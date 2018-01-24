@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
+import org.dom4j.QName;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
 
@@ -124,11 +125,12 @@ public class TalendModel {
     	return readFile(new File(job.getPathWithoutExtension() + ".item"));
     }
     
-    private Talendjob readFromProperties(File propertiesFile) throws Exception {
+    public Talendjob readFromProperties(File propertiesFile) throws Exception {
     	Document propDoc = readFile(propertiesFile);
     	Talendjob job = new Talendjob();
     	Element propertyNode = (Element) propDoc.selectSingleNode("/xmi:XMI/TalendProperties:Property");
-    	job.setId(propertyNode.attributeValue("id"));
+    	QName nameId = new QName("id", null);
+    	job.setId(propertyNode.attributeValue(nameId));
     	job.setJobName(propertyNode.attributeValue("label"));
     	job.setPath(propertiesFile.getAbsolutePath());
     	job.setVersion(propertyNode.attributeValue("version"));
@@ -173,7 +175,7 @@ public class TalendModel {
 			if (targetRootDir.endsWith("/") == false) {
 				targetRootDir = targetRootDir + "/";
 			}
-			targetFilePath = targetRootDir + relPath + ".item";
+			targetFilePath = targetRootDir + "/process" + relPath + ".item";
 		}
 		File targetFile = new File(targetFilePath);
 		File targetDir = targetFile.getParentFile();
@@ -181,7 +183,8 @@ public class TalendModel {
 		if (targetDir.exists() == false) {
 			throw new Exception("Cannot create or use target dir: " + targetDir.getAbsolutePath());
 		}
-		XMLWriter writer = new XMLWriter(new FileOutputStream(targetFilePath), format);
+		LOG.debug("Write item file: " + targetFile.getAbsolutePath());
+		XMLWriter writer = new XMLWriter(new FileOutputStream(targetFile), format);
         writer.write( itemDoc );
         writer.close();
 		return targetFilePath;

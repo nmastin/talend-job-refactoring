@@ -120,8 +120,8 @@ public class TaskFixTRunJob {
 				LOG.error("Missing referenced job in job: " + job + " component: " + compUniqeName + " referenced job: " + referencedJobName + ":" + referencedJobVersion);
 				countMissingJobs++;
 			} else {
-				LOG.info("Job reference fixed in job: " + job + " component: " + compUniqeName + " referenced job: " + referencedJobName + ":" + referencedJobVersion);
-				processId.addAttribute("value", job.getId());
+				LOG.info("Fix reference in job: " + job + " component: " + compUniqeName + " referenced job: " + referencedJobName + ":" + referencedJobVersion + " current job version: " + referencedJob.getVersion() + " id: " + referencedJob.getId());
+				processId.addAttribute("value", referencedJob.getId());
 				countFixedComponents++;
 				return true;
 			}
