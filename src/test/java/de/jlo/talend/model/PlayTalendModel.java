@@ -1,22 +1,18 @@
-package talend_refactoring;
+package de.jlo.talend.model;
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-
-import de.jlo.talend.model.TalendModel;
-import de.jlo.talend.model.Talendjob;
-import de.jlo.talend.model.TaskFixTRunJob;
 
 public class PlayTalendModel {
 
 	public static void main(String[] args) {
 		BasicConfigurator.configure();
 		Logger LOG = Logger.getRootLogger();
-		LOG.setLevel(Level.INFO);
+		LOG.setLevel(Level.DEBUG);
 		TalendModel model = new TalendModel();
 		try {
-			model.readProject("/Data/projects/gvl/talend/workspace_631_tos/BEAT17");
+			model.readProject("/Data/projects/gvl/git/talend_631_project_beat17/BEAT17");
 			Talendjob job = model.getLatestJob("navi_calculate_usage_score_one_product");
 			System.out.println(job);
 			TaskFixTRunJob rt = new TaskFixTRunJob(model);

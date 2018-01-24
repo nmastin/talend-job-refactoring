@@ -1,6 +1,7 @@
 package de.jlo.talend.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -79,7 +80,9 @@ public class TaskFixTRunJob {
 		for (Element el : listTRunJobs) {
 			countComponents++;
 			if (checkAndRepairOneTRunJob(job, el)) {
-				writeFixedJobs(job);
+				if (outputDir != null) {
+					writeFixedJobs(job);
+				}
 				jobFixed = true;
 			}
 		}
@@ -152,6 +155,10 @@ public class TaskFixTRunJob {
 		sb.append("* Count affected components: " + countAffectedComponents + "\n");
 		sb.append("* Count components with missing references: " + countMissingJobs + "\n");
 		sb.append("## List jobs changed:\n");
+		if (outputDir != null) {
+			sb.append("# Output folder: " + outputDir);
+		}
+		Collections.sort(listFixedTalendJobs);
 		for (Talendjob job : listFixedTalendJobs) {
 			sb.append(job);
 			sb.append("\n");

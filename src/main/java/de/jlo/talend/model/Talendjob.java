@@ -6,6 +6,7 @@ public class Talendjob implements Comparable<Talendjob> {
 	
 	private String id = null;
 	private String projectName = null;
+	private String jobFolder = null;
 	private String jobName = null;
 	private String version = null;
 	private int majorVersion = 0;
@@ -83,31 +84,43 @@ public class Talendjob implements Comparable<Talendjob> {
 		} else {
 			int major = Integer.parseInt(job.getVersion().substring(0, pos));
 			int minor = Integer.parseInt(job.getVersion().substring(pos + 1));
-			if (majorVersion > major) {
-				return -1;
-			} else if (majorVersion < major) {
-				return 1;
-			} else {
-				if (minorVersion > minor) {
+			if (jobName.equals(job.jobName)) {
+				if (majorVersion > major) {
 					return -1;
-				} else if (minorVersion < minor) {
+				} else if (majorVersion < major) {
 					return 1;
 				} else {
-					return 0;
+					if (minorVersion > minor) {
+						return -1;
+					} else if (minorVersion < minor) {
+						return 1;
+					} else {
+						return 0;
+					}
 				}
+			} else {
+				String ownPath = jobFolder + jobName + version;
+				String otherPath = job.jobFolder + job.jobName + job.version;
+				return ownPath.compareTo(otherPath);
 			}
 		}
 	}
 	
 	@Override
 	public String toString() {
-		return jobName + ":" + version;
+		return jobFolder + "/" + jobName + ":" + version;
 	}
 	public Document getItemDoc() {
 		return itemDoc;
 	}
 	public void setItemDoc(Document itemDoc) {
 		this.itemDoc = itemDoc;
+	}
+	public String getJobFolder() {
+		return jobFolder;
+	}
+	public void setJobFolder(String jobFolder) {
+		this.jobFolder = jobFolder;
 	}
 	
 }

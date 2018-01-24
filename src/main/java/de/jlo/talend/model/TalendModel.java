@@ -21,9 +21,10 @@ import org.dom4j.io.XMLWriter;
 public class TalendModel {
 	
 	private static final Logger LOG = Logger.getLogger(TalendModel.class);
-	private Map<String, Talendjob> mapIdJob = new HashMap<String, Talendjob>();
 	private Map<String, List<Talendjob>> mapNameJobs = new HashMap<>();
+	private List<Talendjob> listAllJobs = new ArrayList<>();
 	private String projectRootDir = null;
+	private String processFolderPath = null;
 	private OutputFormat format = OutputFormat.createPrettyPrint();
 	
 	/**
@@ -36,13 +37,14 @@ public class TalendModel {
     	LOG.info("Start read jobs from project root: " + rootDir);
     	projectRootDir = rootDir;
 		File processFolder = new File(rootDir, "process");
+		processFolderPath = processFolder.getAbsolutePath();
 		readPropertiesFiles(processFolder);
-    	LOG.info("Finished read " + mapIdJob.size() + " jobs from project root: " + rootDir);
-		return mapIdJob.size();
+    	LOG.info("Finished read " + listAllJobs.size() + " jobs from project root: " + rootDir);
+		return listAllJobs.size();
 	}
 
-	private void registerJob(Talendjob job) {
-		mapIdJob.put(job.getId(), job);
+	private void registerJob(Talendjob job) throws Exception {
+		listAllJobs.add(job);
 		List<Talendjob> list = mapNameJobs.get(job.getJobName());
 		if (list == null) {
 			list = new ArrayList<Talendjob>();
@@ -69,10 +71,6 @@ public class TalendModel {
 		}
 	}
 	
-    public Talendjob getJobById(String id) {
-    	return mapIdJob.get(id);
-    }
-    
     public Talendjob getLatestJob(String jobName) {
 		List<Talendjob> list = mapNameJobs.get(jobName);
 		if (list != null && list.isEmpty() == false) {
@@ -85,11 +83,7 @@ public class TalendModel {
 	}
     
     public List<Talendjob> getAllJobs() {
-    	List<Talendjob> list = new ArrayList<Talendjob>();
-    	for (Map.Entry<String, Talendjob> entry : mapIdJob.entrySet()) {
-    		list.add(entry.getValue());
-    	}
-    	return list;
+    	return listAllJobs;
     }
     
     public List<Element> getComponents(Talendjob job, String componentName) throws Exception {
@@ -136,6 +130,8 @@ public class TalendModel {
     	job.setJobName(propertyNode.attributeValue("label"));
     	job.setPath(propertiesFile.getAbsolutePath());
     	job.setVersion(propertyNode.attributeValue("version"));
+    	String folder = propertiesFile.getParentFile().getAbsolutePath().replace(processFolderPath, "");
+    	job.setJobFolder(folder);
     	if (LOG.isDebugEnabled()) {
         	LOG.debug("Read Talend job properties from file: " + propertiesFile.getAbsolutePath() + ". Id=" + job.getId());
     	}
@@ -158,18 +154,14 @@ public class TalendModel {
 	}
 	
 	private String getRelativePath(Talendjob job) {
-		String path = job.getPathWithoutExtension();
-		path = path.replace(projectRootDir, "");
-		if (path.startsWith("/")) {
-			path = path.substring(1);
-		}
+		String path = job.getJobFolder() + "/" + job.getJobName() + "_" + job.getVersion();
 		return path;
 	}
 	
 	public String writeItemFile(Talendjob job, String targetRootDir) throws Exception {
 		Document itemDoc = job.getItemDoc();
 		if (itemDoc == null) {
-			throw new Exception("Talend job: " + job + " does not carry a read or changed document.");
+			throw new Exception("Talend job: " + job + " does not carry a document.");
 		}
 		String targetFilePath = null;
 		if (targetRootDir == null) {
