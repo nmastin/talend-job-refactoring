@@ -90,6 +90,7 @@ public class TaskFixTRunJob {
 	}
 	
 	private boolean checkAndRepairOneTRunJob(Talendjob job, Element tRunJob) throws Exception {
+    	@SuppressWarnings("unchecked")
 		List<Element> params = tRunJob.elements();
 		String referencedJobName = null;
 		String referencedJobVersion = null;

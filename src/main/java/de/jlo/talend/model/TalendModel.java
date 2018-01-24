@@ -88,11 +88,13 @@ public class TalendModel {
     
     public List<Element> getComponents(Talendjob job, String componentName) throws Exception {
     	Document doc = readItem(job);
-    	List<Element> list = doc.selectNodes("/talendfile:ProcessType/node[@componentName='" + componentName + "']");
+    	@SuppressWarnings("unchecked")
+		List<Element> list = doc.selectNodes("/talendfile:ProcessType/node[@componentName='" + componentName + "']");
     	return list;
     }
 	
     public List<Element> getComponents(Document doc, String componentName) throws Exception {
+    	@SuppressWarnings("unchecked")
     	List<Element> list = doc.selectNodes("/talendfile:ProcessType/node[@componentName='" + componentName + "']");
     	return list;
     }
