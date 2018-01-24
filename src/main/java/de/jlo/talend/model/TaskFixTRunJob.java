@@ -19,6 +19,7 @@ public class TaskFixTRunJob {
 	private int countMissingJobs = 0;
 	private List<Talendjob> listFixedTalendJobs = new ArrayList<Talendjob>();
 	private String outputDir = null;
+	private boolean simulate = false; 
 	
 	public static void main(String[] args) {
 		TaskFixTRunJob task = new TaskFixTRunJob();
@@ -26,6 +27,8 @@ public class TaskFixTRunJob {
 			task.projectRootPath = args[0];
 			if (args.length > 1) {
 				task.outputDir = args[1];
+			} else {
+				task.outputDir = task.projectRootPath;
 			}
 			if (task.projectRootPath == null || task.projectRootPath.trim().isEmpty()) {
 				System.err.println("projectRoorPath cannot be null or empty");
@@ -59,6 +62,9 @@ public class TaskFixTRunJob {
 	}
 	
 	public void execute() throws Exception {
+		if (outputDir == null || outputDir.trim().isEmpty()) {
+			outputDir = projectRootPath;
+		}
 		List<Talendjob> list = model.getAllJobs();
 		for (Talendjob job : list) {
 			if (checkAndRepair(job)) {
@@ -80,7 +86,7 @@ public class TaskFixTRunJob {
 		for (Element el : listTRunJobs) {
 			countComponents++;
 			if (checkAndRepairOneTRunJob(job, el)) {
-				if (outputDir != null) {
+				if (simulate == false) {
 					writeFixedJobs(job);
 				}
 				jobFixed = true;
@@ -155,9 +161,9 @@ public class TaskFixTRunJob {
 		sb.append("* Count affected jobs: " + countAffectedJobs + "\n");
 		sb.append("* Count affected components: " + countAffectedComponents + "\n");
 		sb.append("* Count components with missing references: " + countMissingJobs + "\n");
-		sb.append("## List jobs changed:\n");
-		if (outputDir != null) {
-			sb.append("# Output folder: " + outputDir);
+		sb.append("## List jobs changed: ");
+		if (simulate == false) {
+			sb.append("written to output folder: " + getOutputDir() + "\n");
 		}
 		Collections.sort(listFixedTalendJobs);
 		for (Talendjob job : listFixedTalendJobs) {
@@ -173,6 +179,14 @@ public class TaskFixTRunJob {
 
 	public void setOutputDir(String outputDir) {
 		this.outputDir = outputDir;
+	}
+
+	public boolean isSimulate() {
+		return simulate;
+	}
+
+	public void setSimulate(boolean simulate) {
+		this.simulate = simulate;
 	}
 	
 }
