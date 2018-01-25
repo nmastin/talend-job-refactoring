@@ -12,7 +12,7 @@ public class PlayTalendModel {
 		LOG.setLevel(Level.INFO);
 		TalendModel model = new TalendModel();
 		try {
-			model.readProject("/Data/projects/gvl/git/talend_631_project_core_api/CORE_API");
+			model.readProject("/Data/projects/gvl/git/talend_631_project_beat17/BEAT17");
 			TaskFixTRunJob rt = new TaskFixTRunJob(model);
 			rt.execute();
 			System.out.println(rt.getSummary());

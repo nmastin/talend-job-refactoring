@@ -18,6 +18,7 @@ public class TaskFixTRunJob {
 	private int countFixedComponents = 0;
 	private int countMissingJobs = 0;
 	private List<Talendjob> listFixedTalendJobs = new ArrayList<Talendjob>();
+	private List<Talendjob> listTalendJobsRefMissingJobs = new ArrayList<Talendjob>();
 	private String outputDir = null;
 	private boolean simulate = false; 
 	
@@ -124,6 +125,9 @@ public class TaskFixTRunJob {
 			Talendjob referencedJob = model.getJobByVersion(referencedJobName, referencedJobVersion);
 			if (referencedJob == null) {
 				LOG.error("Missing referenced job in job: " + job + " component: " + compUniqeName + " referenced job: " + referencedJobName + ":" + referencedJobVersion);
+				if (listTalendJobsRefMissingJobs.contains(job) == false) {
+					listTalendJobsRefMissingJobs.add(job);
+				}
 				countMissingJobs++;
 			} else {
 				LOG.info("Fix reference in job: " + job + " component: " + compUniqeName + " referenced job: " + referencedJobName + ":" + referencedJobVersion + " current job version: " + referencedJob.getVersion() + " id: " + referencedJob.getId());
@@ -161,12 +165,19 @@ public class TaskFixTRunJob {
 		sb.append("* Count affected jobs: " + countAffectedJobs + "\n");
 		sb.append("* Count affected components: " + countAffectedComponents + "\n");
 		sb.append("* Count components with missing references: " + countMissingJobs + "\n");
-		sb.append("## List jobs changed: ");
+		sb.append("## List jobs sucessfully changed: ");
 		if (simulate == false) {
 			sb.append("written to output folder: " + getOutputDir() + "\n");
 		}
 		Collections.sort(listFixedTalendJobs);
 		for (Talendjob job : listFixedTalendJobs) {
+			sb.append(job);
+			sb.append("\n");
+		}
+		sb.append("\n");
+		sb.append("## List jobs with missing referenced jobs: \n");
+		Collections.sort(listTalendJobsRefMissingJobs);
+		for (Talendjob job : listTalendJobsRefMissingJobs) {
 			sb.append(job);
 			sb.append("\n");
 		}
