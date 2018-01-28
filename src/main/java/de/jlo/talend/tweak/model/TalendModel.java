@@ -1,4 +1,4 @@
-package de.jlo.talend.model;
+package de.jlo.talend.tweak.model;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -190,4 +190,8 @@ public class TalendModel {
 		return targetFilePath;
 	}
     
+	public int getCountJobs() {
+		return listAllJobs.size();
+	}
+	
 }

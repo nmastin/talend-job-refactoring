@@ -4,6 +4,9 @@ import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
+import de.jlo.talend.tweak.model.TalendModel;
+import de.jlo.talend.tweak.model.tasks.TaskFixTRunJob;
+
 public class PlayTalendModel {
 
 	public static void main(String[] args) {

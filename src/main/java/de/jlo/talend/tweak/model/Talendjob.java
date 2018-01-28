@@ -1,4 +1,4 @@
-package de.jlo.talend.model;
+package de.jlo.talend.tweak.model;
 
 import org.dom4j.Document;
 

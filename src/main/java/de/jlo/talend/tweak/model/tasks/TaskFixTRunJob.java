@@ -1,4 +1,4 @@
-package de.jlo.talend.model;
+package de.jlo.talend.tweak.model.tasks;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,6 +6,9 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.dom4j.Element;
+
+import de.jlo.talend.tweak.model.TalendModel;
+import de.jlo.talend.tweak.model.Talendjob;
 
 public class TaskFixTRunJob {
 
@@ -73,6 +76,7 @@ public class TaskFixTRunJob {
 				countAffectedJobs++;
 			}
 		}
+		LOG.info(getSummary());
 	}
 	
 	private void writeFixedJobs(Talendjob job) throws Exception {
