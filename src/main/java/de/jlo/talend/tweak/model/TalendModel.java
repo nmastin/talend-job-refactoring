@@ -17,7 +17,6 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.QName;
 import org.dom4j.io.OutputFormat;
-import org.dom4j.io.XMLWriter;
 
 public class TalendModel {
 	
@@ -184,7 +183,8 @@ public class TalendModel {
 			throw new Exception("Cannot create or use target dir: " + targetDir.getAbsolutePath());
 		}
 		LOG.debug("Write item file: " + targetFile.getAbsolutePath());
-		XMLWriter writer = new XMLWriter(new FileOutputStream(targetFile), format);
+		TalendXMLWriter writer = new TalendXMLWriter(new FileOutputStream(targetFile), format);
+		writer.setEscapeText(true);
         writer.write( itemDoc );
         writer.close();
 		return targetFilePath;
