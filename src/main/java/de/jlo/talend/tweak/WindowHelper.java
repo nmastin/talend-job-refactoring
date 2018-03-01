@@ -56,7 +56,6 @@ public class WindowHelper {
             Rectangle gdBounds = gd.getDefaultConfiguration().getBounds();
             bounds = bounds.union(gdBounds);
             listScreens.add(gdBounds);
-            System.out.println(bounds);
         }
         return bounds;
     }

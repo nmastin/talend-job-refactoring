@@ -15,7 +15,7 @@ public class TaskFixTRunJob {
 	private static Logger LOG = Logger.getLogger(TaskFixTRunJob.class);
 	private String projectRootPath = null;
 	private TalendModel model = null;
-	private int countAffectedJobs = 0;
+	private int countRepairedJobs = 0;
 	private int countComponents = 0;
 	private int countAffectedComponents = 0;
 	private int countFixedComponents = 0;
@@ -73,7 +73,7 @@ public class TaskFixTRunJob {
 		for (Talendjob job : list) {
 			if (checkAndRepair(job)) {
 				listFixedTalendJobs.add(job);
-				countAffectedJobs++;
+				countRepairedJobs++;
 			}
 		}
 		LOG.info(getSummary());
@@ -113,7 +113,6 @@ public class TaskFixTRunJob {
 		String compUniqeName = null;
 		Element processId = null;
 		for (Element param : params) {
-			countComponents++;
 			String name = param.attributeValue("name");
 			String value = param.attributeValue("value");
 			if (name.equals("PROCESS")) {
@@ -147,8 +146,8 @@ public class TaskFixTRunJob {
 		return false;
 	}
 
-	public int getCountAffectedJobs() {
-		return countAffectedJobs;
+	public int getCountRepairedJobs() {
+		return countRepairedJobs;
 	}
 
 	public int getCountComponents() {
@@ -170,7 +169,7 @@ public class TaskFixTRunJob {
 	public String getSummary() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Checked project: " + projectRootPath + "\n");
-		sb.append("* Count affected jobs: " + countAffectedJobs + "\n");
+		sb.append("* Count repaired jobs: " + countRepairedJobs + "\n");
 		sb.append("* Count affected components: " + countAffectedComponents + "\n");
 		sb.append("* Count components with missing references: " + countMissingJobs + "\n");
 		sb.append("## List jobs sucessfully changed: ");
