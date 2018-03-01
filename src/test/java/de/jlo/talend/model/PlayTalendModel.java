@@ -15,7 +15,7 @@ public class PlayTalendModel {
 		LOG.setLevel(Level.INFO);
 		TalendModel model = new TalendModel();
 		try {
-			model.readProject("/Data/projects/gvl/git/talend_631_project_beat17/BEAT17");
+			model.readProject("/Users/jan/Desktop/test");
 			TaskFixTRunJob rt = new TaskFixTRunJob(model);
 			rt.execute();
 			System.out.println(rt.getSummary());

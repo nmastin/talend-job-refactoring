@@ -84,9 +84,13 @@ public class TaskFixTRunJob {
 	}
 	
 	private boolean checkAndRepair(Talendjob job) throws Exception {
-		LOG.debug("Check job: " + job);
 		job.setItemDoc(model.readItem(job));
 		List<Element> listTRunJobs = model.getComponents(job.getItemDoc(), "tRunJob");
+		String message = "Check job: " + job;
+		if (listTRunJobs != null && listTRunJobs.isEmpty() == false) {
+			message = message + ": " + listTRunJobs.size() + " tRunJob components";
+		}
+		LOG.info(message);
 		boolean jobFixed = false;
 		for (Element el : listTRunJobs) {
 			countComponents++;
@@ -172,6 +176,8 @@ public class TaskFixTRunJob {
 		sb.append("## List jobs sucessfully changed: ");
 		if (simulate == false) {
 			sb.append("written to output folder: " + getOutputDir() + "\n");
+		} else {
+			sb.append("\n");
 		}
 		Collections.sort(listFixedTalendJobs);
 		for (Talendjob job : listFixedTalendJobs) {

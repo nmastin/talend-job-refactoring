@@ -94,8 +94,9 @@ public class TalendModel {
     }
 	
     public List<Element> getComponents(Document doc, String componentName) throws Exception {
+    	String xpath = "/talendfile:ProcessType/node[@componentName='" + componentName + "']";
     	@SuppressWarnings("unchecked")
-    	List<Element> list = doc.selectNodes("/talendfile:ProcessType/node[@componentName='" + componentName + "']");
+    	List<Element> list = doc.selectNodes(xpath);
     	return list;
     }
     
@@ -121,7 +122,8 @@ public class TalendModel {
     }
     
     public Document readItem(Talendjob job) throws Exception {
-    	return readFile(new File(job.getPathWithoutExtension() + ".item"));
+    	String filePath = job.getPathWithoutExtension() + ".item";
+    	return readFile(new File(filePath));
     }
     
     public Talendjob readFromProperties(File propertiesFile) throws Exception {
@@ -142,14 +144,19 @@ public class TalendModel {
     }
 
     private Document readFile(File f) throws Exception {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(f), "UTF-8"));
-		String line = null;
-		StringBuilder sb = new StringBuilder();
-		while ((line = reader.readLine()) != null) {
-			sb.append(line);
-		}
-		reader.close();
-    	return DocumentHelper.parseText(sb.toString());
+    	try {
+    		BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(f), "UTF-8"));
+    		String line = null;
+    		StringBuilder sb = new StringBuilder();
+    		while ((line = reader.readLine()) != null) {
+    			sb.append(line);
+    			sb.append('\n');
+    		}
+    		reader.close();
+        	return DocumentHelper.parseText(sb.toString());
+    	} catch (Exception e) {
+    		throw new Exception("Read file: " + f.getAbsolutePath() + "failed: " + e.getMessage(), e);
+    	}
     }
 
 	public String getProjectRootDir() {
