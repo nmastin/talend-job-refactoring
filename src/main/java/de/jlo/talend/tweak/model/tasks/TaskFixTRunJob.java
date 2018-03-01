@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.dom4j.Element;
+import org.dom4j.Node;
 
 import de.jlo.talend.tweak.model.TalendModel;
 import de.jlo.talend.tweak.model.Talendjob;
@@ -85,14 +86,14 @@ public class TaskFixTRunJob {
 	
 	private boolean checkAndRepair(Talendjob job) throws Exception {
 		job.setItemDoc(model.readItem(job));
-		List<Element> listTRunJobs = model.getComponents(job.getItemDoc(), "tRunJob");
+		List<Node> listTRunJobs = model.getComponents(job.getItemDoc(), "tRunJob");
 		String message = "Check job: " + job;
 		if (listTRunJobs != null && listTRunJobs.isEmpty() == false) {
 			message = message + ": " + listTRunJobs.size() + " tRunJob components";
 		}
 		LOG.info(message);
 		boolean jobFixed = false;
-		for (Element el : listTRunJobs) {
+		for (Node el : listTRunJobs) {
 			countComponents++;
 			if (checkAndRepairOneTRunJob(job, el)) {
 				if (simulate == false) {
@@ -104,9 +105,9 @@ public class TaskFixTRunJob {
 		return jobFixed;
 	}
 	
-	private boolean checkAndRepairOneTRunJob(Talendjob job, Element tRunJob) throws Exception {
-    	@SuppressWarnings("unchecked")
-		List<Element> params = tRunJob.elements();
+	private boolean checkAndRepairOneTRunJob(Talendjob job, Node tRunJob) throws Exception {
+    	Element e = (Element) tRunJob;
+		List<Element> params = e.elements();
 		String referencedJobName = null;
 		String referencedJobVersion = null;
 		String referencedJobId = null;

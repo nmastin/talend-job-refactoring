@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
+import org.dom4j.Node;
 import org.dom4j.QName;
 import org.dom4j.io.OutputFormat;
 
@@ -86,17 +87,16 @@ public class TalendModel {
     	return listAllJobs;
     }
     
-    public List<Element> getComponents(Talendjob job, String componentName) throws Exception {
+    public List<Node> getComponents(Talendjob job, String componentName) throws Exception {
     	Document doc = readItem(job);
-    	@SuppressWarnings("unchecked")
-		List<Element> list = doc.selectNodes("/talendfile:ProcessType/node[@componentName='" + componentName + "']");
+    	String xpath = "/talendfile:ProcessType/node[@componentName='" + componentName + "']";
+		List<Node> list = doc.selectNodes(xpath);
     	return list;
     }
 	
-    public List<Element> getComponents(Document doc, String componentName) throws Exception {
+    public List<Node> getComponents(Document doc, String componentName) throws Exception {
     	String xpath = "/talendfile:ProcessType/node[@componentName='" + componentName + "']";
-    	@SuppressWarnings("unchecked")
-    	List<Element> list = doc.selectNodes(xpath);
+    	List<Node> list = doc.selectNodes(xpath);
     	return list;
     }
     
