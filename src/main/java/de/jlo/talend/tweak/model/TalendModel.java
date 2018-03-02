@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -57,7 +58,7 @@ public class TalendModel {
 	}
 	
 	public Talendjob getJobByVersion(String jobName, String version) {
-		if (version.equals("Latest")) {
+		if (version == null || version.equals("Latest")) {
 			return getLatestJob(jobName);
 		} else {
 			List<Talendjob> list = mapNameJobs.get(jobName);
@@ -89,15 +90,21 @@ public class TalendModel {
     
     public List<Node> getComponents(Talendjob job, String componentName) throws Exception {
     	Document doc = readItem(job);
-    	String xpath = "/talendfile:ProcessType/node[@componentName='" + componentName + "']";
-		List<Node> list = doc.selectNodes(xpath);
-    	return list;
+    	return getComponents(doc, componentName);
     }
 	
     public List<Node> getComponents(Document doc, String componentName) throws Exception {
-    	String xpath = "/talendfile:ProcessType/node[@componentName='" + componentName + "']";
-    	List<Node> list = doc.selectNodes(xpath);
-    	return list;
+    	Element root = doc.getRootElement();
+    	Iterator<Element> it = root.elementIterator("node");
+    	List<Node> allNodes = new ArrayList<Node>();
+    	while (it.hasNext()) {
+    		Element e = it.next();
+    		String cn = e.attributeValue("componentName");
+    		if (componentName.equals(cn)) {
+        		allNodes.add(e);
+    		}
+    	}
+    	return allNodes;
     }
     
     private void readPropertiesFiles(File root) throws Exception {
