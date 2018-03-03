@@ -181,7 +181,7 @@ public class PanelTaskSearchByComponentAttributes extends JPanel {
 			this.add(cbReplaceValue, gbc);
 		}
 		{
-			JLabel label = new JLabel("Attribute Value Pattern");
+			JLabel label = new JLabel("New Attribute Value");
 			label.setHorizontalAlignment(JLabel.LEFT);
 			GridBagConstraints gbc = new GridBagConstraints();
 			gbc.gridx = 0;
