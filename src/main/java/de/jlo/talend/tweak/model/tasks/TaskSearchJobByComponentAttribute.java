@@ -138,7 +138,7 @@ public class TaskSearchJobByComponentAttribute {
 	public String getSummary() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Found " + currentSearchResult.size() + " components:\n");
-		sb.append("Replaced all found values with the new value=" + replaceAttributeValue);
+		sb.append("Replaced all found values with the new value=" + replaceAttributeValue + "\n");
 		for (SearchResult r : currentSearchResult) {
 			sb.append(r.getJob().getJobName());
 			sb.append("->");
