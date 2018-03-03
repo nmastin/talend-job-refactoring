@@ -26,44 +26,11 @@ public class TaskFixTRunJob {
 	private String outputDir = null;
 	private boolean simulate = false; 
 	
-	public static void main(String[] args) {
-		TaskFixTRunJob task = new TaskFixTRunJob();
-		if (args != null && args.length > 0) {
-			task.projectRootPath = args[0];
-			if (args.length > 1) {
-				task.outputDir = args[1];
-			} else {
-				task.outputDir = task.projectRootPath;
-			}
-			if (task.projectRootPath == null || task.projectRootPath.trim().isEmpty()) {
-				System.err.println("projectRoorPath cannot be null or empty");
-				System.exit(-1);
-			} else {
-				try {
-					task.initialize();
-					task.execute();
-				} catch (Exception e) {
-					e.printStackTrace();
-					System.exit(-1);
-				}
-			}
-		} else {
-			System.err.println("projectRootPath not given");
-			System.exit(-1);
-		}
-	}
-	
 	public TaskFixTRunJob() {}
 	
 	public TaskFixTRunJob(TalendModel model) {
 		this.model = model;
 		projectRootPath = model.getProjectRootDir();
-	}
-
-	public void initialize() throws Exception {
-		LOG.debug("Initialize model...");
-		model = new TalendModel();
-		model.readProject(projectRootPath);
 	}
 	
 	public void execute() throws Exception {

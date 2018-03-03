@@ -36,6 +36,7 @@ public class TalendTweakTool extends JFrame {
 	private JButton btnFileChooser = null;
 	private JLabel lbNumberJobs = null;
 	private PanelTaskFixTRunJob pnTaskFixTRunJob = null;
+	private PanelTaskSearchByComponentAttributes pnTaskSearchByComponentAttributes = null;
 
 	public static void main(String[] args) {
 		TalendTweakTool tool = new TalendTweakTool();
@@ -51,6 +52,7 @@ public class TalendTweakTool extends JFrame {
 		tabbedPane.add("Model config", getConfigPane());
 		tabbedPane.add("Log", LogPanel.getInstance());
 		tabbedPane.add("Fix tRunJob", getPanelTaskFixTRunJob());
+		tabbedPane.add("Search Component Attributes", getPanelTaskSearchByComponentAttributes());
 		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		setVisible(true);
@@ -131,6 +133,11 @@ public class TalendTweakTool extends JFrame {
 		return pnTaskFixTRunJob;
 	}
 	
+	private JPanel getPanelTaskSearchByComponentAttributes() {
+		pnTaskSearchByComponentAttributes = new PanelTaskSearchByComponentAttributes();
+		return pnTaskSearchByComponentAttributes;
+	}
+
 	private void selectProjectRootDir() {
 		System.setProperty("apple.awt.fileDialogForDirectories", "true");
 		FileDialog fd = new FileDialog(this, "Choose Talend root project dir (or file talend.project)", FileDialog.LOAD);
@@ -192,6 +199,7 @@ public class TalendTweakTool extends JFrame {
 		this.model = model;
 		lbNumberJobs.setText(String.valueOf(model.getCountJobs()));
 		pnTaskFixTRunJob.setModel(model);
+		pnTaskSearchByComponentAttributes.setModel(model);
 	}
 
 	public TalendModel getModel() {

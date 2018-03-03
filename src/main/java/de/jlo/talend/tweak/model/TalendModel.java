@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 import org.dom4j.Document;
@@ -88,6 +90,22 @@ public class TalendModel {
     	return listAllJobs;
     }
     
+    public List<Talendjob> getJobs(String jobNamePattern) {
+    	if (jobNamePattern == null || jobNamePattern.trim().isEmpty()) {
+    		return getAllJobs();
+    	} else {
+        	List<Talendjob> list = new ArrayList<Talendjob>();
+        	Pattern pattern = Pattern.compile(jobNamePattern, Pattern.CASE_INSENSITIVE);
+        	for (Talendjob job : listAllJobs) {
+        		Matcher m = pattern.matcher(job.getJobName());
+        		if (m.find()) {
+        			list.add(job);
+        		}
+        	}
+        	return list;
+    	}
+    }
+
     public List<Node> getComponents(Talendjob job, String componentName) throws Exception {
     	Document doc = readItem(job);
     	return getComponents(doc, componentName);
@@ -100,7 +118,7 @@ public class TalendModel {
     	while (it.hasNext()) {
     		Element e = it.next();
     		String cn = e.attributeValue("componentName");
-    		if (componentName.equals(cn)) {
+    		if (componentName.equalsIgnoreCase(cn)) {
         		allNodes.add(e);
     		}
     	}
