@@ -11,11 +11,10 @@ import org.dom4j.Node;
 import de.jlo.talend.tweak.model.TalendModel;
 import de.jlo.talend.tweak.model.Talendjob;
 
-public class TaskFixTRunJob {
+public class TaskFixTRunJob extends AbstractTask {
 
 	private static Logger LOG = Logger.getLogger(TaskFixTRunJob.class);
 	private String projectRootPath = null;
-	private TalendModel model = null;
 	private int countRepairedJobs = 0;
 	private int countComponents = 0;
 	private int countAffectedComponents = 0;
@@ -26,18 +25,17 @@ public class TaskFixTRunJob {
 	private String outputDir = null;
 	private boolean simulate = false; 
 	
-	public TaskFixTRunJob() {}
-	
 	public TaskFixTRunJob(TalendModel model) {
-		this.model = model;
+		super(model);
 		projectRootPath = model.getProjectRootDir();
 	}
 	
+	@Override
 	public void execute() throws Exception {
 		if (outputDir == null || outputDir.trim().isEmpty()) {
 			outputDir = projectRootPath;
 		}
-		List<Talendjob> list = model.getAllJobs();
+		List<Talendjob> list = getModel().getAllJobs();
 		for (Talendjob job : list) {
 			if (checkAndRepair(job)) {
 				listFixedTalendJobs.add(job);
@@ -48,12 +46,12 @@ public class TaskFixTRunJob {
 	}
 	
 	private void writeFixedJobs(Talendjob job) throws Exception {
-		model.writeItemFile(job, outputDir);
+		getModel().writeItemFile(job, outputDir);
 	}
 	
 	private boolean checkAndRepair(Talendjob job) throws Exception {
-		job.setItemDoc(model.readItem(job));
-		List<Node> listTRunJobs = model.getComponents(job.getItemDoc(), "tRunJob");
+		job.setItemDoc(getModel().readItem(job));
+		List<Node> listTRunJobs = getModel().getComponents(job.getItemDoc(), "tRunJob");
 		String message = "Check job: " + job;
 		if (listTRunJobs != null && listTRunJobs.isEmpty() == false) {
 			message = message + ": " + listTRunJobs.size() + " tRunJob components";
@@ -97,7 +95,7 @@ public class TaskFixTRunJob {
 		LOG.debug("Check tRunJob component: " + compUniqeName + " referencing job: " + referencedJobName + ":" + referencedJobVersion);
 		if (referencedJobId == null || referencedJobId.trim().isEmpty()) {
 			countAffectedComponents++;
-			Talendjob referencedJob = model.getJobByVersion(referencedJobName, referencedJobVersion);
+			Talendjob referencedJob = getModel().getJobByVersion(referencedJobName, referencedJobVersion);
 			if (referencedJob == null) {
 				LOG.error("Missing referenced job in job: " + job + " component: " + compUniqeName + " referenced job: " + referencedJobName + ":" + referencedJobVersion);
 				if (listTalendJobsRefMissingJobs.contains(job) == false) {

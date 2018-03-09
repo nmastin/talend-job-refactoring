@@ -26,6 +26,7 @@ public class TalendModel {
 	
 	private static final Logger LOG = Logger.getLogger(TalendModel.class);
 	private Map<String, List<Talendjob>> mapNameJobs = new HashMap<>();
+	private Map<String, DatabaseConnection> mapIdConnections = new HashMap<>();
 	private List<Talendjob> listAllJobs = new ArrayList<>();
 	private String projectRootDir = null;
 	private String processFolderPath = null;
@@ -38,12 +39,16 @@ public class TalendModel {
 	 * @throws Exception
 	 */
 	public int readProject(String rootDir) throws Exception {
-    	LOG.info("Start read jobs from project root: " + rootDir);
+    	LOG.info("Start read jobs and connections from project root: " + rootDir);
     	projectRootDir = rootDir;
 		File processFolder = new File(rootDir, "process");
 		processFolderPath = processFolder.getAbsolutePath();
-		readPropertiesFiles(processFolder);
+		readJobPropertiesFiles(processFolder);
     	LOG.info("Finished read " + listAllJobs.size() + " jobs from project root: " + rootDir);
+    	LOG.info("Read database connections...");
+    	File metadataConnectionFolder = new File(rootDir, "metadata/connection"); 
+    	readDatabaseItemFiles(metadataConnectionFolder);
+    	LOG.info("Finished read " + mapIdConnections.size() + " connections from project root: " + rootDir);
 		return listAllJobs.size();
 	}
 
@@ -125,18 +130,18 @@ public class TalendModel {
     	return allNodes;
     }
     
-    private void readPropertiesFiles(File root) throws Exception {
-        File[] list = root.listFiles();
+    private void readJobPropertiesFiles(File processFolder) throws Exception {
+        File[] list = processFolder.listFiles();
         if (list == null) {
         	return;
         }
         for (File f : list) {
             if (f.isDirectory()) {
-            	readPropertiesFiles(f);
+            	readJobPropertiesFiles(f);
             	LOG.debug("Read jobs in: " + f.getAbsoluteFile());
             } else if (f.getName().endsWith(".properties")) {
             	try {
-					Talendjob job = readFromProperties(f);
+					Talendjob job = readTalendJobFromProperties(f);
 					registerJob(job);
 				} catch (Exception e) {
 					LOG.error("Failed to read properties file: " + f.getAbsolutePath(), e);
@@ -146,12 +151,42 @@ public class TalendModel {
         }
     }
     
+    private void readDatabaseItemFiles(File metadataConnectionFolder) throws Exception {
+        File[] list = metadataConnectionFolder.listFiles();
+        if (list == null) {
+        	return;
+        }
+        for (File f : list) {
+            if (f.isDirectory()) {
+            	readDatabaseItemFiles(f);
+            	LOG.debug("Read jobs in: " + f.getAbsoluteFile());
+            } else if (f.getName().endsWith(".item")) {
+            	try {
+					DatabaseConnection conn = readDatabaseConnectionFromFile(f);
+					mapIdConnections.put(conn.getId(), conn);
+				} catch (Exception e) {
+					LOG.error("Failed to read item file: " + f.getAbsolutePath(), e);
+					throw new Exception("Failed to read item file: " + f.getAbsolutePath(), e);
+				}
+            }
+        }
+    }
+    
+    public DatabaseConnection getDatabaseConnectionById(String id) {
+    	return mapIdConnections.get(id);
+    }
+
     public Document readItem(Talendjob job) throws Exception {
     	String filePath = job.getPathWithoutExtension() + ".item";
     	return readFile(new File(filePath));
     }
     
-    public Talendjob readFromProperties(File propertiesFile) throws Exception {
+    private DatabaseConnection readDatabaseConnectionFromFile(File itemFile) throws Exception {
+    	Document itemDoc = readFile(itemFile);
+    	return new DatabaseConnection(itemDoc);
+    }
+    
+    public Talendjob readTalendJobFromProperties(File propertiesFile) throws Exception {
     	Document propDoc = readFile(propertiesFile);
     	Talendjob job = new Talendjob();
     	Element propertyNode = (Element) propDoc.selectSingleNode("/xmi:XMI/TalendProperties:Property");
