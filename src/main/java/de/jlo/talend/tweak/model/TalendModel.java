@@ -209,7 +209,7 @@ public class TalendModel {
     		String line = null;
     		StringBuilder sb = new StringBuilder();
     		while ((line = reader.readLine()) != null) {
-    			sb.append(line);
+    			sb.append(line.trim());
     			sb.append('\n');
     		}
     		reader.close();
