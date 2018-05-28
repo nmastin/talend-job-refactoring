@@ -1,0 +1,1300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default" jobType="Standard">
+  <context confirmationNeeded="false" name="Default">
+    <contextParameter comment="" name="vendor_id" prompt="vendor_id?" promptNeeded="true" type="id_Long" value="136743192"/>
+    <contextParameter comment="" name="dwh_vendor_report_hersteller_design" prompt="dwh_vendor_report_hersteller_design?" promptNeeded="true" type="id_String" value="/var/data/talend/dwh/dwh_vts/vendor_report/designs/Hersteller.jrxml"/>
+    <contextParameter comment="" name="dwh_vendort_report_hersteller_output_dir" prompt="dwh_vendort_report_hersteller_output_dir?" promptNeeded="true" type="id_String" value="/mnt/"/>
+    <contextParameter comment="" name="year" prompt="year?" promptNeeded="true" type="id_Integer" value="2016"/>
+    <contextParameter comment="" name="run_id" prompt="run_id?" promptNeeded="true" type="id_Integer" value="3"/>
+    <contextParameter comment="" name="uuid" prompt="uuid?" promptNeeded="true" type="id_String" value="1be9ecb0-16e4-11e8-b77a-391a40037bec"/>
+    <contextParameter comment="" name="B17_MANAGEMENT_DB_Database" prompt="B17_MANAGEMENT_DB_Database?" promptNeeded="false" repositoryContextId="_zmPYYMXEEeWZRNZKlN1Jqg" type="id_String" value="b17_data_dev"/>
+    <contextParameter comment="" name="B17_MANAGEMENT_DB_Login" prompt="B17_MANAGEMENT_DB_Login?" promptNeeded="false" repositoryContextId="_zmPYYMXEEeWZRNZKlN1Jqg" type="id_String" value="nucleus_job"/>
+    <contextParameter comment="" name="approval" prompt="approval?" promptNeeded="true" type="id_Date" value=""/>
+    <contextParameter comment="" name="B17_MANAGEMENT_DB_Password" prompt="B17_MANAGEMENT_DB_Password?" promptNeeded="false" repositoryContextId="_zmPYYMXEEeWZRNZKlN1Jqg" type="id_Password" value="SEGtTH6/DmxhV4l4i9BH425GF9a7kfO91byOB5AspFZTT4JdMTBEm1YVATKd8H+/s8XtByfhgFN4215hSq/8+w=="/>
+    <contextParameter comment="" name="B17_MANAGEMENT_DB_Port" prompt="B17_MANAGEMENT_DB_Port?" promptNeeded="false" repositoryContextId="_zmPYYMXEEeWZRNZKlN1Jqg" type="id_String" value="5432"/>
+    <contextParameter comment="" name="B17_MANAGEMENT_DB_Schema" prompt="B17_MANAGEMENT_DB_Schema?" promptNeeded="false" repositoryContextId="_zmPYYMXEEeWZRNZKlN1Jqg" type="id_String" value="b17_management"/>
+    <contextParameter comment="" name="B17_MANAGEMENT_DB_Server" prompt="B17_MANAGEMENT_DB_Server?" promptNeeded="false" repositoryContextId="_zmPYYMXEEeWZRNZKlN1Jqg" type="id_String" value="coredbdev01.gvl.local"/>
+    <contextParameter comment="this is where catalog-files (excel) are imported from" name="catalogFilesDir" prompt="catalogFilesDir?" promptNeeded="false" repositoryContextId="_KBCKcMXFEeWZRNZKlN1Jqg" type="id_String" value="/tmp/b17files/catalog"/>
+    <contextParameter comment="" name="contextPropertiesFile" prompt="contextPropertiesFile?" promptNeeded="false" repositoryContextId="_KBCKcMXFEeWZRNZKlN1Jqg" type="id_File" value="config/context.properties"/>
+    <contextParameter comment="this is the root path for resource files, needed context.talendFilesRootDir" name="resourceFilesDir" prompt="resourceFilesDir?" promptNeeded="false" repositoryContextId="_KBCKcMXFEeWZRNZKlN1Jqg" type="id_String" value="resource/"/>
+    <contextParameter comment="" name="talendFilesRootDir" prompt="talendFilesRootDir?" promptNeeded="false" repositoryContextId="_KBCKcMXFEeWZRNZKlN1Jqg" type="id_String" value="/var/data/talend/"/>
+    <contextParameter comment="this is where temporary files will be created" name="temporaryFilesDir" prompt="temporaryFilesDir?" promptNeeded="false" repositoryContextId="_KBCKcMXFEeWZRNZKlN1Jqg" type="id_String" value="/tmp/b17files"/>
+    <contextParameter comment="" name="DWH_VTS_MART_Database" prompt="DWH_VTS_MART_Database?" promptNeeded="false" repositoryContextId="_XicjYLMjEeebf5UxGNsAAg" type="id_String" value="dwh_vts"/>
+    <contextParameter comment="" name="DWH_VTS_MART_Login" prompt="DWH_VTS_MART_Login?" promptNeeded="false" repositoryContextId="_XicjYLMjEeebf5UxGNsAAg" type="id_String" value="dwh_vts_owner"/>
+    <contextParameter comment="" name="DWH_VTS_MART_Password" prompt="DWH_VTS_MART_Password?" promptNeeded="false" repositoryContextId="_XicjYLMjEeebf5UxGNsAAg" type="id_Password" value="2ONceNqo2wT709PYKy+R9EbQvQe8S+oO0wSIiUf/aIVDHzUOYK0P0HRuLoJa+52r"/>
+    <contextParameter comment="" name="DWH_VTS_MART_Port" prompt="DWH_VTS_MART_Port?" promptNeeded="false" repositoryContextId="_XicjYLMjEeebf5UxGNsAAg" type="id_String" value="5432"/>
+    <contextParameter comment="" name="DWH_VTS_MART_Schema" prompt="DWH_VTS_MART_Schema?" promptNeeded="false" repositoryContextId="_XicjYLMjEeebf5UxGNsAAg" type="id_String" value="dwh_vts_marts"/>
+    <contextParameter comment="" name="DWH_VTS_MART_Server" prompt="DWH_VTS_MART_Server?" promptNeeded="false" repositoryContextId="_XicjYLMjEeebf5UxGNsAAg" type="id_String" value="dwhdbtest01.gvl.local"/>
+    <contextParameter comment="" name="report_pdf_TypeName" prompt="report_pdf_TypeName?" promptNeeded="false" type="id_String" value="Herstellerreport PDF, Sendeminuten"/>
+    <contextParameter comment="" name="report_pdf_TypeSysname" prompt="report_pdf_TypeSysname?" promptNeeded="false" type="id_String" value="detailed_report_producer_broadc_minutes"/>
+    <contextParameter comment="" name="report_excel_TypeName" prompt="report_excel_TypeName?" promptNeeded="false" type="id_String" value="Herstellerreport XLS, Minuten und Sender"/>
+    <contextParameter comment="" name="report_excel_TypeSysname" prompt="report_excel_TypeSysname?" promptNeeded="false" type="id_String" value="detailed_report_producer_station_usage"/>
+    <contextParameter comment="" name="gptype" prompt="gptype?" promptNeeded="true" type="id_String" value="Tonträgerhersteller"/>
+    <contextParameter comment="" name="dwh_vendor_report_hersteller_design_excel_de" prompt="dwh_vendor_report_hersteller_design_excel_de?" promptNeeded="false" type="id_String" value="/var/data/talend/dwh/dwh_vts/vendor_report/designs/Hersteller.xlsx"/>
+    <contextParameter comment="" name="DWH_VTS_MART_PRODUCER_Schema" prompt="DWH_VTS_MART_PRODUCER_Schema?" promptNeeded="false" repositoryContextId="_2IHNgMt_EeepYe2DyGm9sA" type="id_String" value="dwh_vts_mart_producer"/>
+    <contextParameter comment="" name="DWH_VTS_MART_PRODUCER_Server" prompt="DWH_VTS_MART_PRODUCER_Server?" promptNeeded="false" repositoryContextId="_2IHNgMt_EeepYe2DyGm9sA" type="id_String" value="dwhdbtest01.gvl.local"/>
+    <contextParameter comment="" name="DWH_VTS_MART_PRODUCER_Database" prompt="DWH_VTS_MART_PRODUCER_Database?" promptNeeded="false" repositoryContextId="_2IHNgMt_EeepYe2DyGm9sA" type="id_String" value="dwh"/>
+    <contextParameter comment="" name="DWH_VTS_MART_PRODUCER_Password" prompt="DWH_VTS_MART_PRODUCER_Password?" promptNeeded="false" repositoryContextId="_2IHNgMt_EeepYe2DyGm9sA" type="id_Password" value="jQ3Cc/7rj55+UZPV0clS3+Rj4Xwwd6fQcNeB89EdutyrjHJDMdyYFaTq/7MffzEenxghydyusv5AERBSXxYgOJ0fjuK7qxgTQXojoiTapP5ifCWB/pFAoaxLjcAP5qIV"/>
+    <contextParameter comment="" name="DWH_VTS_MART_PRODUCER_Port" prompt="DWH_VTS_MART_PRODUCER_Port?" promptNeeded="false" repositoryContextId="_2IHNgMt_EeepYe2DyGm9sA" type="id_String" value="5432"/>
+    <contextParameter comment="" name="DWH_VTS_MART_PRODUCER_Login" prompt="DWH_VTS_MART_PRODUCER_Login?" promptNeeded="false" repositoryContextId="_2IHNgMt_EeepYe2DyGm9sA" type="id_String" value="vts_transfer"/>
+  </context>
+  <parameters>
+    <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx4G " show="false"/>
+    <elementParameter field="CHECK" name="JOB_RUN_VM_ARGUMENTS_OPTION" value="true" show="false"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="0" show="false"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="0" show="false"/>
+    <elementParameter field="TEXT" name="REPOSITORY_CONNECTION_ID" value="" show="false"/>
+    <elementParameter field="TEXT" name="OOZIE_PROPERTY_TYPENAME" value="" show="false"/>
+    <elementParameter field="TEXT" name="OOZIE_HADOOP_DISTRIBUTION" value="" show="false"/>
+    <elementParameter field="TEXT" name="OOZIE_HADOOP_VERSION" value="" show="false"/>
+    <elementParameter field="TEXT" name="OOZIE_ENABLE_KERBEROS" value="" show="false"/>
+    <elementParameter field="TEXT" name="OOZIE_NAME_NODE_PRINCIPAL" value="" show="false"/>
+    <elementParameter field="TEXT" name="OOZIE_USERNAME" value="" show="false"/>
+    <elementParameter field="TEXT" name="OOZIE_GROUP" value="" show="false"/>
+    <elementParameter field="TEXT" name="OOZIE_USE_KEYTAB" value="" show="false"/>
+    <elementParameter field="TEXT" name="OOZIE_KT_PRINCIPAL" value="" show="false"/>
+    <elementParameter field="TEXT" name="OOZIE_KEY_TAB" value="" show="false"/>
+    <elementParameter field="TEXT" name="OOZIE_ENABLE_OO_KERBEROS" value="" show="false"/>
+    <elementParameter field="TEXT" name="OOZIE_NAME_NODE_END_POINT" value="" show="false"/>
+    <elementParameter field="TEXT" name="OOZIE_JOB_TRACKER_ENDPOINT" value="" show="false"/>
+    <elementParameter field="TEXT" name="OOZIE_END_POINT" value="" show="false"/>
+    <elementParameter field="CHECK" name="IMPLICITCONTEXT_USE_PROJECT_SETTINGS" value="false" show="false"/>
+    <elementParameter field="CHECK" name="STATANDLOG_USE_PROJECT_SETTINGS" value="true" show="false"/>
+    <elementParameter field="CHECK" name="MULTI_THREAD_EXECATION" value="false"/>
+    <elementParameter field="CHECK" name="IMPLICIT_TCONTEXTLOAD" value="true"/>
+    <elementParameter field="RADIO" name="FROM_FILE_FLAG_IMPLICIT_CONTEXT" value="true"/>
+    <elementParameter field="RADIO" name="FROM_DATABASE_FLAG_IMPLICIT_CONTEXT" value="false"/>
+    <elementParameter field="FILE" name="IMPLICIT_TCONTEXTLOAD_FILE" value="context.talendFilesRootDir + context.contextPropertiesFile"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;=&quot;"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY_TYPE_IMPLICIT_CONTEXT:PROPERTY_TYPE" value="" show="false"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY_TYPE_IMPLICIT_CONTEXT:REPOSITORY_PROPERTY_TYPE" value="" show="false"/>
+    <elementParameter field="CLOSED_LIST" name="DB_TYPE_IMPLICIT_CONTEXT" value="" show="false"/>
+    <elementParameter field="CLOSED_LIST" name="DB_VERSION_IMPLICIT_CONTEXT" value="" show="false"/>
+    <elementParameter field="TEXT" name="URL_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TABLE" name="DRIVER_JAR_IMPLICIT_CONTEXT" show="false"/>
+    <elementParameter field="TEXT" name="DRIVER_CLASS_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="HOST_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="PORT_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="DBNAME_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="LOCAL_SERVICE_NAME_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="PROPERTIES_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="USER_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
+    <elementParameter field="PASSWORD" name="PASS_IMPLICIT_CONTEXT" value="EmekHM+r0swh+R92AteNsCgNibbYUhmE+t92mu1Zfdo=" show="false"/>
+    <elementParameter field="FILE" name="DBFILE_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
+    <elementParameter field="DBTABLE" name="DBTABLE_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="QUERY_CONDITION_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
+    <elementParameter field="CLOSED_LIST" name="LOAD_NEW_VARIABLE" value="Warning"/>
+    <elementParameter field="CLOSED_LIST" name="NOT_LOAD_OLD_VARIABLE" value="Warning"/>
+    <elementParameter field="CHECK" name="PRINT_OPERATIONS" value="false"/>
+    <elementParameter field="CHECK" name="DISABLE_ERROR" value="false"/>
+    <elementParameter field="CHECK" name="DISABLE_WARNINGS" value="true"/>
+    <elementParameter field="CHECK" name="DISABLE_INFO" value="true"/>
+    <elementParameter field="CHECK" name="ON_STATCATCHER_FLAG" value="false"/>
+    <elementParameter field="CHECK" name="ON_LOGCATCHER_FLAG" value="false"/>
+    <elementParameter field="CHECK" name="ON_METERCATCHER_FLAG" value="false"/>
+    <elementParameter field="CHECK" name="ON_CONSOLE_FLAG" value="false" show="false"/>
+    <elementParameter field="CHECK" name="ON_FILES_FLAG" value="false" show="false"/>
+    <elementParameter field="DIRECTORY" name="FILE_PATH" value="&quot;/Data/projects/gvl/talend/workspace_talend_631/.metadata&quot;" show="false"/>
+    <elementParameter field="TEXT" name="FILENAME_STATS" value="&quot;stats_file.txt&quot;" show="false"/>
+    <elementParameter field="TEXT" name="FILENAME_LOGS" value="&quot;logs_file.txt&quot;" show="false"/>
+    <elementParameter field="TEXT" name="FILENAME_METTER" value="&quot;meter_file.txt&quot;" show="false"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="ISO-8859-15" show="false"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15" show="false"/>
+    <elementParameter field="CHECK" name="ON_DATABASE_FLAG" value="false" show="false"/>
+    <elementParameter field="CLOSED_LIST" name="DB_TYPE" value="tJDBCOutput" show="false"/>
+    <elementParameter field="CLOSED_LIST" name="DB_VERSION" value="ORACLE_11" show="false"/>
+    <elementParameter field="TEXT" name="URL" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TABLE" name="DRIVER_JAR" show="false"/>
+    <elementParameter field="TEXT" name="DRIVER_CLASS" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="DATASOURCE" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="LOCAL_SERVICE_NAME" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="PROPERTIES" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;&quot;" show="false"/>
+    <elementParameter field="PASSWORD" name="PASS" value="EmekHM+r0swh+R92AteNsCgNibbYUhmE+t92mu1Zfdo=" show="false"/>
+    <elementParameter field="FILE" name="DBFILE" value="&quot;&quot;" show="false"/>
+    <elementParameter field="DBTABLE" name="TABLE_STATS" value="&quot;&quot;" show="false"/>
+    <elementParameter field="DBTABLE" name="TABLE_LOGS" value="&quot;&quot;" show="false"/>
+    <elementParameter field="DBTABLE" name="TABLE_METER" value="&quot;&quot;" show="false"/>
+    <elementParameter field="CHECK" name="CATCH_RUNTIME_ERRORS" value="true" show="false"/>
+    <elementParameter field="CHECK" name="CATCH_USER_ERRORS" value="true" show="false"/>
+    <elementParameter field="CHECK" name="CATCH_USER_WARNING" value="true" show="false"/>
+    <elementParameter field="CHECK" name="CATCH_REALTIME_STATS" value="false" show="false"/>
+    <elementParameter field="TEXT" name="HEADERFOOTER_HEADERID" value="" show="false"/>
+    <elementParameter field="CHECK" name="HEADER_ENABLED" value="false" show="false"/>
+    <elementParameter field="TEXT" name="HEADER_LIBRARY" value="" show="false"/>
+    <elementParameter field="TEXT" name="HEADER_CODE" value="" show="false"/>
+    <elementParameter field="TEXT" name="HEADER_IMPORT" value="" show="false"/>
+    <elementParameter field="TEXT" name="HEADERFOOTER_FOOTERID" value="" show="false"/>
+    <elementParameter field="CHECK" name="FOOTER_ENABLED" value="false" show="false"/>
+    <elementParameter field="TEXT" name="FOOTER_LIBRARY" value="" show="false"/>
+    <elementParameter field="TEXT" name="FOOTER_CODE" value="" show="false"/>
+    <elementParameter field="TEXT" name="FOOTER_IMPORT" value="" show="false"/>
+    <routinesParameter id="_8XrEYIegEeWxp-Xev2UlmQ" name="GVLStringUtil"/>
+    <routinesParameter id="_hm8r0CKLEeaTcZfaXugHag" name="CatalogLoad"/>
+    <routinesParameter id="_LzfecLD6EeO6VM06V454Cg" name="Base64"/>
+    <routinesParameter id="_hFnF8MLUEeaJfvumeW8oMA" name="BooleanUtil"/>
+    <routinesParameter id="_4t3KQMxDEea_Iby_T9wHug" name="GenericDateUtil"/>
+    <routinesParameter id="_r0snwJK8EeC6Ic6NNICiJQ" name="GlobalMapUtil"/>
+    <routinesParameter id="_azIYAMWsEeWHPoOuj66bsg" name="Guid"/>
+    <routinesParameter id="_pPW-kJnzEea8EpUaCWrZIw" name="MD5FileChecksum"/>
+    <routinesParameter id="_Teup0JK5EeC6Ic6NNICiJQ" name="NumberUtil"/>
+    <routinesParameter id="_0hC9gGEqEeOsmZImU2CMNw" name="RegexUtil"/>
+    <routinesParameter id="_EjjtALD6EeO6VM06V454Cg" name="StringCrypt"/>
+    <routinesParameter id="_UiNMYJ5nEeCszbciuBGlOg" name="StringUtil"/>
+    <routinesParameter id="_MT5_QKvnEeGBhuT7zCIcQA" name="TimestampUtil"/>
+    <routinesParameter id="_aWP6wGCwEeeFs9H9ZrSqPQ" name="APIException"/>
+    <routinesParameter id="_VcfxwFBCEeeFi-YKZVBx8g" name="PostException"/>
+    <routinesParameter id="_P4zfsFBCEeeFi-YKZVBx8g" name="PutException"/>
+    <routinesParameter id="_CksEwExREee8-sG41ET8ZQ" name="ServiceException"/>
+    <routinesParameter id="_CErrsAl5Eee_EtaEfCwg8w" name="WhereForMultiGet"/>
+    <routinesParameter id="_DcPUwBUPEeeVb_La_tASfw" name="ExcelValidationVC"/>
+    <routinesParameter id="_aMApkMITEeaVFe6XAFWZZw" name="ExcelValidation"/>
+    <routinesParameter id="_WK3KYAWVEeeO3aH4SlenCw" name="IPUtil"/>
+    <routinesParameter id="_5jEkYNJsEeajQ9-MWsv4jA" name="JSONUtil"/>
+    <routinesParameter id="_warbYATTEeehI_n6cQvTYg" name="WSSEHeaderUtil"/>
+    <routinesParameter id="_sJl38Al5Eee_EtaEfCwg8w" name="WhereUtil"/>
+    <routinesParameter id="_t9gYoCBOEeeDbOD5M4Q-Yg" name="BCryptUtil"/>
+    <routinesParameter id="_SlOr0E5LEeaS5-u_BguUfA" name="CatalogIdLookup"/>
+    <routinesParameter id="_P_YjcFJHEeapK-BQrSZejg" name="CoalesceField"/>
+    <routinesParameter id="_iqC0AEMDEeeE7btqX-YHgA" name="EncryptionUtil"/>
+    <routinesParameter id="_ZTdzwKgDEead6aYCKznNjg" name="StringHandlingGVL"/>
+    <routinesParameter id="_DCHUgAfdEeebqJuto1Alxg" name="TransformationDecisionUtil"/>
+    <routinesParameter id="_mmZ-0KT1Eea9DZwjqE3VVA" name="WrongInputException"/>
+    <routinesParameter id="_Y7XJYDlZEeeXuLUvsUxBHg" name="GlobalWeatherLocator"/>
+    <routinesParameter id="_ZtJysDlZEeeXuLUvsUxBHg" name="GlobalWeatherSoap_BindingStub"/>
+    <routinesParameter id="_acLb4DlZEeeXuLUvsUxBHg" name="GlobalWeatherSoap_PortType"/>
+    <routinesParameter id="_YEBRsDlZEeeXuLUvsUxBHg" name="GlobalWeather"/>
+    <routinesParameter id="_VZkocMqFEeWbga7eVpSPyQ" name="TestdscTstandardizerow_1"/>
+    <routinesParameter id="_XlC3EH3_EeeOH7L_Ee1aqg" name="DQTechnical"/>
+    <routinesParameter id="_Xk5tIH3_EeeOH7L_Ee1aqg" name="DataMasking"/>
+    <routinesParameter id="_Xj-gEH3_EeeOH7L_Ee1aqg" name="DataOperation"/>
+    <routinesParameter id="_Xk9-kH3_EeeOH7L_Ee1aqg" name="DataQualityDependencies"/>
+    <routinesParameter id="_Xk8JYH3_EeeOH7L_Ee1aqg" name="DataQuality"/>
+    <routinesParameter id="_XlAa0H3_EeeOH7L_Ee1aqg" name="DqStringHandling"/>
+    <routinesParameter id="_YwAYcIDrEeecIsjWU7XuAw" name="MDM"/>
+    <routinesParameter id="_Xkp1gH3_EeeOH7L_Ee1aqg" name="Mathematical"/>
+    <routinesParameter id="_XksRwH3_EeeOH7L_Ee1aqg" name="Numeric"/>
+    <routinesParameter id="_XkuuAH3_EeeOH7L_Ee1aqg" name="Relational"/>
+    <routinesParameter id="_XlFTUH3_EeeOH7L_Ee1aqg" name="SQLike"/>
+    <routinesParameter id="_XkxKQH3_EeeOH7L_Ee1aqg" name="StringHandling"/>
+    <routinesParameter id="_Xky_cH3_EeeOH7L_Ee1aqg" name="TalendDataGenerator"/>
+    <routinesParameter id="_Xk00oH3_EeeOH7L_Ee1aqg" name="TalendDate"/>
+    <routinesParameter id="_Xk3Q4H3_EeeOH7L_Ee1aqg" name="TalendString"/>
+    <routinesParameter id="_A12E8NGdEea7m_J39mIIhQ" name="FileUtil"/>
+    <routinesParameter id="_w8lu0MYkEee3Nq73JFhpKw" name="DocuwareUtil"/>
+  </parameters>
+  <node componentName="tPrejob" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="96" posY="64">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPrejob_1" show="false"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+  </node>
+  <node componentName="tJobInstanceStart" componentVersion="6.5" offsetLabelX="0" offsetLabelY="0" posX="320" posY="64">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJobInstanceStart_1" show="false"/>
+    <elementParameter field="CHECK" name="USE_DATA_SOURCE" value="true"/>
+    <elementParameter field="TEXT" name="DATA_SOURCE_ALIAS" value="&quot;b17_management&quot;"/>
+    <elementParameter field="CHECK" name="USE_DATA_SOURCE_ALIAS_AS_DBNAME" value="true"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="" show="false"/>
+    <elementParameter field="CHECK" name="CLOSE_CONNECTION" value="true" show="false"/>
+    <elementParameter field="TEXT" name="JOB_NAME" value="jobName"/>
+    <elementParameter field="TEXT" name="JOB_DISPLAY_NAME" value=""/>
+    <elementParameter field="TEXT" name="PROCESS_INSTANCE_NAME" value=""/>
+    <elementParameter field="TEXT" name="JOB_WORK_ITEM" value="context.vendor_id"/>
+    <elementParameter field="CHECK" name="EMPTY_WORK_ITEM_IS_NULL" value="false"/>
+    <elementParameter field="TEXT" name="TIME_RANGE_START" value=""/>
+    <elementParameter field="TEXT" name="TIME_RANGE_END" value=""/>
+    <elementParameter field="TEXT" name="VALUE_RANGE_START" value=""/>
+    <elementParameter field="TEXT" name="VALUE_RANGE_END" value=""/>
+    <elementParameter field="TEXT" name="CONTEXT_VAR_JOB_INSTANCE_ID" value=""/>
+    <elementParameter field="TEXT" name="CONTEXT_VAR_PROCESS_INSTANCE_ID" value=""/>
+    <elementParameter field="TEXT" name="CONTEXT_VAR_EXT_JOB_INSTANCE_ID" value=""/>
+    <elementParameter field="CHECK" name="SAVE_CONTEXT_AT_START" value="false"/>
+    <elementParameter field="CHECK" name="DO_NOT_SAVE_PASSWORDS" value="false" show="false"/>
+    <elementParameter field="TEXT" name="RESTART_FROM_JOB_INSTANCE_ID" value="" show="false"/>
+    <elementParameter field="CHECK" name="SINGLETON_JOB_INSTANCE" value="false"/>
+    <elementParameter field="CHECK" name="SINGLETON_JOB_INSTANCE_FOR_WORKITEM" value="false" show="false"/>
+    <elementParameter field="LABEL" name="NOTE1" value="Note: You can use the an if trigger with the return value JOB_RUNS_ALONE (boolean) to trigger the process in case no other instance is running or let the process die by triggering a tDie" show="false"/>
+    <elementParameter field="CHECK" name="SINGLETON_JOB_INSTANCE_AVOID_JOB_STATUS" value="false" show="false"/>
+    <elementParameter field="LABEL" name="NOTE2" value="Note: You can avoid a register entry for a job which should actually not run." show="false"/>
+    <elementParameter field="CHECK" name="RETRIEVE_LAST_RUN_DATA" value="false"/>
+    <elementParameter field="CHECK" name="RETRIEVE_LAST_RUN_DATA_SUCCESSFUL" value="true" show="false"/>
+    <elementParameter field="CHECK" name="RETRIEVE_LAST_RUN_DATA_WITH_DATA" value="true" show="false"/>
+    <elementParameter field="CHECK" name="RETRIEVE_LAST_RUN_DATA_WITH_INPUT" value="false" show="false"/>
+    <elementParameter field="CHECK" name="RETRIEVE_LAST_RUN_DATA_FOR_WORKITEM" value="true" show="false"/>
+    <elementParameter field="CHECK" name="RETRIEVE_LAST_RUN_DATA_WITHIN_SAME_ROOT" value="false" show="false"/>
+    <elementParameter field="CHECK" name="COLLECT_SOURCE_INSTANCE_IDS" value="false" show="false"/>
+    <elementParameter field="TABLE" name="SOURCE_JOB_NAMES" show="false"/>
+    <elementParameter field="TEXT" name="OK_RESULT_CODES" value="&quot;0&quot;" show="false"/>
+    <elementParameter field="TEXT" name="INITIAL_PREV_JOB_INSTANCE_ID" value="0l" show="false"/>
+    <elementParameter field="TEXT" name="INITIAL_PREV_JOB_START_DATE" value="TalendDate.parseDate(&quot;yyyy-MM-dd&quot;, &quot;1970-01-01&quot;)" show="false"/>
+    <elementParameter field="TEXT" name="INITIAL_PREV_TIME_RANGE_END" value="TalendDate.parseDate(&quot;yyyy-MM-dd&quot;, &quot;1970-01-01&quot;)" show="false"/>
+    <elementParameter field="TEXT" name="INITIAL_PREV_VALUE_RANGE_END" value="&quot;0&quot;" show="false"/>
+    <elementParameter field="TEXT" name="INITIAL_PREV_RESULT_ITEM" value="&quot;0&quot;" show="false"/>
+    <elementParameter field="CHECK" name="SET_UTC_TIMEZONE" value="false"/>
+    <elementParameter field="CHECK" name="MEASURE_MEMORY_USAGE" value="false"/>
+    <elementParameter field="CHECK" name="USE_LOG4J" value="false"/>
+    <elementParameter field="FILE" name="LOG4J_CONFIG_FILE" value="&quot;/path/to/log4j.xml&quot;" show="false"/>
+    <elementParameter field="CHECK" name="USE_LOG_FILE" value="true" show="false"/>
+    <elementParameter field="FILE" name="LOG_FILE_PATH" value="&quot;/var/log/talend_jobs/{project}/{jobName}_{jobInstanceId}.log&quot;" show="false"/>
+    <elementParameter field="TEXT" name="LOG_FILE_LAYOUT" value="&quot;%-6r [%15.15t] %-5p %30.30c %x - [%X{origin}] %m%n&quot;" show="false"/>
+    <elementParameter field="CHECK" name="ADD_CONTEXT_TO_MDC" value="false" show="false"/>
+    <elementParameter field="TEXT" name="HELPER_NAME" value="" show="false"/>
+    <elementParameter field="CHECK" name="USE_DB_APPENDER" value="false" show="false"/>
+    <elementParameter field="TEXT" name="PATTEN_LAYOUT" value="&quot;[%X{origin}] %m&quot;" show="false"/>
+    <elementParameter field="TEXT" name="LOG_BATCH_UPDATE_MILLIS" value="5000" show="false"/>
+    <elementParameter field="TEXT" name="LOG_BATCH_SIZE" value="100" show="false"/>
+    <elementParameter field="LABEL" name="CATCH_SYSOUT_HINT" value="This setting affects this job and all further jobs in the same VM!" show="false"/>
+    <elementParameter field="CHECK" name="CATCH_SYSOUT" value="true" show="false"/>
+    <elementParameter field="CHECK" name="FORWARD_TO_CONSOLE" value="true" show="false"/>
+    <elementParameter field="CHECK" name="SYSOUT_JOB_INSTANCE_ID" value="false"/>
+    <elementParameter field="TEXT" name="SYSOUT_JOB_INSTANCE_ID_EXPRESSION" value="&quot;Job: &quot; + jobName + &quot; job_instance_id: &quot; + ((Long) globalMap.get(&quot;tJobInstanceStart_1_JOB_INSTANCE_ID&quot;))" show="false"/>
+    <elementParameter field="CHECK" name="DEBUG" value="false"/>
+    <elementParameter field="TEXT" name="SCHEMA_NAME" value=""/>
+    <elementParameter field="TEXT" name="TABLE_NAME" value="&quot;JOB_INSTANCE_STATUS&quot;"/>
+    <elementParameter field="TEXT" name="TABLE_NAME_CONTEXT" value=""/>
+    <elementParameter field="TEXT" name="TABLE_NAME_COUNTER" value=""/>
+    <elementParameter field="TEXT" name="MAX_MESSAGE_LENGTH" value="1000"/>
+    <elementParameter field="CHECK" name="USE_GENERATED_JID" value="false"/>
+    <elementParameter field="TEXT" name="HOST_INDEX" value="0" show="false"/>
+    <elementParameter field="CHECK" name="IS_AUTO_INCREMENT" value="false"/>
+    <elementParameter field="TEXT" name="SEQUENCE_EXPRESSION" value="&quot;nextval('b17_management.seq_job_instance_id')&quot;"/>
+    <elementParameter field="CHECK" name="REDUCE_RESUME_LOGS" value="false"/>
+    <elementParameter field="CHECK" name="ACTIVATE_JMX" value="false"/>
+    <elementParameter field="LABEL" name="RELEASE_LABEL_20171204" value="Release: 6.5 build at: 20171204"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+  </node>
+  <node componentName="tPostjob" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="448" posY="64">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostjob_1" show="false"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+  </node>
+  <node componentName="tJobInstanceEnd" componentVersion="6.5" offsetLabelX="0" offsetLabelY="0" posX="576" posY="64">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJobInstanceEnd_1" show="false"/>
+    <elementParameter field="CHECK" name="USE_SEPARATE_CONNECTION" value="true"/>
+    <elementParameter field="CHECK" name="USE_DATA_SOURCE" value="true"/>
+    <elementParameter field="TEXT" name="DATA_SOURCE_ALIAS" value="&quot;b17_management&quot;"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnectionPool_1" show="false"/>
+    <elementParameter field="COMPONENT_LIST" name="JOB_START_COMP" value="tJobInstanceStart_1"/>
+    <elementParameter field="TEXT" name="JOB_RESULT" value="((String)globalMap.get(&quot;tFileExcelWorkbookSave_1_FILENAME&quot;))"/>
+    <elementParameter field="TEXT" name="TIME_RANGE_START" value=""/>
+    <elementParameter field="TEXT" name="TIME_RANGE_END" value=""/>
+    <elementParameter field="TEXT" name="VALUE_RANGE_START" value=""/>
+    <elementParameter field="TEXT" name="VALUE_RANGE_END" value=""/>
+    <elementParameter field="CHECK" name="SAVE_NAMED_COUNTERS" value="false"/>
+    <elementParameter field="CHECK" name="SAVE_CONTEXT_AT_END" value="false"/>
+    <elementParameter field="CHECK" name="DO_NOT_SAVE_PASSWORDS" value="false" show="false"/>
+    <elementParameter field="CHECK" name="CLEANUP_BY_WORKITEM" value="false"/>
+    <elementParameter field="CHECK" name="CLOSE_CONNECTION" value="true" show="false"/>
+    <elementParameter field="CHECK" name="CHECK_ALL_COMPONENTS_FINISHED" value="true"/>
+    <elementParameter field="TABLE" name="INPUTS"/>
+    <elementParameter field="TABLE" name="OUTPUTS">
+      <elementValue elementRef="OUTPUT_COUNTER" value="((Integer)globalMap.get(&quot;tJasperReportExec_1_NUMBER_OF_PAGES&quot;))"/>
+      <elementValue elementRef="ADD" value="true"/>
+      <elementValue elementRef="COUNTER_NAME" value=""/>
+    </elementParameter>
+    <elementParameter field="TABLE" name="UPDATES"/>
+    <elementParameter field="TABLE" name="REJECTS"/>
+    <elementParameter field="TABLE" name="DELETES"/>
+    <elementParameter field="LABEL" name="RELEASE_LABEL_20171204" value="Release: 6.5 build at: 20171204"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+  </node>
+  <node componentName="tFileExcelWorkbookOpen" componentVersion="8.7" offsetLabelX="0" offsetLabelY="0" posX="288" posY="192">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFileExcelWorkbookOpen_1" show="false"/>
+    <elementParameter field="CHECK" name="CREATE_EMPTY_WORKBOOK" value="false"/>
+    <elementParameter field="FILE" name="FILENAME" value="context.dwh_vendor_report_hersteller_design_excel_de"/>
+    <elementParameter field="CLOSED_LIST" name="SPREADSHEET_TYPE" value="XLS" show="false"/>
+    <elementParameter field="LABEL" name="CONFIGTEXT" value="The memory saving mode currently applies only to the writing of large files, not to the reading!"/>
+    <elementParameter field="CHECK" name="CREATE_STREAMING_WORKBOOK" value="false"/>
+    <elementParameter field="CHECK" name="DIE_IF_FILE_NOT_EXISTS" value="false"/>
+    <elementParameter field="CHECK" name="DECRYPT_FILE" value="false"/>
+    <elementParameter field="TEXT" name="PASSWORD" value="&quot;secret&quot;" show="false"/>
+    <elementParameter field="CHECK" name="REGISTER_BACKPORT_FUNCTIONS" value="false"/>
+    <elementParameter field="TABLE" name="FUNCTION_ADDONS"/>
+    <elementParameter field="LABEL" name="RELEASE_LABEL_20170413" value="Release: 8.7 build at: 20170413"/>
+    <elementParameter field="TEXT" name="LABEL" value="open vendor workbook"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+  </node>
+  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="448" posY="192">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_1" show="false"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1" show="false"/>
+    <elementParameter field="CLOSED_LIST" name="DB_VERSION" value="V9_X"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="TYPE" value="PostgreSQL" show="false"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
+    <elementParameter field="PASSWORD" name="PASS" value="k3WNzwEJ9MTsQqCStv4d5g=="/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;producer_detail_report&quot;"/>
+    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value="" show="false"/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
+    <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT &#xD;&#xA;name, street, city,email,gvl_contract_number, year, run_id, approval, max_amount_per_rating_unit&#xD;&#xA;FROM dwh_vts_mart_producer.producer_detail_report(CAST (NULLIF (TRIM ('&quot;+context.uuid+&quot;'), '') AS UUID), CAST (&quot;+context.vendor_id+&quot; AS BIGINT))&quot;"/>
+    <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
+    <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="true"/>
+    <elementParameter field="TEXT" name="DATASOURCE_ALIAS" value="&quot;producer&quot;"/>
+    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id" show="false"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;" show="false"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CHECK" name="USE_CURSOR" value="false"/>
+    <elementParameter field="TEXT" name="CURSOR_SIZE" value="1000" show="false"/>
+    <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
+    <elementParameter field="TABLE" name="TRIM_COLUMN">
+      <elementValue elementRef="SCHEMA_COLUMN" value="name"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="street"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="city"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="email"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="gvl_contract_number"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="year"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="run_id"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="approval"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="max_amount_per_rating_unit"/>
+      <elementValue elementRef="TRIM" value="false"/>
+    </elementParameter>
+    <elementParameter field="TEXT" name="LABEL" value="producer_detail_report"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tPostgresqlInput_1">
+      <column comment="" key="false" length="500" name="name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="500" usefulColumn="true"/>
+      <column comment="" key="false" length="500" name="street" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="500" usefulColumn="true"/>
+      <column comment="" key="false" length="500" name="city" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="500" usefulColumn="true"/>
+      <column comment="" key="false" length="500" name="email" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="500" usefulColumn="true"/>
+      <column comment="" key="false" length="500" name="gvl_contract_number" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="500" usefulColumn="true"/>
+      <column comment="" defaultValue="" key="false" length="5" name="year" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer" originalLength="-1" usefulColumn="true"/>
+      <column comment="" defaultValue="" key="false" length="10" name="run_id" nullable="true" pattern="" precision="0" sourceType="INT8" type="id_Long" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="29" name="approval" nullable="true" pattern="&quot;yyyy-MM-dd&quot;" precision="6" sourceType="TIMESTAMP" type="id_Date" originalLength="-1" usefulColumn="true"/>
+      <column comment="" defaultValue="" key="false" length="17" name="max_amount_per_rating_unit" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double" originalLength="-1" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="608" posY="192">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_2" show="false"/>
+    <elementParameter field="EXTERNAL" name="MAP" value=""/>
+    <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
+    <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
+    <elementParameter field="IMAGE" name="PREVIEW" value="_skbLkMkgEeeq3cKGbJ4iYg-tMap_2-PREVIEW.bmp"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true" show="false"/>
+    <elementParameter field="CHECK" name="LKUP_PARALLELIZE" value="false" show="false"/>
+    <elementParameter field="CHECK" name="ENABLE_AUTO_CONVERT_TYPE" value="false" show="false"/>
+    <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
+    <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="false"/>
+    <elementParameter field="TEXT" name="LABEL" value="add_text"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" label="with_long_text" name="with_long_text">
+      <column comment="" key="false" length="500" name="name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="500" usefulColumn="true"/>
+      <column comment="" key="false" length="500" name="street" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="500" usefulColumn="true"/>
+      <column comment="" key="false" length="500" name="city" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="500" usefulColumn="true"/>
+      <column comment="" key="false" length="500" name="email" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="500" usefulColumn="true"/>
+      <column comment="" key="false" length="500" name="gvl_contract_number" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="500" usefulColumn="true"/>
+      <column comment="" defaultValue="" key="false" length="5" name="year" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer" originalLength="-1" usefulColumn="true"/>
+      <column comment="" defaultValue="" key="false" length="10" name="run_id" nullable="true" pattern="" precision="0" sourceType="INT8" type="id_Long" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="29" name="approval" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date" originalLength="-1" usefulColumn="true"/>
+      <column comment="" defaultValue="" key="false" length="17" name="max_amount_per_rating_unit" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="usage_string" nullable="false" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="period" nullable="false" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="creation" nullable="false" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+    </metadata>
+    <nodeData xsi:type="MapperData">
+      <uiProperties/>
+      <varTables sizeState="INTERMEDIATE" name="Var">
+        <mapperTableEntries name="usage_string" expression="&quot;GVL-Verteilung &quot; + context.year.toString() + &quot; Abrechnungsinformationen für die Nutzung erschienener Tonträgeraufnahmen&quot; " type="id_String"/>
+        <mapperTableEntries name="period" expression="&quot;01.01.&quot; + context.year.toString() + &quot; - 31.12.&quot; + context.year.toString() " type="id_String"/>
+        <mapperTableEntries name="creation" expression="TalendDate.formatDate(&quot;dd.MM.yyyy&quot;,&#xD;&#xA;producer_detail.approval ) " type="id_String"/>
+      </varTables>
+      <outputTables sizeState="INTERMEDIATE" name="with_long_text">
+        <mapperTableEntries name="name" expression="producer_detail.name" type="id_String" nullable="true"/>
+        <mapperTableEntries name="street" expression="producer_detail.street" type="id_String" nullable="true"/>
+        <mapperTableEntries name="city" expression="producer_detail.city" type="id_String" nullable="true"/>
+        <mapperTableEntries name="email" expression="producer_detail.email" type="id_String" nullable="true"/>
+        <mapperTableEntries name="gvl_contract_number" expression="producer_detail.gvl_contract_number" type="id_String" nullable="true"/>
+        <mapperTableEntries name="year" expression="producer_detail.year" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="run_id" expression="producer_detail.run_id" type="id_Long" nullable="true"/>
+        <mapperTableEntries name="approval" expression="producer_detail.approval" type="id_Date" nullable="true"/>
+        <mapperTableEntries name="max_amount_per_rating_unit" expression="producer_detail.max_amount_per_rating_unit" type="id_Double" nullable="true"/>
+        <mapperTableEntries name="usage_string" expression="Var.usage_string " type="id_String"/>
+        <mapperTableEntries name="period" expression="Var.period " type="id_String"/>
+        <mapperTableEntries name="creation" expression="Var.creation " type="id_String"/>
+      </outputTables>
+      <inputTables sizeState="INTERMEDIATE" name="producer_detail" matchingMode="ALL_ROWS" lookupMode="LOAD_ONCE">
+        <mapperTableEntries name="name" type="id_String" nullable="true"/>
+        <mapperTableEntries name="street" type="id_String" nullable="true"/>
+        <mapperTableEntries name="city" type="id_String" nullable="true"/>
+        <mapperTableEntries name="email" type="id_String" nullable="true"/>
+        <mapperTableEntries name="gvl_contract_number" type="id_String" nullable="true"/>
+        <mapperTableEntries name="year" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="run_id" type="id_Long" nullable="true"/>
+        <mapperTableEntries name="approval" type="id_Date" nullable="true"/>
+        <mapperTableEntries name="max_amount_per_rating_unit" type="id_Double" nullable="true"/>
+      </inputTables>
+    </nodeData>
+  </node>
+  <node componentName="tFlowToIterate" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="768" posY="192">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFlowToIterate_1" show="false"/>
+    <elementParameter field="CHECK" name="DEFAULT_MAP" value="true"/>
+    <elementParameter field="TABLE" name="MAP" show="false"/>
+    <elementParameter field="TEXT" name="LABEL" value="iterate_details"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tFlowToIterate_1"/>
+  </node>
+  <node componentName="tFileExcelNamedCellOutput" componentVersion="8.7" offsetLabelX="0" offsetLabelY="0" posX="928" posY="192">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFileExcelNamedCellOutput_1" show="false"/>
+    <elementParameter field="COMPONENT_LIST" name="WORKBOOK" value="tFileExcelWorkbookOpen_1"/>
+    <elementParameter field="TABLE" name="CELL_CONFIG">
+      <elementValue elementRef="CELL_NAME" value="&quot;email&quot;"/>
+      <elementValue elementRef="CELL_VALUE" value="((String)globalMap.get(&quot;with_long_text.email&quot;))"/>
+      <elementValue elementRef="IGNORE_MISSING_CELL" value="false"/>
+      <elementValue elementRef="DO_NOT_WRITE_NULL" value="false"/>
+      <elementValue elementRef="CELL_NAME" value="&quot;name&quot;"/>
+      <elementValue elementRef="CELL_VALUE" value="((String)globalMap.get(&quot;with_long_text.name&quot;))"/>
+      <elementValue elementRef="IGNORE_MISSING_CELL" value="false"/>
+      <elementValue elementRef="DO_NOT_WRITE_NULL" value="false"/>
+      <elementValue elementRef="CELL_NAME" value="&quot;street&quot;"/>
+      <elementValue elementRef="CELL_VALUE" value="((String)globalMap.get(&quot;with_long_text.street&quot;))"/>
+      <elementValue elementRef="IGNORE_MISSING_CELL" value="false"/>
+      <elementValue elementRef="DO_NOT_WRITE_NULL" value="false"/>
+      <elementValue elementRef="CELL_NAME" value="&quot;city&quot;"/>
+      <elementValue elementRef="CELL_VALUE" value="((String)globalMap.get(&quot;with_long_text.city&quot;))"/>
+      <elementValue elementRef="IGNORE_MISSING_CELL" value="false"/>
+      <elementValue elementRef="DO_NOT_WRITE_NULL" value="false"/>
+      <elementValue elementRef="CELL_NAME" value="&quot;vendor_id&quot;"/>
+      <elementValue elementRef="CELL_VALUE" value="context.vendor_id"/>
+      <elementValue elementRef="IGNORE_MISSING_CELL" value="false"/>
+      <elementValue elementRef="DO_NOT_WRITE_NULL" value="false"/>
+      <elementValue elementRef="CELL_NAME" value="&quot;run_id&quot;"/>
+      <elementValue elementRef="CELL_VALUE" value="context.run_id"/>
+      <elementValue elementRef="IGNORE_MISSING_CELL" value="false"/>
+      <elementValue elementRef="DO_NOT_WRITE_NULL" value="false"/>
+      <elementValue elementRef="CELL_NAME" value="&quot;usage_string&quot;"/>
+      <elementValue elementRef="CELL_VALUE" value="((String)globalMap.get(&quot;with_long_text.usage_string&quot;))"/>
+      <elementValue elementRef="IGNORE_MISSING_CELL" value="false"/>
+      <elementValue elementRef="DO_NOT_WRITE_NULL" value="false"/>
+      <elementValue elementRef="CELL_NAME" value="&quot;period&quot;"/>
+      <elementValue elementRef="CELL_VALUE" value="((String)globalMap.get(&quot;with_long_text.period&quot;))"/>
+      <elementValue elementRef="IGNORE_MISSING_CELL" value="false"/>
+      <elementValue elementRef="DO_NOT_WRITE_NULL" value="false"/>
+      <elementValue elementRef="CELL_NAME" value="&quot;creation&quot;"/>
+      <elementValue elementRef="CELL_VALUE" value="((String)globalMap.get(&quot;with_long_text.creation&quot;))"/>
+      <elementValue elementRef="IGNORE_MISSING_CELL" value="false"/>
+      <elementValue elementRef="DO_NOT_WRITE_NULL" value="false"/>
+      <elementValue elementRef="CELL_NAME" value="&quot;gvl_contract_number&quot;"/>
+      <elementValue elementRef="CELL_VALUE" value="((String)globalMap.get(&quot;with_long_text.gvl_contract_number&quot;))"/>
+      <elementValue elementRef="IGNORE_MISSING_CELL" value="false"/>
+      <elementValue elementRef="DO_NOT_WRITE_NULL" value="false"/>
+    </elementParameter>
+    <elementParameter field="LABEL" name="RELEASE_LABEL_20170413" value="Release: 8.7 build at: 20170413"/>
+    <elementParameter field="TEXT" name="LABEL" value="fill_header"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tFileExcelNamedCellOutput_1">
+      <column comment="" key="false" length="-1" name="header_col_a" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="header_col_b" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="header_col_c" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="header_col_d" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="header_col_e" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="header_col_f" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="header_col_g" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column defaultValue="" key="false" length="32" name="CELL_NAME" nullable="true" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column defaultValue="" key="false" length="0" name="CELL_VALUE" nullable="true" precision="0" sourceType="" type="id_Object" originalLength="-1" usefulColumn="true"/>
+      <column defaultValue="" key="false" length="0" name="IGNORE_MISSING_CELL" nullable="true" precision="0" sourceType="" type="id_Boolean" originalLength="-1" usefulColumn="true"/>
+      <column defaultValue="" key="false" length="0" name="DO_NOT_WRITE_NULL" nullable="true" precision="0" sourceType="" type="id_Boolean" originalLength="-1" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="448" posY="320">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_2" show="false"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1" show="false"/>
+    <elementParameter field="CLOSED_LIST" name="DB_VERSION" value="V9_X"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="TYPE" value="PostgreSQL" show="false"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
+    <elementParameter field="PASSWORD" name="PASS" value="k3WNzwEJ9MTsQqCStv4d5g=="/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;producer_detail_report_list2&quot;"/>
+    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value="" show="false"/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
+    <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT &#xD;&#xA;product_id,&#xD;&#xA;track_id_label,&#xD;&#xA;product,&#xD;&#xA;display_mainartist,&#xD;&#xA;isrc,&#xD;&#xA;composer,&#xD;&#xA;type,&#xD;&#xA;usage_medium,&#xD;&#xA;SUM(product_usage_minutes_initial) as product_usage_minutes_initial&#xD;&#xA;FROM dwh_vts_mart_producer.producer_detail_report_list2(CAST (NULLIF (TRIM ('&quot;+context.uuid+&quot;'), '') AS UUID), CAST (&quot;+context.vendor_id+&quot; AS BIGINT))&#xD;&#xA;GROUP BY product_id, track_id_label, product, display_mainartist, isrc, composer, type, usage_medium&#xD;&#xA;ORDER BY display_mainartist, product, track_id_label, product_id, usage_medium&#xD;&#xA;&quot;"/>
+    <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
+    <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="true"/>
+    <elementParameter field="TEXT" name="DATASOURCE_ALIAS" value="&quot;producer&quot;"/>
+    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id" show="false"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;" show="false"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CHECK" name="USE_CURSOR" value="false"/>
+    <elementParameter field="TEXT" name="CURSOR_SIZE" value="1000" show="false"/>
+    <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
+    <elementParameter field="TABLE" name="TRIM_COLUMN">
+      <elementValue elementRef="SCHEMA_COLUMN" value="product_id"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="track_id_label"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="product"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="display_mainartist"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="isrc"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="composer"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="type"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="usage_medium"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="product_usage_minutes_initial"/>
+      <elementValue elementRef="TRIM" value="false"/>
+    </elementParameter>
+    <elementParameter field="TEXT" name="LABEL" value="producer_detail_report_list2"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tPostgresqlInput_2">
+      <column comment="" key="false" length="-1" name="product_id" nullable="true" pattern="" precision="-1" sourceType="INT8" type="id_Long" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="255" name="track_id_label" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="255" usefulColumn="true"/>
+      <column comment="" key="false" length="255" name="product" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="255" usefulColumn="true"/>
+      <column comment="" key="false" length="255" name="display_mainartist" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="255" usefulColumn="true"/>
+      <column comment="" key="false" length="255" name="isrc" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="255" usefulColumn="true"/>
+      <column comment="" key="false" length="255" name="composer" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="255" usefulColumn="true"/>
+      <column comment="" key="false" length="255" name="type" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="255" usefulColumn="true"/>
+      <column comment="" key="false" length="255" name="usage_medium" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="255" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="product_usage_minutes_initial" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double" originalLength="-1" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="608" posY="320">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_1" show="false"/>
+    <elementParameter field="EXTERNAL" name="MAP" value=""/>
+    <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
+    <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
+    <elementParameter field="IMAGE" name="PREVIEW" value="_skbLkMkgEeeq3cKGbJ4iYg-tMap_1-PREVIEW.bmp"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true" show="false"/>
+    <elementParameter field="CHECK" name="LKUP_PARALLELIZE" value="false" show="false"/>
+    <elementParameter field="CHECK" name="ENABLE_AUTO_CONVERT_TYPE" value="false" show="false"/>
+    <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
+    <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="false"/>
+    <elementParameter field="TEXT" name="LABEL" value="insert details"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" label="write_excel" name="write_excel">
+      <column comment="" key="false" length="-1" name="product_id" nullable="true" pattern="" precision="-1" sourceType="INT8" type="id_Long" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="255" name="track_id_label" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="255" usefulColumn="true"/>
+      <column comment="" key="false" length="255" name="product" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="255" usefulColumn="true"/>
+      <column comment="" key="false" length="255" name="display_mainartist" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="255" usefulColumn="true"/>
+      <column comment="" key="false" length="255" name="composer" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="255" usefulColumn="true"/>
+      <column comment="" key="false" length="255" name="isrc" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="255" usefulColumn="true"/>
+      <column comment="" key="false" length="255" name="type" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="255" usefulColumn="true"/>
+      <column comment="" key="false" length="255" name="usage_medium" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="255" usefulColumn="true"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="min_product_usage_minutes_initial" nullable="false" pattern="" precision="-1" sourceType="" type="id_Long" originalLength="-1" usefulColumn="true"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="sec_product_usage_minutes_initial" nullable="false" pattern="" precision="-1" sourceType="" type="id_Long" originalLength="-1" usefulColumn="true"/>
+    </metadata>
+    <metadata connector="FLOW" label="set_initial_minutes" name="product_usage_minutes_initial">
+      <column comment="" key="false" length="-1" name="product_usage_minutes_initial" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double" originalLength="-1" usefulColumn="true"/>
+    </metadata>
+    <nodeData xsi:type="MapperData">
+      <uiProperties shellMaximized="true"/>
+      <varTables sizeState="INTERMEDIATE" name="Var">
+        <mapperTableEntries name="sec_product_usage_minutes_initial" expression="(long) Math.round ((60.0 * vendor_data.product_usage_minutes_initial ) -  (double) (60 * (((long) (60.0 * vendor_data.product_usage_minutes_initial  + 0.5)) / 60))) " type="id_Long"/>
+        <mapperTableEntries name="min_product_usage_minutes_initial" expression="((long) (60.0 * vendor_data.product_usage_minutes_initial + 0.5)) / 60 " type="id_Long"/>
+      </varTables>
+      <outputTables sizeState="INTERMEDIATE" name="write_excel">
+        <mapperTableEntries name="product_id" expression="vendor_data.product_id " type="id_Long" nullable="true"/>
+        <mapperTableEntries name="track_id_label" expression="vendor_data.track_id_label " type="id_String" nullable="true"/>
+        <mapperTableEntries name="product" expression="vendor_data.product " type="id_String" nullable="true"/>
+        <mapperTableEntries name="display_mainartist" expression="vendor_data.display_mainartist " type="id_String" nullable="true"/>
+        <mapperTableEntries name="composer" expression="vendor_data.composer " type="id_String" nullable="true"/>
+        <mapperTableEntries name="isrc" expression="vendor_data.isrc " type="id_String" nullable="true"/>
+        <mapperTableEntries name="type" expression="vendor_data.type " type="id_String" nullable="true"/>
+        <mapperTableEntries name="usage_medium" expression="vendor_data.usage_medium " type="id_String" nullable="true"/>
+        <mapperTableEntries name="min_product_usage_minutes_initial" expression="Var.min_product_usage_minutes_initial " type="id_Long"/>
+        <mapperTableEntries name="sec_product_usage_minutes_initial" expression="Var.sec_product_usage_minutes_initial " type="id_Long"/>
+      </outputTables>
+      <outputTables sizeState="INTERMEDIATE" name="product_usage_minutes_initial">
+        <mapperTableEntries name="product_usage_minutes_initial" expression="vendor_data.product_usage_minutes_initial " type="id_Double" nullable="true"/>
+      </outputTables>
+      <inputTables sizeState="INTERMEDIATE" name="vendor_data" matchingMode="ALL_ROWS" lookupMode="LOAD_ONCE">
+        <mapperTableEntries name="product_id" type="id_Long" nullable="true"/>
+        <mapperTableEntries name="track_id_label" type="id_String" nullable="true"/>
+        <mapperTableEntries name="product" type="id_String" nullable="true"/>
+        <mapperTableEntries name="display_mainartist" type="id_String" nullable="true"/>
+        <mapperTableEntries name="isrc" type="id_String" nullable="true"/>
+        <mapperTableEntries name="composer" type="id_String" nullable="true"/>
+        <mapperTableEntries name="type" type="id_String" nullable="true"/>
+        <mapperTableEntries name="usage_medium" type="id_String" nullable="true"/>
+        <mapperTableEntries name="product_usage_minutes_initial" type="id_Double" nullable="true"/>
+      </inputTables>
+    </nodeData>
+  </node>
+  <node componentName="tFileExcelSheetOutput" componentVersion="8.7" offsetLabelX="0" offsetLabelY="0" posX="768" posY="320">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFileExcelSheetOutput_1" show="false"/>
+    <elementParameter field="COMPONENT_LIST" name="WORKBOOK" value="tFileExcelWorkbookOpen_1"/>
+    <elementParameter field="TEXT" name="SHEET_NAME" value="&quot;Herstellerbericht&quot;"/>
+    <elementParameter field="CHECK" name="CREATE_SHEET_AS_COPY" value="false"/>
+    <elementParameter field="TEXT" name="SOURCE_SHEET_NAME" value="&quot;template&quot;" show="false"/>
+    <elementParameter field="CHECK" name="WRITE_IN_COLUMNS" value="false"/>
+    <elementParameter field="CHECK" name="APPEND_ROWS" value="false"/>
+    <elementParameter field="TEXT" name="ROW_START_INDEX" value="8"/>
+    <elementParameter field="CHECK" name="INCLUDE_HEADER" value="false"/>
+    <elementParameter field="CHECK" name="USE_COLUMN_POSITIONING" value="false"/>
+    <elementParameter field="TEXT" name="COLUMN_START_INDEX" value="&quot;A&quot;"/>
+    <elementParameter field="TABLE" name="COLUMN_CONFIG">
+      <elementValue elementRef="SCHEMA_COLUMN" value="product_id"/>
+      <elementValue elementRef="HEADER" value="&quot;Product ID&quot;"/>
+      <elementValue elementRef="POSITION" value=""/>
+      <elementValue elementRef="FORMAT" value=""/>
+      <elementValue elementRef="IS_AUTO_SIZE" value="true"/>
+      <elementValue elementRef="IS_COMMENT" value="false"/>
+      <elementValue elementRef="IS_HYPERLINK" value="false"/>
+      <elementValue elementRef="GROUP_ROW" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="track_id_label"/>
+      <elementValue elementRef="HEADER" value=""/>
+      <elementValue elementRef="POSITION" value=""/>
+      <elementValue elementRef="FORMAT" value=""/>
+      <elementValue elementRef="IS_AUTO_SIZE" value="true"/>
+      <elementValue elementRef="IS_COMMENT" value="false"/>
+      <elementValue elementRef="IS_HYPERLINK" value="false"/>
+      <elementValue elementRef="GROUP_ROW" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="product"/>
+      <elementValue elementRef="HEADER" value="&quot;Product&quot;"/>
+      <elementValue elementRef="POSITION" value=""/>
+      <elementValue elementRef="FORMAT" value=""/>
+      <elementValue elementRef="IS_AUTO_SIZE" value="true"/>
+      <elementValue elementRef="IS_COMMENT" value="false"/>
+      <elementValue elementRef="IS_HYPERLINK" value="false"/>
+      <elementValue elementRef="GROUP_ROW" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="display_mainartist"/>
+      <elementValue elementRef="HEADER" value="&quot;Mainartist&quot;"/>
+      <elementValue elementRef="POSITION" value=""/>
+      <elementValue elementRef="FORMAT" value=""/>
+      <elementValue elementRef="IS_AUTO_SIZE" value="true"/>
+      <elementValue elementRef="IS_COMMENT" value="false"/>
+      <elementValue elementRef="IS_HYPERLINK" value="false"/>
+      <elementValue elementRef="GROUP_ROW" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="composer"/>
+      <elementValue elementRef="HEADER" value="&quot;Composer&quot;"/>
+      <elementValue elementRef="POSITION" value=""/>
+      <elementValue elementRef="FORMAT" value=""/>
+      <elementValue elementRef="IS_AUTO_SIZE" value="true"/>
+      <elementValue elementRef="IS_COMMENT" value="false"/>
+      <elementValue elementRef="IS_HYPERLINK" value="false"/>
+      <elementValue elementRef="GROUP_ROW" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="isrc"/>
+      <elementValue elementRef="HEADER" value="&quot;ISRC&quot;"/>
+      <elementValue elementRef="POSITION" value=""/>
+      <elementValue elementRef="FORMAT" value=""/>
+      <elementValue elementRef="IS_AUTO_SIZE" value="true"/>
+      <elementValue elementRef="IS_COMMENT" value="false"/>
+      <elementValue elementRef="IS_HYPERLINK" value="false"/>
+      <elementValue elementRef="GROUP_ROW" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="type"/>
+      <elementValue elementRef="HEADER" value="&quot;Type&quot;"/>
+      <elementValue elementRef="POSITION" value=""/>
+      <elementValue elementRef="FORMAT" value=""/>
+      <elementValue elementRef="IS_AUTO_SIZE" value="true"/>
+      <elementValue elementRef="IS_COMMENT" value="false"/>
+      <elementValue elementRef="IS_HYPERLINK" value="false"/>
+      <elementValue elementRef="GROUP_ROW" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="usage_medium"/>
+      <elementValue elementRef="HEADER" value="&quot;Usage medium&quot;"/>
+      <elementValue elementRef="POSITION" value=""/>
+      <elementValue elementRef="FORMAT" value=""/>
+      <elementValue elementRef="IS_AUTO_SIZE" value="true"/>
+      <elementValue elementRef="IS_COMMENT" value="false"/>
+      <elementValue elementRef="IS_HYPERLINK" value="false"/>
+      <elementValue elementRef="GROUP_ROW" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="min_product_usage_minutes_initial"/>
+      <elementValue elementRef="HEADER" value=""/>
+      <elementValue elementRef="POSITION" value=""/>
+      <elementValue elementRef="FORMAT" value=""/>
+      <elementValue elementRef="IS_AUTO_SIZE" value="true"/>
+      <elementValue elementRef="IS_COMMENT" value="false"/>
+      <elementValue elementRef="IS_HYPERLINK" value="false"/>
+      <elementValue elementRef="GROUP_ROW" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="sec_product_usage_minutes_initial"/>
+      <elementValue elementRef="HEADER" value=""/>
+      <elementValue elementRef="POSITION" value=""/>
+      <elementValue elementRef="FORMAT" value=""/>
+      <elementValue elementRef="IS_AUTO_SIZE" value="true"/>
+      <elementValue elementRef="IS_COMMENT" value="false"/>
+      <elementValue elementRef="IS_HYPERLINK" value="false"/>
+      <elementValue elementRef="GROUP_ROW" value="false"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="REMOVE_LAST_EMPTY_ROWS" value="true"/>
+    <elementParameter field="TEXT" name="FREEZE_ROW" value="7"/>
+    <elementParameter field="TEXT" name="FREEZE_COL" value=""/>
+    <elementParameter field="TEXT" name="GROUP_COLS" value=""/>
+    <elementParameter field="CHECK" name="REUSE_STYLE" value="true"/>
+    <elementParameter field="CHECK" name="REUSE_STYLE_ALTERNATING" value="true"/>
+    <elementParameter field="CHECK" name="REUSE_STYLES_FOR_ALL" value="false"/>
+    <elementParameter field="CHECK" name="REUSE_CF" value="false"/>
+    <elementParameter field="CHECK" name="REUSE_FIRST_ROW_HEIGHT" value="false"/>
+    <elementParameter field="CHECK" name="EXTEND_TABLE_CELL_RANGE" value="false"/>
+    <elementParameter field="CHECK" name="EXTEND_DATA_VALIDATIONS" value="false"/>
+    <elementParameter field="CHECK" name="DEBUG" value="false"/>
+    <elementParameter field="CHECK" name="WRITE_NULL" value="false"/>
+    <elementParameter field="CHECK" name="WRITE_ZERO_DATE_AS_NULL" value="true"/>
+    <elementParameter field="LABEL" name="RELEASE_LABEL_20170413" value="Release: 8.7 build at: 20170413"/>
+    <elementParameter field="TEXT" name="LABEL" value="vendor report"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" label="write_excel" name="tFileExcelSheetOutput_1">
+      <column comment="" key="false" length="-1" name="product_id" nullable="true" pattern="" precision="-1" sourceType="INT8" type="id_Long" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="255" name="track_id_label" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="255" usefulColumn="true"/>
+      <column comment="" key="false" length="255" name="product" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="255" usefulColumn="true"/>
+      <column comment="" key="false" length="255" name="display_mainartist" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="255" usefulColumn="true"/>
+      <column comment="" key="false" length="255" name="composer" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="255" usefulColumn="true"/>
+      <column comment="" key="false" length="255" name="isrc" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="255" usefulColumn="true"/>
+      <column comment="" key="false" length="255" name="type" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="255" usefulColumn="true"/>
+      <column comment="" key="false" length="255" name="usage_medium" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="255" usefulColumn="true"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="min_product_usage_minutes_initial" nullable="false" pattern="" precision="-1" sourceType="" type="id_Long" originalLength="-1" usefulColumn="true"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="sec_product_usage_minutes_initial" nullable="false" pattern="" precision="-1" sourceType="" type="id_Long" originalLength="-1" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tJavaRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="768" posY="416">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJavaRow_4" show="false"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="// code sample:&#xA;//&#xA;// multiply by 2 the row identifier&#xA;// output_row.id = input_row.id * 2;&#xA;//&#xA;// lowercase the name&#xA;// output_row.name = input_row.name.toLowerCase();&#xA;if (globalMap.get(&quot;product_usage_minutes_initial&quot;) == null) {&#xA;globalMap.put(&quot;product_usage_minutes_initial&quot;, input_row.product_usage_minutes_initial);&#xA;} else {&#xA;globalMap.put(&quot;product_usage_minutes_initial&quot;, ((Double)globalMap.get(&quot;product_usage_minutes_initial&quot;) + input_row.product_usage_minutes_initial));&#xA;}&#xA; &#xA;"/>
+    <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
+    <elementParameter field="TEXT" name="LABEL" value="globalMap(usage_minutes_initial)"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tJavaRow_4"/>
+  </node>
+  <node componentName="tFixedFlowInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="448" posY="544">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFixedFlowInput_2" show="false"/>
+    <elementParameter field="TEXT" name="NB_ROWS" value="1"/>
+    <elementParameter field="RADIO" name="USE_SINGLEMODE" value="true"/>
+    <elementParameter field="TABLE" name="VALUES">
+      <elementValue elementRef="SCHEMA_COLUMN" value="text"/>
+      <elementValue elementRef="VALUE" value="((double)globalMap.get(&quot;product_usage_minutes_initial&quot;)) > 99.9 &amp;&amp; ((double)globalMap.get(&quot;product_usage_minutes_initial&quot;)) &lt; 100.1 ? &quot;Gesamtsumme: *)&quot; : &quot;Gesamtsumme:&quot;"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="total_min"/>
+      <elementValue elementRef="VALUE" value="((long) (60.0 * ((Double)globalMap.get(&quot;product_usage_minutes_initial&quot;))+ 0.5)) / 60"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="total_sec"/>
+      <elementValue elementRef="VALUE" value="(long) Math.round ((60.0 * ((Double)globalMap.get(&quot;product_usage_minutes_initial&quot;))) -  (double) (60 * (((long) (60.0 * ((Double)globalMap.get(&quot;product_usage_minutes_initial&quot;)) + 0.5)) / 60)))"/>
+    </elementParameter>
+    <elementParameter field="RADIO" name="USE_INTABLE" value="false"/>
+    <elementParameter field="TABLE" name="INTABLE" show="false"/>
+    <elementParameter field="RADIO" name="USE_INLINECONTENT" value="false"/>
+    <elementParameter field="TEXT" name="ROWSEPARATOR" value="&quot;\n&quot;" show="false"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;;&quot;" show="false"/>
+    <elementParameter field="MEMO" name="INLINECONTENT" value="" show="false"/>
+    <elementParameter field="TEXT" name="LABEL" value="generate_total_formula"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tFixedFlowInput_2">
+      <column comment="" key="false" length="-1" name="text" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="total_min" nullable="true" pattern="" precision="-1" sourceType="" type="id_Long" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="total_sec" nullable="true" pattern="" precision="-1" sourceType="" type="id_Long" originalLength="-1" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tFileExcelSheetOutput" componentVersion="8.7" offsetLabelX="0" offsetLabelY="0" posX="608" posY="544">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFileExcelSheetOutput_3" show="false"/>
+    <elementParameter field="COMPONENT_LIST" name="WORKBOOK" value="tFileExcelWorkbookOpen_1"/>
+    <elementParameter field="TEXT" name="SHEET_NAME" value="&quot;Herstellerbericht&quot;"/>
+    <elementParameter field="CHECK" name="CREATE_SHEET_AS_COPY" value="false"/>
+    <elementParameter field="TEXT" name="SOURCE_SHEET_NAME" value="&quot;template&quot;" show="false"/>
+    <elementParameter field="CHECK" name="WRITE_IN_COLUMNS" value="false"/>
+    <elementParameter field="CHECK" name="APPEND_ROWS" value="true"/>
+    <elementParameter field="TEXT" name="ROW_START_INDEX" value="1" show="false"/>
+    <elementParameter field="CHECK" name="INCLUDE_HEADER" value="false"/>
+    <elementParameter field="CHECK" name="USE_COLUMN_POSITIONING" value="true"/>
+    <elementParameter field="TEXT" name="COLUMN_START_INDEX" value="&quot;I&quot;" show="false"/>
+    <elementParameter field="TABLE" name="COLUMN_CONFIG">
+      <elementValue elementRef="SCHEMA_COLUMN" value="text"/>
+      <elementValue elementRef="HEADER" value=""/>
+      <elementValue elementRef="POSITION" value="&quot;H&quot;"/>
+      <elementValue elementRef="FORMAT" value=""/>
+      <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
+      <elementValue elementRef="IS_COMMENT" value="false"/>
+      <elementValue elementRef="IS_HYPERLINK" value="false"/>
+      <elementValue elementRef="GROUP_ROW" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="total_min"/>
+      <elementValue elementRef="HEADER" value=""/>
+      <elementValue elementRef="POSITION" value="&quot;I&quot;"/>
+      <elementValue elementRef="FORMAT" value=""/>
+      <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
+      <elementValue elementRef="IS_COMMENT" value="false"/>
+      <elementValue elementRef="IS_HYPERLINK" value="false"/>
+      <elementValue elementRef="GROUP_ROW" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="total_sec"/>
+      <elementValue elementRef="HEADER" value=""/>
+      <elementValue elementRef="POSITION" value="&quot;J&quot;"/>
+      <elementValue elementRef="FORMAT" value=""/>
+      <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
+      <elementValue elementRef="IS_COMMENT" value="false"/>
+      <elementValue elementRef="IS_HYPERLINK" value="false"/>
+      <elementValue elementRef="GROUP_ROW" value="false"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="REMOVE_LAST_EMPTY_ROWS" value="false"/>
+    <elementParameter field="TEXT" name="FREEZE_ROW" value=""/>
+    <elementParameter field="TEXT" name="FREEZE_COL" value=""/>
+    <elementParameter field="TEXT" name="GROUP_COLS" value=""/>
+    <elementParameter field="CHECK" name="REUSE_STYLE" value="false"/>
+    <elementParameter field="CHECK" name="REUSE_STYLE_ALTERNATING" value="false" show="false"/>
+    <elementParameter field="CHECK" name="REUSE_STYLES_FOR_ALL" value="false" show="false"/>
+    <elementParameter field="CHECK" name="REUSE_CF" value="false"/>
+    <elementParameter field="CHECK" name="REUSE_FIRST_ROW_HEIGHT" value="false"/>
+    <elementParameter field="CHECK" name="EXTEND_TABLE_CELL_RANGE" value="false"/>
+    <elementParameter field="CHECK" name="EXTEND_DATA_VALIDATIONS" value="false"/>
+    <elementParameter field="CHECK" name="DEBUG" value="false"/>
+    <elementParameter field="CHECK" name="WRITE_NULL" value="false"/>
+    <elementParameter field="CHECK" name="WRITE_ZERO_DATE_AS_NULL" value="true"/>
+    <elementParameter field="LABEL" name="RELEASE_LABEL_20170413" value="Release: 8.7 build at: 20170413"/>
+    <elementParameter field="TEXT" name="LABEL" value="add_total"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tFileExcelSheetOutput_3">
+      <column comment="" key="false" length="-1" name="text" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="total_min" nullable="true" pattern="" precision="-1" sourceType="" type="id_Long" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="total_sec" nullable="true" pattern="" precision="-1" sourceType="" type="id_Long" originalLength="-1" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tFileExcelWorkbookSave" componentVersion="8.7" offsetLabelX="0" offsetLabelY="0" posX="768" posY="672">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFileExcelWorkbookSave_1" show="false"/>
+    <elementParameter field="COMPONENT_LIST" name="WORKBOOK" value="tFileExcelWorkbookOpen_1"/>
+    <elementParameter field="FILE" name="FILENAME" value="context.dwh_vendort_report_hersteller_output_dir + &quot;/&quot; + context.vendor_id + &quot;_Verguetungen_&quot; + context.year + &quot;_&quot; + context.run_id + &quot;.xlsx&quot;"/>
+    <elementParameter field="CHECK" name="CREATE_DIRS" value="true"/>
+    <elementParameter field="TABLE" name="TEMPLATE_SHEETS"/>
+    <elementParameter field="CHECK" name="EVALUATE_ALL_FORMULAS" value="false"/>
+    <elementParameter field="CHECK" name="ENCRYPT_FILE" value="false"/>
+    <elementParameter field="TEXT" name="PASSWORD" value="&quot;secret&quot;" show="false"/>
+    <elementParameter field="CHECK" name="OPTIMZE_HSSF_WB_STYLES" value="false"/>
+    <elementParameter field="CHECK" name="OPTIMZE_HSSF_WB_FONTS" value="false"/>
+    <elementParameter field="LABEL" name="RELEASE_LABEL_20170413" value="Release: 8.7 build at: 20170413"/>
+    <elementParameter field="TEXT" name="LABEL" value="save vendor workbook"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+  </node>
+  <node componentName="tFixedFlowInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="448" posY="800">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFixedFlowInput_3" show="false"/>
+    <elementParameter field="TEXT" name="NB_ROWS" value="1"/>
+    <elementParameter field="RADIO" name="USE_SINGLEMODE" value="true"/>
+    <elementParameter field="TABLE" name="VALUES">
+      <elementValue elementRef="SCHEMA_COLUMN" value="content"/>
+      <elementValue elementRef="VALUE" value=""/>
+    </elementParameter>
+    <elementParameter field="RADIO" name="USE_INTABLE" value="false"/>
+    <elementParameter field="TABLE" name="INTABLE" show="false"/>
+    <elementParameter field="RADIO" name="USE_INLINECONTENT" value="false"/>
+    <elementParameter field="TEXT" name="ROWSEPARATOR" value="&quot;\n&quot;" show="false"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;;&quot;" show="false"/>
+    <elementParameter field="MEMO" name="INLINECONTENT" value="" show="false"/>
+    <elementParameter field="TEXT" name="LABEL" value="dummy start"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tFixedFlowInput_3">
+      <column comment="" key="false" length="-1" name="content" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tJavaRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="608" posY="800">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJavaRow_1" show="false"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="&#xA;output_row.content = DocuwareUtil.buildDocuwareControlForVendorReports(&#xA;&#x9;FileUtil.getFileName(((String)globalMap.get(&quot;tFileExcelWorkbookSave_1_FILENAME&quot;))),&#xA;&#x9;context.vendor_id,&#xA;&#x9;context.year,&#xA;&#x9;context.run_id,&#xA;&#x9;context.gptype,&#xA;&#x9;context.report_excel_TypeName,&#xA;&#x9;context.report_excel_TypeSysname,&#xA;&#x9;context.approval,&#xA;&#x9;context.dwh_vendort_report_hersteller_output_dir,&#xA;&#x9;&quot;ger&quot;);&#xA;"/>
+    <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
+    <elementParameter field="TEXT" name="LABEL" value="setup dwcontrol excel"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tJavaRow_1">
+      <column comment="" key="false" length="-1" name="content" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tFileOutputDelimited" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="768" posY="800">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFileOutputDelimited_1" show="false"/>
+    <elementParameter field="CHECK" name="USESTREAM" value="false"/>
+    <elementParameter field="TEXT" name="STREAMNAME" value="outputStream" show="false"/>
+    <elementParameter field="FILE" name="FILENAME" value="((String)globalMap.get(&quot;tFileExcelWorkbookSave_1_FILENAME&quot;)) + &quot;.dwcontrol&quot;"/>
+    <elementParameter field="TEXT" name="ROWSEPARATOR" value="&quot;\n&quot;"/>
+    <elementParameter field="CHECK" name="OS_LINE_SEPARATOR_AS_ROW_SEPARATOR" value="true" show="false"/>
+    <elementParameter field="OPENED_LIST" name="CSVROWSEPARATOR" value="&quot;\n&quot;" show="false"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;&quot;"/>
+    <elementParameter field="CHECK" name="APPEND" value="false"/>
+    <elementParameter field="CHECK" name="INCLUDEHEADER" value="false"/>
+    <elementParameter field="CHECK" name="COMPRESS" value="false"/>
+    <elementParameter field="CHECK" name="ADVANCED_SEPARATOR" value="false"/>
+    <elementParameter field="TEXT" name="THOUSANDS_SEPARATOR" value="&quot;,&quot;" show="false"/>
+    <elementParameter field="TEXT" name="DECIMAL_SEPARATOR" value="&quot;.&quot;" show="false"/>
+    <elementParameter field="CHECK" name="CSV_OPTION" value="false"/>
+    <elementParameter field="TEXT" name="ESCAPE_CHAR" value="&quot;&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="TEXT_ENCLOSURE" value="&quot;&quot;&quot;" show="false"/>
+    <elementParameter field="CHECK" name="CREATE" value="true"/>
+    <elementParameter field="CHECK" name="SPLIT" value="false"/>
+    <elementParameter field="TEXT" name="SPLIT_EVERY" value="1000" show="false"/>
+    <elementParameter field="CHECK" name="FLUSHONROW" value="false"/>
+    <elementParameter field="TEXT" name="FLUSHONROW_NUM" value="1" show="false"/>
+    <elementParameter field="CHECK" name="ROW_MODE" value="false"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;UTF-8&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="UTF-8"/>
+    <elementParameter field="CHECK" name="DELETE_EMPTYFILE" value="false"/>
+    <elementParameter field="TEXT" name="SCHEMA_OPT_NUM" value="90" show="false"/>
+    <elementParameter field="TEXT" name="LABEL" value="write dwcontrol file"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tFileOutputDelimited_1">
+      <column comment="" key="false" length="-1" name="content" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tPostgresqlRow" componentVersion="0.102" offsetLabelX="3" offsetLabelY="6" posX="448" posY="928">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_1" show="false"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1" show="false"/>
+    <elementParameter field="CLOSED_LIST" name="DB_VERSION" value="V9_X"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="TYPE" value="PostgreSQL" show="false"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
+    <elementParameter field="PASSWORD" name="PASS" value="k3WNzwEJ9MTsQqCStv4d5g=="/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;&quot;"/>
+    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value="" show="false"/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;update &#xD;&#xA;dwh_vts_mart_producer.producer_report_creation_control &#xD;&#xA;set report_excel_created=now(), report_excel_job_instance_id=&quot;+((Long)globalMap.get(&quot;tJobInstanceStart_1_JOB_INSTANCE_ID&quot;))+&quot;&#xD;&#xA;, output_file_excel='&quot;+((String)globalMap.get(&quot;tFileExcelWorkbookSave_1_FILENAME&quot;))+&quot;'&#xD;&#xA;where producer_id=&quot;+ context.vendor_id +&quot; &#xD;&#xA;and vts_uuid='&quot;+context.uuid+&quot;'&#xD;&#xA;and vts_run_id=&quot;+context.run_id+&quot;&#xD;&#xA; &quot;"/>
+    <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
+    <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="true"/>
+    <elementParameter field="TEXT" name="DATASOURCE_ALIAS" value="&quot;producer&quot;"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
+    <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
+    <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value="" show="false"/>
+    <elementParameter field="CHECK" name="USE_PREPAREDSTATEMENT" value="false"/>
+    <elementParameter field="TABLE" name="SET_PREPAREDSTATEMENT_PARAMETERS" show="false"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;" show="false"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
+    <elementParameter field="TEXT" name="LABEL" value="update control table"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tPostgresqlRow_1"/>
+    <metadata connector="REJECT" name="REJECT">
+      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tFixedFlowInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="448" posY="672">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFixedFlowInput_1" show="false"/>
+    <elementParameter field="TEXT" name="NB_ROWS" value="1"/>
+    <elementParameter field="RADIO" name="USE_SINGLEMODE" value="true"/>
+    <elementParameter field="TABLE" name="VALUES">
+      <elementValue elementRef="SCHEMA_COLUMN" value="text"/>
+      <elementValue elementRef="VALUE" value="((double)globalMap.get(&quot;product_usage_minutes_initial&quot;)) > 99.9 &amp;&amp; ((double)globalMap.get(&quot;product_usage_minutes_initial&quot;)) &lt; 100.1 ? &quot;*) die aufgeführten Sendeminuten enthalten zusätzliche Minuten, die die GVL jedem Hersteller gewährt, der in den ersten drei Jahren vergütet wird und dessen Sendeminuten bei Ausschüttungen in diesem Zeitraum unter 100 Minuten liegen.&quot; : &quot;&quot;"/>
+    </elementParameter>
+    <elementParameter field="RADIO" name="USE_INTABLE" value="false"/>
+    <elementParameter field="TABLE" name="INTABLE" show="false"/>
+    <elementParameter field="RADIO" name="USE_INLINECONTENT" value="false"/>
+    <elementParameter field="TEXT" name="ROWSEPARATOR" value="&quot;\n&quot;" show="false"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;;&quot;" show="false"/>
+    <elementParameter field="MEMO" name="INLINECONTENT" value="" show="false"/>
+    <elementParameter field="TEXT" name="LABEL" value="footer"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tFixedFlowInput_1">
+      <column comment="" key="false" length="-1" name="text" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tFileExcelSheetOutput" componentVersion="8.7" offsetLabelX="0" offsetLabelY="0" posX="608" posY="672">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFileExcelSheetOutput_2" show="false"/>
+    <elementParameter field="COMPONENT_LIST" name="WORKBOOK" value="tFileExcelWorkbookOpen_1"/>
+    <elementParameter field="TEXT" name="SHEET_NAME" value="&quot;Herstellerbericht&quot;"/>
+    <elementParameter field="CHECK" name="CREATE_SHEET_AS_COPY" value="false"/>
+    <elementParameter field="TEXT" name="SOURCE_SHEET_NAME" value="&quot;template&quot;" show="false"/>
+    <elementParameter field="CHECK" name="WRITE_IN_COLUMNS" value="false"/>
+    <elementParameter field="CHECK" name="APPEND_ROWS" value="true"/>
+    <elementParameter field="TEXT" name="ROW_START_INDEX" value="1" show="false"/>
+    <elementParameter field="CHECK" name="INCLUDE_HEADER" value="false"/>
+    <elementParameter field="CHECK" name="USE_COLUMN_POSITIONING" value="true"/>
+    <elementParameter field="TEXT" name="COLUMN_START_INDEX" value="&quot;I&quot;" show="false"/>
+    <elementParameter field="TABLE" name="COLUMN_CONFIG">
+      <elementValue elementRef="SCHEMA_COLUMN" value="text"/>
+      <elementValue elementRef="HEADER" value=""/>
+      <elementValue elementRef="POSITION" value="&quot;A&quot;"/>
+      <elementValue elementRef="FORMAT" value=""/>
+      <elementValue elementRef="IS_AUTO_SIZE" value="false"/>
+      <elementValue elementRef="IS_COMMENT" value="false"/>
+      <elementValue elementRef="IS_HYPERLINK" value="false"/>
+      <elementValue elementRef="GROUP_ROW" value="false"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="REMOVE_LAST_EMPTY_ROWS" value="false"/>
+    <elementParameter field="TEXT" name="FREEZE_ROW" value=""/>
+    <elementParameter field="TEXT" name="FREEZE_COL" value=""/>
+    <elementParameter field="TEXT" name="GROUP_COLS" value=""/>
+    <elementParameter field="CHECK" name="REUSE_STYLE" value="false"/>
+    <elementParameter field="CHECK" name="REUSE_STYLE_ALTERNATING" value="false" show="false"/>
+    <elementParameter field="CHECK" name="REUSE_STYLES_FOR_ALL" value="false" show="false"/>
+    <elementParameter field="CHECK" name="REUSE_CF" value="false"/>
+    <elementParameter field="CHECK" name="REUSE_FIRST_ROW_HEIGHT" value="false"/>
+    <elementParameter field="CHECK" name="EXTEND_TABLE_CELL_RANGE" value="false"/>
+    <elementParameter field="CHECK" name="EXTEND_DATA_VALIDATIONS" value="false"/>
+    <elementParameter field="CHECK" name="DEBUG" value="false"/>
+    <elementParameter field="CHECK" name="WRITE_NULL" value="false"/>
+    <elementParameter field="CHECK" name="WRITE_ZERO_DATE_AS_NULL" value="true"/>
+    <elementParameter field="LABEL" name="RELEASE_LABEL_20170413" value="Release: 8.7 build at: 20170413"/>
+    <elementParameter field="TEXT" name="LABEL" value="row3"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tFileExcelSheetOutput_2">
+      <column comment="" key="false" length="-1" name="text" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tPostgresqlConnectionPool" componentVersion="2.6" offsetLabelX="0" offsetLabelY="0" posX="128" posY="192">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlConnectionPool_1" show="false"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_olpuEMt_EeepYe2DyGm9sA" show="false"/>
+    <elementParameter field="CLOSED_LIST" name="MODE" value="CREATE_POOL"/>
+    <elementParameter field="TEXT" name="HOST" value="context.DWH_VTS_MART_PRODUCER_Server"/>
+    <elementParameter field="TEXT" name="PORT" value="context.DWH_VTS_MART_PRODUCER_Port"/>
+    <elementParameter field="TEXT" name="DATABASE" value="context.DWH_VTS_MART_PRODUCER_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.DWH_VTS_MART_PRODUCER_Schema"/>
+    <elementParameter field="TEXT" name="USER" value="context.DWH_VTS_MART_PRODUCER_Login"/>
+    <elementParameter field="PASSWORD" name="PASS" value="OB/Tc4DjOIexFHvv3rI0rBxU+82HhZXP4OKfOjuuHLuFMdx143zIOG6O+jTKnm8B+FdFUbqt+SO4U7QuEc0xdg=="/>
+    <elementParameter field="TEXT" name="ALIAS" value="&quot;producer&quot;"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION_POOL" value="" show="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION_TO_FIX" value="" show="false"/>
+    <elementParameter field="CHECK" name="AUTO_COMMIT" value="true"/>
+    <elementParameter field="TEXT" name="SHARED_CONNECTION_NAME" value="" show="false"/>
+    <elementParameter field="TEXT" name="ADDITIONAL_PARAM" value="&quot;ApplicationName=&quot; + jobName"/>
+    <elementParameter field="CHECK" name="TEST_ON_BORROW" value="true"/>
+    <elementParameter field="TEXT" name="VALIDATION_SQL" value="&quot;select current_date&quot;"/>
+    <elementParameter field="TEXT" name="TIME_BETWEEN_CHECKS" value="60000"/>
+    <elementParameter field="TEXT" name="TIME_IDLE_CONNECTION_IS_CHECKED" value="30000"/>
+    <elementParameter field="TEXT" name="NUM_CONNECTIONS_CHECKED" value="5"/>
+    <elementParameter field="CHECK" name="SET_INITIAL_SIZE" value="false"/>
+    <elementParameter field="TEXT" name="INITIAL_SIZE" value="5" show="false"/>
+    <elementParameter field="CHECK" name="SET_MAX_TOTAL" value="false"/>
+    <elementParameter field="TEXT" name="MAX_TOTAL" value="5" show="false"/>
+    <elementParameter field="CHECK" name="SET_MAX_WAIT_FOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="MAX_WAIT_FOR_CONNECTION" value="0" show="false"/>
+    <elementParameter field="CHECK" name="SET_INIT_SQL" value="false"/>
+    <elementParameter field="TEXT" name="INIT_SQL" value="" show="false"/>
+    <elementParameter field="CHECK" name="ENABLE_JMX" value="true"/>
+    <elementParameter field="CHECK" name="DEBUG" value="false"/>
+    <elementParameter field="LABEL" name="RELEASE_LABEL_20171213" value="Release: 2.6 build at: 20171213"/>
+    <elementParameter field="TEXT" name="LABEL" value="pool_mart_producer"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+  </node>
+  <node componentName="tPostgresqlConnectionPool" componentVersion="2.6" offsetLabelX="0" offsetLabelY="0" posX="192" posY="64">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlConnectionPool_2" show="false"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_cEWJkMQ-EeWlZcr-c7CwQg" show="false"/>
+    <elementParameter field="CLOSED_LIST" name="MODE" value="CREATE_POOL"/>
+    <elementParameter field="TEXT" name="HOST" value="context.B17_MANAGEMENT_DB_Server"/>
+    <elementParameter field="TEXT" name="PORT" value="context.B17_MANAGEMENT_DB_Port"/>
+    <elementParameter field="TEXT" name="DATABASE" value="context.B17_MANAGEMENT_DB_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.B17_MANAGEMENT_DB_Schema"/>
+    <elementParameter field="TEXT" name="USER" value="context.B17_MANAGEMENT_DB_Login"/>
+    <elementParameter field="PASSWORD" name="PASS" value="OB/Tc4DjOIcEkV97Bw7h3a53vKbRvlshASqEfkPmoyjAfI7t8b/acZnUEVprV5wmVqj17W6/Ul6hUh4NC6Hf7A=="/>
+    <elementParameter field="TEXT" name="ALIAS" value="&quot;b17_management&quot;"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION_POOL" value="" show="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION_TO_FIX" value="" show="false"/>
+    <elementParameter field="CHECK" name="AUTO_COMMIT" value="true"/>
+    <elementParameter field="TEXT" name="SHARED_CONNECTION_NAME" value="" show="false"/>
+    <elementParameter field="TEXT" name="ADDITIONAL_PARAM" value="&quot;ApplicationName=&quot; + jobName"/>
+    <elementParameter field="CHECK" name="TEST_ON_BORROW" value="true"/>
+    <elementParameter field="TEXT" name="VALIDATION_SQL" value="&quot;select current_date&quot;"/>
+    <elementParameter field="TEXT" name="TIME_BETWEEN_CHECKS" value="60000"/>
+    <elementParameter field="TEXT" name="TIME_IDLE_CONNECTION_IS_CHECKED" value="30000"/>
+    <elementParameter field="TEXT" name="NUM_CONNECTIONS_CHECKED" value="5"/>
+    <elementParameter field="CHECK" name="SET_INITIAL_SIZE" value="false"/>
+    <elementParameter field="TEXT" name="INITIAL_SIZE" value="5" show="false"/>
+    <elementParameter field="CHECK" name="SET_MAX_TOTAL" value="false"/>
+    <elementParameter field="TEXT" name="MAX_TOTAL" value="5" show="false"/>
+    <elementParameter field="CHECK" name="SET_MAX_WAIT_FOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="MAX_WAIT_FOR_CONNECTION" value="0" show="false"/>
+    <elementParameter field="CHECK" name="SET_INIT_SQL" value="false"/>
+    <elementParameter field="TEXT" name="INIT_SQL" value="" show="false"/>
+    <elementParameter field="CHECK" name="ENABLE_JMX" value="false"/>
+    <elementParameter field="CHECK" name="DEBUG" value="false"/>
+    <elementParameter field="LABEL" name="RELEASE_LABEL_20171213" value="Release: 2.6 build at: 20171213"/>
+    <elementParameter field="TEXT" name="LABEL" value="management"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+  </node>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPrejob_1" offsetLabelX="0" offsetLabelY="0" source="tPrejob_1" target="tPostgresqlConnectionPool_2">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk1" show="false"/>
+  </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostjob_1" offsetLabelX="0" offsetLabelY="0" source="tPostjob_1" target="tJobInstanceEnd_1">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk2" show="false"/>
+  </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tFileExcelWorkbookOpen_1" offsetLabelX="0" offsetLabelY="0" source="tFileExcelWorkbookOpen_1" target="tPostgresqlInput_1">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk3" show="false"/>
+  </connection>
+  <connection connectorName="FLOW" label="producer_detail" lineStyle="0" metaname="tPostgresqlInput_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_1" target="tMap_2">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="producer_detail" show="false"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlInput_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_1" target="tPostgresqlInput_2">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk5" show="false"/>
+  </connection>
+  <connection connectorName="FLOW" label="with_long_text" lineStyle="0" metaname="with_long_text" offsetLabelX="0" offsetLabelY="0" source="tMap_2" target="tFlowToIterate_1">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="usage_string"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="creation"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="period"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="with_long_text" show="false"/>
+  </connection>
+  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="tFlowToIterate_1" offsetLabelX="0" offsetLabelY="0" source="tFlowToIterate_1" target="tFileExcelNamedCellOutput_1">
+    <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
+    <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2" show="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate2" show="false"/>
+  </connection>
+  <connection connectorName="FLOW" label="vendor_data" lineStyle="0" metaname="tPostgresqlInput_2" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_2" target="tMap_1">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="product"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="licensee"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="display_mainartist"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="composer"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="product_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="isrc"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="type"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="usage_medium"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="product_usage_minutes_initial"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="track_id_label"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="vendor_data" show="false"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlInput_2" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_2" target="tFixedFlowInput_2">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk8" show="false"/>
+  </connection>
+  <connection connectorName="FLOW" label="write_excel" lineStyle="0" metaname="write_excel" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tMap_1" target="tFileExcelSheetOutput_1">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="sec_product_usage_minutes_initial"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="min_product_usage_minutes_initial"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="write_excel" show="false"/>
+  </connection>
+  <connection connectorName="FLOW" label="product_usage_minutes_initial" lineStyle="0" metaname="product_usage_minutes_initial" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tMap_1" target="tJavaRow_4">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="product_usage_minutes_initial" show="false"/>
+  </connection>
+  <connection connectorName="FLOW" label="add_total" lineStyle="0" metaname="tFixedFlowInput_2" offsetLabelX="0" offsetLabelY="0" source="tFixedFlowInput_2" target="tFileExcelSheetOutput_3">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="add_total" show="false"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tFixedFlowInput_2" offsetLabelX="0" offsetLabelY="0" source="tFixedFlowInput_2" target="tFixedFlowInput_1">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk9" show="false"/>
+  </connection>
+  <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tFixedFlowInput_3" offsetLabelX="0" offsetLabelY="0" source="tFixedFlowInput_3" target="tJavaRow_1">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row1" show="false"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tFixedFlowInput_3" offsetLabelX="0" offsetLabelY="0" source="tFixedFlowInput_3" target="tPostgresqlRow_1">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk6" show="false"/>
+  </connection>
+  <connection connectorName="FLOW" label="row2" lineStyle="0" metaname="tJavaRow_1" offsetLabelX="0" offsetLabelY="0" source="tJavaRow_1" target="tFileOutputDelimited_1">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row2" show="false"/>
+  </connection>
+  <connection connectorName="FLOW" label="row3" lineStyle="0" metaname="tFixedFlowInput_1" offsetLabelX="0" offsetLabelY="0" source="tFixedFlowInput_1" target="tFileExcelSheetOutput_2">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row3" show="false"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tFixedFlowInput_1" offsetLabelX="0" offsetLabelY="0" source="tFixedFlowInput_1" target="tFixedFlowInput_3">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk10" show="false"/>
+  </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tFileExcelSheetOutput_2" offsetLabelX="0" offsetLabelY="0" source="tFileExcelSheetOutput_2" target="tFileExcelWorkbookSave_1">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk7" show="false"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlConnectionPool_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlConnectionPool_1" target="tFileExcelWorkbookOpen_1">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk3" show="false"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlConnectionPool_2" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlConnectionPool_2" target="tJobInstanceStart_1">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk1" show="false"/>
+  </connection>
+  <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true" show="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPrejob_1" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="230;100;0"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="255;220;180"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJobInstanceStart_1" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true" show="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostjob_1" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="230;100;0"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="255;220;180"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJobInstanceEnd_1" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFileExcelWorkbookOpen_1" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_1" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_2" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFixedFlowInput_2" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFileExcelWorkbookSave_1" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFixedFlowInput_3" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_1" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFixedFlowInput_1" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlConnectionPool_1" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlConnectionPool_2" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
+  </subjob>
+</talendfile:ProcessType>

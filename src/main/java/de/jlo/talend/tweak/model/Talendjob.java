@@ -1,6 +1,13 @@
 package de.jlo.talend.tweak.model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.Node;
 
 public class Talendjob implements Comparable<Talendjob> {
 	
@@ -13,6 +20,7 @@ public class Talendjob implements Comparable<Talendjob> {
 	private int minorVersion = 0;
 	private String pathWithoutExtension = null;
 	private Document itemDoc = null;
+	private Map<String, String> context = null;
 	
 	public String getId() {
 		return id;
@@ -110,17 +118,69 @@ public class Talendjob implements Comparable<Talendjob> {
 	public String toString() {
 		return jobFolder + "/" + jobName + ":" + version;
 	}
+	
 	public Document getItemDoc() {
 		return itemDoc;
 	}
+	
 	public void setItemDoc(Document itemDoc) {
 		this.itemDoc = itemDoc;
 	}
+	
 	public String getJobFolder() {
 		return jobFolder;
 	}
+	
 	public void setJobFolder(String jobFolder) {
 		this.jobFolder = jobFolder;
 	}
 	
+	public void retrieveContext() throws Exception {
+		if (itemDoc == null) {
+			throw new IllegalStateException("Item document not set!");
+		}
+		context = new HashMap<>();
+		List<Node> contextNodes = itemDoc.selectNodes("/talendfile:ProcessType/context/contextParameter");
+		for (Node cn : contextNodes) {
+			String name = ((Element) cn).attributeValue("name");
+			String value = ((Element) cn).attributeValue("value");
+			context.put(name, value);
+		}
+	}
+	
+	public Map<String, String> getContext() throws Exception {
+		if (context == null) {
+			retrieveContext();
+		}
+		return context;
+	}
+	
+	public List<ComponentAttribute> getComponentAttributes(Element component) {
+		List<Element> params = component.elements();
+		List<ComponentAttribute> attributes = new ArrayList<>();
+		for (Element param : params) {
+			ComponentAttribute a = new ComponentAttribute();
+			a.setName(param.attributeValue("name"));
+			a.setField(param.attributeValue("field"));
+			a.setValue(param.attributeValue("value"));
+			attributes.add(a);
+		}
+		return attributes;
+	}
+	
+	public ComponentAttribute getComponentAttributeByName(Element component, String nameToSearchFor) {
+		List<Element> params = component.elements();
+		for (Element param : params) {
+			String name = param.attributeValue("name");
+			if (name.equalsIgnoreCase(nameToSearchFor)) {
+				ComponentAttribute a = new ComponentAttribute();
+				a.setName(param.attributeValue("name"));
+				a.setField(param.attributeValue("field"));
+				a.setValue(param.attributeValue("value"));
+				return a;
+			}
+		}
+		return null;
+	}
+
 }

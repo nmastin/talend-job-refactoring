@@ -36,6 +36,9 @@ public class ContextVarResolver {
 	}
 	
 	public String getVariableValue(String name) {
+		if (name.startsWith("context.")) {
+			name = name.substring("context.".length());
+		}
 		return contextVars.getProperty(name);
 	}
 	
@@ -63,10 +66,7 @@ public class ContextVarResolver {
 				lastEnd = matcher.end();
 				// now add the context variable value
 				String contextVarName = matcher.group(1);
-				if (contextVars.containsKey(contextVarName) == false) {
-					throw new Exception("Context variable: " + contextVarName + " is not available!");
-				}
-				String contextVarValue = contextVars.getProperty(contextVarName);
+				String contextVarValue = contextVars.getProperty(contextVarName, contextVarName.replace("context.", "context_"));
 				result.append(contextVarValue);
 			}
 		}

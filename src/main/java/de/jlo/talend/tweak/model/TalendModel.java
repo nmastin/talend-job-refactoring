@@ -116,20 +116,38 @@ public class TalendModel {
     	return getComponents(doc, componentName);
     }
 	
-    public List<Node> getComponents(Document doc, String componentName) throws Exception {
+    public List<Node> getComponents(Document doc, String ... componentName) throws Exception {
     	Element root = doc.getRootElement();
     	Iterator<Element> it = root.elementIterator("node");
     	List<Node> allNodes = new ArrayList<Node>();
     	while (it.hasNext()) {
     		Element e = it.next();
     		String cn = e.attributeValue("componentName");
-    		if (componentName.equalsIgnoreCase(cn)) {
-        		allNodes.add(e);
+    		if (componentName != null) {
+        		for (String name : componentName) {
+            		if (cn.contains(name)) {
+                		allNodes.add(e);
+            		}
+        		}
     		}
     	}
     	return allNodes;
     }
     
+    public List<Node> getAllComponents(Document doc) throws Exception {
+    	Element root = doc.getRootElement();
+    	Iterator<Element> it = root.elementIterator("node");
+    	List<Node> allNodes = new ArrayList<Node>();
+    	while (it.hasNext()) {
+    		Element e = it.next();
+    		String cn = e.attributeValue("componentName");
+    		if (cn != null) {
+        		allNodes.add(e);
+    		}
+    	}
+    	return allNodes;
+    }
+
     private void readJobPropertiesFiles(File processFolder) throws Exception {
         File[] list = processFolder.listFiles();
         if (list == null) {
@@ -215,7 +233,7 @@ public class TalendModel {
     		reader.close();
         	return DocumentHelper.parseText(sb.toString());
     	} catch (Exception e) {
-    		throw new Exception("Read file: " + f.getAbsolutePath() + "failed: " + e.getMessage(), e);
+    		throw new Exception("Read file: " + f.getAbsolutePath() + " failed: " + e.getMessage(), e);
     	}
     }
 
@@ -260,5 +278,5 @@ public class TalendModel {
 	public int getCountJobs() {
 		return listAllJobs.size();
 	}
-	
+		
 }
