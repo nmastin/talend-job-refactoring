@@ -44,7 +44,11 @@ public final class SQLParser {
     private char scriptEnd = SCRIPT_END;
     private boolean useScriptDetecting = true;
     private Pattern fromTablePattern = null;
-	private static final String fromTableRegex = "[from|join][\\s]([a-z_]{1}[a-z0-9_\\.]*)";
+    private Pattern withNamePattern1 = null;
+    private Pattern withNamePattern2 = null;
+	private static final String fromTableRegex = "\\s{1,}(from|join)[\\s]{1,}([a-z_]{1}[a-z0-9_\\.]*)";
+	private static final String withNameRegex1 = "with\\s{1,}([a-z_]{1}[a-z_0-9]*)\\s{1,}as\\s*\\(";
+	private static final String withNameRegex2 = "\\)\\s*[,]\\s*([a-z_]{1}[a-z_0-9]*)\\s{1,}as\\s*\\(";
     static String[]         plsqlKeyWords   = {
             "DECLARE",
             "CREATE OR REPLACE PROCEDURE",
@@ -68,6 +72,8 @@ public final class SQLParser {
 
     public SQLParser() {
     	fromTablePattern = Pattern.compile(fromTableRegex, Pattern.CASE_INSENSITIVE);
+    	withNamePattern1 = Pattern.compile(withNameRegex1, Pattern.CASE_INSENSITIVE);
+    	withNamePattern2 = Pattern.compile(withNameRegex2, Pattern.CASE_INSENSITIVE);
     }
 
     public SQLParser(String text) {
@@ -1210,6 +1216,7 @@ public final class SQLParser {
 	}
 
 	public List<String> findFromTables(String code) {
+		List<String> withNames = findWithNames(code);
 		List<String> tables = new ArrayList<>();
 		if (code != null) {
 			Matcher matcher = fromTablePattern.matcher(code);
@@ -1219,15 +1226,47 @@ public final class SQLParser {
         			int end = matcher.end(i);
                     if (start < end) {
                     	String table = matcher.group(i);
-                    	if (table != null && table.trim().isEmpty() == false) {
-                    		tables.add(table);
+                    	if (table != null && table.trim().isEmpty() == false && "from".equalsIgnoreCase(table) == false && "join".equalsIgnoreCase(table) == false) {
+                    		if (withNames.contains(table) == false && tables.contains(table) == false) {
+                        		tables.add(table);
+                    		}
                     	}
                     }
         		}
-				
 			}
 		}
 		return tables;
+	}
+	
+	public List<String> findWithNames(String sql) {
+		List<String> withNames = new ArrayList<>();
+		Matcher matcher = withNamePattern1.matcher(sql);
+		while (matcher.find()) {
+    		for (int i = 1; i <= matcher.groupCount(); i++) {
+    			int start = matcher.start(i);
+    			int end = matcher.end(i);
+                if (start < end) {
+                	String table = matcher.group(i);
+                	if (table != null && table.trim().isEmpty() == false) {
+                		withNames.add(table);
+                	}
+                }
+    		}
+		}
+		matcher = withNamePattern2.matcher(sql);
+		while (matcher.find()) {
+    		for (int i = 1; i <= matcher.groupCount(); i++) {
+    			int start = matcher.start(i);
+    			int end = matcher.end(i);
+                if (start < end) {
+                	String table = matcher.group(i);
+                	if (table != null && table.trim().isEmpty() == false) {
+                		withNames.add(table);
+                	}
+                }
+    		}
+		}
+		return withNames;
 	}
 	
 }

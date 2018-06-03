@@ -13,11 +13,27 @@ public class SQLCodeUtil {
 	 * @return java code without the String concatenation for the globalMap access
 	 */
 	public static String replaceGlobalMapVars(String javaCode) {
-		if (globalMapVarPattern == null) {
-			globalMapVarPattern = Pattern.compile("[\"]{0,1}[\\s]*[+]{0,1}[\\s]*[\\(]{0,1}[\\s]*[\\(]{0,1}[\\s]*[a-z]*[\\s]*\\){0,1}[\\s]*globalMap.get[\\s]*\\([\\s]*\"[a-z\\.-_]*\"[\\s]*[\\)]{0,1}[\\s]*[\\)]{0,1}[\\s]*[+]{0,1}[\\s]*[\"]{0,1}", Pattern.CASE_INSENSITIVE);
+		if (javaCode.contains("globalMap")) {
+			if (globalMapVarPattern == null) {
+				globalMapVarPattern = Pattern.compile("[\"]{0,1}[\\s]*[+]{0,1}[\\s]*[\\(]{0,1}[\\s]*[\\(]{0,1}[\\s]*(String|Integer|Long|Boolean|Date)[\\s]*\\){0,1}[\\s]*globalMap.get[\\s]*\\([\\s]*\"[a-z0-9\\.-_]{1,}\"[\\s]*[\\)]{0,1}[\\s]*[\\)]{0,1}[\\s]*[+]{0,1}[\\s]*[\"]{0,1}", Pattern.CASE_INSENSITIVE);
+			}
+			Matcher m = globalMapVarPattern.matcher(javaCode);
+			m.reset();
+	        boolean result = m.find();
+	        if (result) {
+	            StringBuffer sb = new StringBuffer();
+	            do {
+	                m.appendReplacement(sb, "999999");
+	                result = m.find();
+	            } while (result);
+	            m.appendTail(sb);
+	            return sb.toString();
+	        } else {
+	        	return javaCode;
+	        }
+		} else {
+			return javaCode;
 		}
-		Matcher m = globalMapVarPattern.matcher(javaCode);
-		return m.replaceAll("999999");
 	}
 
 	/**

@@ -20,11 +20,18 @@ public class JobDatabaseTableCollector extends AbstractTask {
 	
 	private static final Logger LOG = Logger.getLogger(JobDatabaseTableCollector.class);
 	private Map<String, List<String>> inputTables = new HashMap<>();
+	private Map<String, Map<String, List<String>>> inputTablesPerComponent = new HashMap<>();
 	private Map<String, List<String>> functions = new HashMap<>();
 	private Map<String, List<String>> outputTables = new HashMap<>();
+	private boolean preferSQLParser = true;
+	private boolean preferPatternParser = true;
 
 	public JobDatabaseTableCollector(TalendModel model) {
 		super(model);
+	}
+	
+	public List<Talendjob> getAllJobs() {
+		return getModel().getAllJobs();
 	}
 
 	@Override
@@ -32,6 +39,7 @@ public class JobDatabaseTableCollector extends AbstractTask {
 		// read context for all jabs
 		List<Talendjob> list = getModel().getAllJobs();
 		for (Talendjob job : list) {
+			LOG.info("Find tables in " + job);
 			try {
 				findTables(job);
 			} catch (Exception e) {
@@ -54,11 +62,24 @@ public class JobDatabaseTableCollector extends AbstractTask {
 		}
 	}
 	
-	private void addInputTable(Talendjob job, String tableName) {
+	private void addInputTable(Talendjob job, String componentId, String tableName) {
 		List<String> list = inputTables.get(job.getJobName());
 		if (list == null) {
 			list = new ArrayList<String>();
 			inputTables.put(job.getJobName(), list);
+		}
+		if (list.contains(tableName) == false) {
+			list.add(tableName);
+		}
+		Map<String, List<String>> compTableMap = inputTablesPerComponent.get(job.getJobName());
+		if (compTableMap == null) {
+			compTableMap = new HashMap<>();
+			inputTablesPerComponent.put(job.getJobName(), compTableMap);
+		}
+		list = compTableMap.get(componentId);
+		if (list == null) {
+			list = new ArrayList<String>();
+			compTableMap.put(componentId, list);
 		}
 		if (list.contains(tableName) == false) {
 			list.add(tableName);
@@ -130,6 +151,9 @@ public class JobDatabaseTableCollector extends AbstractTask {
 				}
 			}
 			if (query != null && query.trim().isEmpty() == false) {
+				if (LOG.isDebugEnabled()) {
+					LOG.debug("Component: " + compId + " process query: " + query);
+				}
 				// now we have read a SQL query
 				// replace the context variables
 				try {
@@ -142,20 +166,45 @@ public class JobDatabaseTableCollector extends AbstractTask {
 				// now convert to SQL
 				String sql = SQLCodeUtil.convertJavaToSqlCode(query);
 				// now parse the sql code
-				try {
-					Statement stmt = CCJSqlParserUtil.parse(sql);
-					TableAndProcedureNameFinder finder = new TableAndProcedureNameFinder();
-					finder.retrieveTablesAndFunctionSignatures(stmt);
-					List<String> listTables = finder.getListTableNames();
-					for (String t : listTables) {
-						addInputTable(job, t);
+				if (preferSQLParser) {
+					if (LOG.isDebugEnabled()) {
+						LOG.debug("Component: " + compId + " parse SQL: " + sql);
 					}
-					List<String> listFunctions = finder.getListFunctionSignatures();
-					for (String f : listFunctions) {
-						addFunction(job, f);
+					try {
+						Statement stmt = CCJSqlParserUtil.parse(sql);
+						TableAndProcedureNameFinder finder = new TableAndProcedureNameFinder();
+						finder.retrieveTablesAndFunctionSignatures(stmt);
+						List<String> listTables = finder.getListTableNames();
+						for (String t : listTables) {
+							addInputTable(job, compId, t);
+						}
+						List<String> listFunctions = finder.getListFunctionSignatures();
+						for (String f : listFunctions) {
+							addFunction(job, f);
+						}
+					} catch (Exception pe) {
+						// try to find the tables with patterns if a full parse fails
+						SQLParser p = new SQLParser();
+						List<String> listTables = p.findFromTables(sql);
+						for (String t : listTables) {
+							addInputTable(job, compId, t);
+						}
 					}
-				} catch (Exception pe) {
-					throw new Exception("Component: " + compId + " fail to parse QUERY: " + query + "\nSQL: " + sql, pe);
+				} else {
+					if (LOG.isDebugEnabled()) {
+						LOG.debug("Component: " + compId + " pattern matching SQL: " + sql);
+					}
+					// try to find the tables with patterns if a full parse fails
+					SQLParser p = new SQLParser();
+					p.setIncludeComments(false);
+					p.parseScript(sql);
+					List<SQLStatement> stats = p.getStatements();
+					for (SQLStatement stat : stats) {
+						List<String> listTables = p.findFromTables(stat.getSQL());
+						for (String t : listTables) {
+							addInputTable(job, compId, t);
+						}
+					}
 				}
 			}
 		}
@@ -171,6 +220,26 @@ public class JobDatabaseTableCollector extends AbstractTask {
 
 	public Map<String, List<String>> getOutputTables() {
 		return outputTables;
+	}
+
+	public boolean isPreferPatternParser() {
+		return preferPatternParser;
+	}
+
+	public void setPreferPatternParser(boolean allowPatternParser) {
+		this.preferPatternParser = allowPatternParser;
+	}
+
+	public boolean isPreferSQLParser() {
+		return preferSQLParser;
+	}
+
+	public void setPreferSQLParser(boolean preferSQLParser) {
+		this.preferSQLParser = preferSQLParser;
+	}
+
+	public Map<String, Map<String, List<String>>> getInputTablesPerComponent() {
+		return inputTablesPerComponent;
 	}
 	
 }
