@@ -19,7 +19,7 @@ public class PlayTalendModel {
 		BasicConfigurator.configure();
 		Logger LOG = Logger.getRootLogger();
 		LOG.setLevel(Level.INFO);
-		playCollectTablesInAllJobs();
+		playCollectTablesInOneJob();
 	}
 
 	public static void playFixTrunJob() {
@@ -76,7 +76,7 @@ public class PlayTalendModel {
 			model.readProject("/Data/projects/gvl/git/talend_631_project_beat17/BEAT17");
 			JobDatabaseTableCollector c = new JobDatabaseTableCollector(model);
 			c.setPreferSQLParser(false);
-			Talendjob j = model.getJobByVersion("navi_riupdate_validate_one_file", null);
+			Talendjob j = model.getJobByVersion("navi_tth_excel_vendor_uploads_report", null);
 			c.findTables(j);
 			Map<String, Map<String, List<String>>> inputTablesPerComp = c.getInputTablesPerComponent();
 			for (Map.Entry<String, Map<String, List<String>>> entryJob : inputTablesPerComp.entrySet()) {

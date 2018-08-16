@@ -1226,7 +1226,11 @@ public final class SQLParser {
         			int end = matcher.end(i);
                     if (start < end) {
                     	String table = matcher.group(i);
-                    	if (table != null && table.trim().isEmpty() == false && "from".equalsIgnoreCase(table) == false && "join".equalsIgnoreCase(table) == false) {
+                    	if (table != null && 
+                    			table.trim().isEmpty() == false && 
+                    			"from".equalsIgnoreCase(table) == false && 
+                            	"lateral".equalsIgnoreCase(table) == false && 
+                    			"join".equalsIgnoreCase(table) == false) {
                     		if (withNames.contains(table) == false && tables.contains(table) == false) {
                         		tables.add(table);
                     		}
