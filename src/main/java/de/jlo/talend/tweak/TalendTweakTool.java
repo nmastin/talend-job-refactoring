@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
@@ -23,6 +24,8 @@ import javax.swing.SwingUtilities;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
+import de.jlo.talend.tweak.deploy.PanelDeployDIJob;
+import de.jlo.talend.tweak.deploy.PanelDeployServiceJob;
 import de.jlo.talend.tweak.log.LogPanel;
 import de.jlo.talend.tweak.model.TalendModel;
 
@@ -37,26 +40,31 @@ public class TalendTweakTool extends JFrame {
 	private JLabel lbNumberJobs = null;
 	private PanelTaskFixTRunJob pnTaskFixTRunJob = null;
 	private PanelTaskSearchByComponentAttributes pnTaskSearchByComponentAttributes = null;
+	private PanelDeployDIJob pnDeployDIJob = null;
+	private PanelDeployServiceJob pnDeployServiceJob = null;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		TalendTweakTool tool = new TalendTweakTool();
 		tool.initialize();
 	}
 	
-	private void initialize() {
+	private void initialize() throws Exception {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		Logger rootLogger = Logger.getRootLogger();
 		rootLogger.setLevel(Level.INFO);
 		setTitle("Talend Tweak Tool");
 		tabbedPane = new JTabbedPane();
 		tabbedPane.add("Model config", getConfigPane());
-		tabbedPane.add("Log", LogPanel.getInstance());
+//		tabbedPane.add("Log", LogPanel.getInstance());
 		tabbedPane.add("Fix tRunJob", getPanelTaskFixTRunJob());
 		tabbedPane.add("Search Component Attributes", getPanelTaskSearchByComponentAttributes());
+		tabbedPane.add("Deploy DI Job to Nexus", getPanelDeployDIJob());
+		tabbedPane.add("Deploy OSGi bundle to Nexus", getPanelDeployServiceJob());
+		JSplitPane splitpane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, tabbedPane, LogPanel.getInstance());
 		getContentPane().setLayout(new BorderLayout());
-		getContentPane().add(tabbedPane, BorderLayout.CENTER);
+		getContentPane().add(splitpane);
 		setVisible(true);
-		setPreferredSize(new Dimension(600,400));
+		setPreferredSize(new Dimension(800,800));
 		pack();
 		WindowHelper.locateWindowAtMiddleOfDefaultScreen(this);
 	}
@@ -76,7 +84,7 @@ public class TalendTweakTool extends JFrame {
 		}
 		{
 			tfProjectPath = new JTextField();
-			tfProjectPath.setToolTipText("Path the the Talend project");
+			tfProjectPath.setToolTipText("Path to the Talend project");
 			tfProjectPath.setEditable(false);
 			GridBagConstraints gbc = new GridBagConstraints();
 			gbc.gridx = 0;
@@ -133,6 +141,16 @@ public class TalendTweakTool extends JFrame {
 		return pnTaskFixTRunJob;
 	}
 	
+	private JPanel getPanelDeployDIJob() throws Exception {
+		pnDeployDIJob = new PanelDeployDIJob(this);
+		return pnDeployDIJob;
+	}
+
+	private JPanel getPanelDeployServiceJob() throws Exception {
+		pnDeployServiceJob = new PanelDeployServiceJob(this);
+		return pnDeployServiceJob;
+	}
+
 	private JPanel getPanelTaskSearchByComponentAttributes() {
 		pnTaskSearchByComponentAttributes = new PanelTaskSearchByComponentAttributes();
 		return pnTaskSearchByComponentAttributes;

@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.jlo.talend.model</groupId>
   <artifactId>jlo-talend-job-refactoring</artifactId>
-  <version>3.0</version>
+  <version>4.0</version>
   <build>
     <plugins>
       <plugin>
@@ -33,6 +33,13 @@
       </plugin>
     </plugins>
   </build>
+  <repositories>
+    <repository>
+      <snapshots />
+      <id>jsqlparser-snapshots</id>
+      <url>https://oss.sonatype.org/content/groups/public/</url>
+    </repository>
+  </repositories>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>

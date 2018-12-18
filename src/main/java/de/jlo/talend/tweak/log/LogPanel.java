@@ -22,6 +22,7 @@ import javax.swing.JViewport;
 
 import org.apache.log4j.Appender;
 import org.apache.log4j.Layout;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 import org.apache.log4j.WriterAppender;
@@ -49,6 +50,7 @@ public final class LogPanel extends JPanel {
     private File                     file;
     private JCheckBox                jCheckBoxAutoScrolling  = null;
     private JCheckBox                jCheckBoxLoggingEnabled = null;
+    private JCheckBox                jCheckBoxDebugEnabled = null;
     private JLabel                   jLabel                  = null;
     private String                   suggestedFileName;
     private boolean                  changed                 = false;
@@ -257,6 +259,7 @@ public final class LogPanel extends JPanel {
             jPanelTools.add(getJButtonClear(), null);
             jPanelTools.add(getJCheckBoxAutoScrolling(), null);
             jPanelTools.add(getJCheckBoxLoggingEnabled(), null);
+            jPanelTools.add(getJCheckBoxDebugEnabled(), null);
         }
         return jPanelTools;
     }
@@ -383,6 +386,30 @@ public final class LogPanel extends JPanel {
             });
         }
         return jCheckBoxLoggingEnabled;
+    }
+
+    /**
+     * This method initializes jCheckBoxLoggingEnabled	
+     * @return  javax.swing.JCheckBox
+     * @uml.property  name="jCheckBoxLoggingEnabled"
+     */
+    private JCheckBox getJCheckBoxDebugEnabled() {
+        if (jCheckBoxDebugEnabled == null) {
+        	jCheckBoxDebugEnabled = new JCheckBox();
+        	jCheckBoxDebugEnabled.setText("debug");
+        	jCheckBoxDebugEnabled.setSelected(Logger.getRootLogger().isDebugEnabled());
+        	jCheckBoxDebugEnabled.addItemListener(new java.awt.event.ItemListener() {
+                @Override
+				public void itemStateChanged(java.awt.event.ItemEvent e) {
+                    if (jCheckBoxDebugEnabled.isSelected()) {
+                    	Logger.getRootLogger().setLevel(Level.DEBUG);
+                    } else {
+                    	Logger.getRootLogger().setLevel(Level.INFO);
+                    }
+                }
+            });
+        }
+        return jCheckBoxDebugEnabled;
     }
 
     /**
