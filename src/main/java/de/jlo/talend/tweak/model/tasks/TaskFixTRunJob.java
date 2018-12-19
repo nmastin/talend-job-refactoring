@@ -50,7 +50,12 @@ public class TaskFixTRunJob extends AbstractTask {
 	}
 	
 	private boolean checkAndRepair(Talendjob job) throws Exception {
-		job.setItemDoc(getModel().readItem(job));
+		try {
+			job.setItemDoc(getModel().readItem(job));
+		} catch (Exception e) {
+			LOG.error("Check and repair tRunJob failed: Load item file failed: " + e.getMessage());
+			return false;
+		}
 		List<Node> listTRunJobs = getModel().getComponents(job.getItemDoc(), "tRunJob");
 		String message = "Check job: " + job;
 		if (listTRunJobs != null && listTRunJobs.isEmpty() == false) {
