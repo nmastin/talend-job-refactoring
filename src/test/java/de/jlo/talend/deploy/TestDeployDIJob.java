@@ -16,7 +16,7 @@ public class TestDeployDIJob {
 	public void testSetJobZipFile() {
 		DeployDIJob d = new DeployDIJob();
 		String zipFilePath = "/path/to/my_artifact_1.23.zip";
-		d.setJobZipFile(zipFilePath);
+		d.setJobFile(zipFilePath);
 		String expectedArtifactid = "my_artifact";
 		String expectedVersion = "1.23.0";
 		String actualArtifactId = d.getArtifactId();

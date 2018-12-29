@@ -1,5 +1,7 @@
 package de.jlo.talend.tweak.deploy;
 
+import java.io.File;
+
 public abstract class Deployer {
 
 	protected String artifactId = null;
@@ -11,6 +13,26 @@ public abstract class Deployer {
 	protected String nexusUser = "admin";
 	protected String nexusPasswd = "Talend123";
 	protected String nexusRepository = null;
+	private File jobFile = null;
+
+	public void setJobFile(String jobJarFilePath) {
+		this.jobFile = new File(jobJarFilePath);
+		String fileName = jobFile.getName();
+		int posDot = fileName.lastIndexOf(".");
+		String extension = fileName.substring(posDot, fileName.length());
+		int pos1 = -1;
+		if (extension == null || extension.trim().isEmpty()) {
+			throw new IllegalArgumentException("job file name has not extension. file path: " + jobJarFilePath);
+		} else if (extension.toLowerCase().endsWith("jar")) {
+			pos1 = fileName.lastIndexOf("-");
+		} else if (extension.toLowerCase().endsWith("zip")) {
+			pos1 = fileName.lastIndexOf("_");
+		} else {
+			throw new IllegalArgumentException("job file name has invalid extension: " + extension + ". file path: " + jobJarFilePath);
+		}
+		artifactId = fileName.substring(0, pos1);
+		version = extractVersion(fileName, extension);
+	}
 
 	public String getGroupId() {
 		return groupId;
@@ -28,8 +50,8 @@ public abstract class Deployer {
 		return version;
 	}
 	
-	public String extractVersion(String fileName, String expectedExtension) {
-		String version = RegexUtil.extractByRegexGroups(fileName, "([0-9]{0,}[\\.]*[0-9]{1,}\\.[0-9]{1,})\\." + expectedExtension);
+	public String extractVersion(String fileName, String extension) {
+		String version = RegexUtil.extractByRegexGroups(fileName, "([0-9]{0,}[\\.]*[0-9]{1,}\\.[0-9]{1,})\\" + extension);
 		return version + ".0";
 	}
 	
@@ -74,6 +96,10 @@ public abstract class Deployer {
 		try {
 			httpClient.close();
 		} catch (Exception e) {}
+	}
+
+	public File getJobFile() {
+		return jobFile;
 	}
 
 }

@@ -43,7 +43,6 @@ public class PanelDeployDIJob extends JPanel {
 	
 	private void initialize() throws Exception {
 		setLayout(new GridBagLayout());
-
 		{
 			JLabel label = new JLabel("Nexus URL: ");
 			label.setHorizontalAlignment(JLabel.LEFT);
@@ -58,8 +57,7 @@ public class PanelDeployDIJob extends JPanel {
 		{
 			tfNexusURL = new JTextField();
 			tfNexusURL.setToolTipText("Path to the Talend DI Job ZIP file");
-			tfNexusURL.setEditable(false);
-			tfNexusURL.setText(deployer.getNexusUrl());
+			tfNexusURL.setText(TalendTweakTool.getProperty(TalendTweakTool.PARAM_NEXUS_URL, deployer.getNexusUrl()));
 			GridBagConstraints gbc = new GridBagConstraints();
 			gbc.gridy = 0;
 			gbc.gridx = 1;
@@ -83,8 +81,7 @@ public class PanelDeployDIJob extends JPanel {
 		{
 			tfNexusRepo = new JTextField();
 			tfNexusRepo.setToolTipText("Nexus repository");
-			tfNexusRepo.setEditable(false);
-			tfNexusRepo.setText(deployer.getNexusRepository());
+			tfNexusRepo.setText(TalendTweakTool.getProperty(TalendTweakTool.PARAM_NEXUS_REPO, deployer.getNexusRepository()));
 			GridBagConstraints gbc = new GridBagConstraints();
 			gbc.gridy = 1;
 			gbc.gridx = 1;
@@ -97,8 +94,7 @@ public class PanelDeployDIJob extends JPanel {
 		{
 			tfNexusGroupId = new JTextField();
 			tfNexusGroupId.setToolTipText("Group-ID");
-			tfNexusGroupId.setEditable(false);
-			tfNexusGroupId.setText(deployer.getGroupId());
+			tfNexusGroupId.setText(TalendTweakTool.getProperty(TalendTweakTool.PARAM_GROUP_ID, deployer.getGroupId()));
 			GridBagConstraints gbc = new GridBagConstraints();
 			gbc.gridy = 1;
 			gbc.gridx = 2;
@@ -122,8 +118,7 @@ public class PanelDeployDIJob extends JPanel {
 		{
 			tfNexusUser = new JTextField();
 			tfNexusUser.setToolTipText("User");
-			tfNexusUser.setEditable(false);
-			tfNexusUser.setText(deployer.getNexusUser());
+			tfNexusUser.setText(TalendTweakTool.getProperty(TalendTweakTool.PARAM_NEXUS_USER, deployer.getNexusUser()));
 			GridBagConstraints gbc = new GridBagConstraints();
 			gbc.gridy = 2;
 			gbc.gridx = 1;
@@ -136,8 +131,7 @@ public class PanelDeployDIJob extends JPanel {
 		{
 			tfNexusPassword = new JPasswordField();
 			tfNexusPassword.setToolTipText("Password");
-			tfNexusPassword.setEditable(false);
-			tfNexusPassword.setText(deployer.getNexusPasswd());
+			tfNexusPassword.setText(TalendTweakTool.getProperty(TalendTweakTool.PARAM_NEXUS_PW, deployer.getNexusPasswd()));
 			GridBagConstraints gbc = new GridBagConstraints();
 			gbc.gridy = 2;
 			gbc.gridx = 2;
@@ -189,30 +183,31 @@ public class PanelDeployDIJob extends JPanel {
 		}
 		{
 			btnDeploy = new JButton("Deploy Job");
+			btnDeploy.setEnabled(false);
 			btnDeploy.addActionListener(new ActionListener() {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					SwingUtilities.invokeLater(new Runnable() {
+					PanelDeployDIJob.this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+					btnDeploy.setEnabled(false);
+					new Thread(new Runnable() {
+						
 						@Override
 						public void run() {
-							btnDeploy.setEnabled(false);
-							PanelDeployDIJob.this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+							try {
+								deploy();
+							} finally {
+								SwingUtilities.invokeLater(new Runnable() {
+									@Override
+									public void run() {
+										PanelDeployDIJob.this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+										btnDeploy.setEnabled(true);
+									}
+								});
+							}
 						}
-					});
-					SwingUtilities.invokeLater(new Runnable() {
-						@Override
-						public void run() {
-							deploy();
-						}
-					});
-					SwingUtilities.invokeLater(new Runnable() {
-						@Override
-						public void run() {
-							PanelDeployDIJob.this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-							btnDeploy.setEnabled(true);
-						}
-					});
+
+					}).start();
 				}
 			});
 			GridBagConstraints gbc = new GridBagConstraints();
@@ -226,6 +221,7 @@ public class PanelDeployDIJob extends JPanel {
 	private void selectFile() {
 		System.setProperty("apple.awt.fileDialogForDirectories", "false");
 		FileDialog fd = new FileDialog(mainFrame, "Choose exported Talend DI job as ZIP file", FileDialog.LOAD);
+		fd.setDirectory(TalendTweakTool.getProperty(TalendTweakTool.PARAM_LAST_DIR, "user.home"));
         fd.setFilenameFilter(new FilenameFilter() {
 			
 			@Override
@@ -239,20 +235,28 @@ public class PanelDeployDIJob extends JPanel {
         String file = fd.getFile();
         if (file != null) {
         	tfFile.setText(new File(dir, file).getAbsolutePath());
+        	btnDeploy.setEnabled(true);
         }
 	}
 	
 	private void deploy() {
 		deployer = new DeployDIJob();
 		deployer.setNexusUrl(tfNexusURL.getText());
+		TalendTweakTool.setProperty(TalendTweakTool.PARAM_NEXUS_URL, deployer.getNexusUrl());
 		deployer.setNexusRepository(tfNexusRepo.getText());
+		TalendTweakTool.setProperty(TalendTweakTool.PARAM_NEXUS_REPO, deployer.getNexusRepository());
 		deployer.setGroupId(tfNexusGroupId.getText());
+		TalendTweakTool.setProperty(TalendTweakTool.PARAM_GROUP_ID, deployer.getGroupId());
 		deployer.setNexusUser(tfNexusUser.getText());
+		TalendTweakTool.setProperty(TalendTweakTool.PARAM_NEXUS_USER, deployer.getNexusUser());
 		deployer.setNexusPasswd(new String(tfNexusPassword.getPassword()));
-		deployer.setJobZipFile(tfFile.getText());
+		TalendTweakTool.setProperty(TalendTweakTool.PARAM_NEXUS_PW, deployer.getNexusPasswd());
+		deployer.setJobFile(tfFile.getText());
+		TalendTweakTool.setProperty(TalendTweakTool.PARAM_LAST_DIR, deployer.getJobFile().getParentFile().getAbsolutePath());
 		try {
-			LOG.info("Deploying DI job: " + tfFile.getText() + ". Artifact-ID: " + deployer.getArtifactId() + " Version: " + deployer.getVersion());
+			LOG.info("Connecting...");
 			deployer.connect();
+			LOG.info("Deploying DI job: " + tfFile.getText() + ". Artifact-ID: " + deployer.getArtifactId() + " Version: " + deployer.getVersion());
 			deployer.deployToNexus();
 			LOG.info("DI job: " + tfFile.getText() + " successfully deployed: Artifact-ID: " + deployer.getArtifactId() + " Version: " + deployer.getVersion());
 			deployer.close();

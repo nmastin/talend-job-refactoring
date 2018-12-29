@@ -16,7 +16,7 @@ public class TestDeployServiceJob {
 	public void testSetJobZipFile() {
 		DeployServiceJob d = new DeployServiceJob();
 		String zipFilePath = "/path/to/my_artifact-1.23.jar";
-		d.setJobJarFile(zipFilePath);
+		d.setJobFile(zipFilePath);
 		String expectedArtifactid = "my_artifact";
 		String expectedVersion = "1.23.0";
 		String actualArtifactId = d.getArtifactId();

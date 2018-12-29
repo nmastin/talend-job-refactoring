@@ -14,20 +14,12 @@ import org.apache.log4j.Logger;
 public class DeployServiceJob extends Deployer {
 	
 	private static final Logger LOG = Logger.getLogger(DeployServiceJob.class);
-	private File jobJarFile = null;
+	private File jobFile = null;
 	
 	public DeployServiceJob() {
 		setNexusRepository("releases");
 	}
 	
-	public void setJobJarFile(String jobJarFilePath) {
-		this.jobJarFile = new File(jobJarFilePath);
-		String fileName = jobJarFile.getName();
-		int pos1 = fileName.lastIndexOf("-");
-		artifactId = fileName.substring(0, pos1);
-		version = extractVersion(fileName, "jar");
-	}
-
 	private String buildBundlePom() {
 		StringBuilder pom = new StringBuilder();
 		pom.append("<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\n");
@@ -119,8 +111,8 @@ public class DeployServiceJob extends Deployer {
 		builder.addTextBody("hasPom", "true", ContentType.DEFAULT_TEXT);
 		builder.addTextBody("e", "jar", ContentType.DEFAULT_TEXT);
 		builder.addBinaryBody("file", pom.getBytes("UTF-8"), ContentType.DEFAULT_BINARY, "pom.xml");
-		InputStream inputStream = new FileInputStream(jobJarFile);
-		builder.addBinaryBody("file", inputStream, ContentType.DEFAULT_BINARY, jobJarFile.getName());
+		InputStream inputStream = new FileInputStream(jobFile);
+		builder.addBinaryBody("file", inputStream, ContentType.DEFAULT_BINARY, jobFile.getName());
 		HttpEntity entity = builder.build();
 		post.setEntity(entity);
 		String response = httpClient.execute(post, false);
