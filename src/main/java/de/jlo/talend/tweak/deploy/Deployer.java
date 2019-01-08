@@ -30,8 +30,10 @@ public abstract class Deployer {
 		} else {
 			throw new IllegalArgumentException("job file name has invalid extension: " + extension + ". file path: " + jobJarFilePath);
 		}
-		artifactId = fileName.substring(0, pos1);
 		version = extractVersion(fileName, extension);
+		int pos = fileName.indexOf(version);
+		artifactId = fileName.substring(0, pos - 1);
+		version = version + ".0";
 	}
 
 	public String getGroupId() {
@@ -51,8 +53,7 @@ public abstract class Deployer {
 	}
 	
 	public String extractVersion(String fileName, String extension) {
-		String version = RegexUtil.extractByRegexGroups(fileName, "([0-9]{0,}[\\.]*[0-9]{1,}\\.[0-9]{1,})\\" + extension);
-		return version + ".0";
+		return RegexUtil.extractByRegexGroups(fileName, "([0-9]{0,}[\\.]*[0-9]{1,}\\.[0-9]{1,})\\" + extension);
 	}
 	
 	public void connect() throws Exception {
