@@ -1,6 +1,5 @@
 package de.jlo.talend.tweak.deploy;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
@@ -14,7 +13,6 @@ import org.apache.log4j.Logger;
 public class DeployServiceJob extends Deployer {
 	
 	private static final Logger LOG = Logger.getLogger(DeployServiceJob.class);
-	private File jobFile = null;
 	
 	public DeployServiceJob() {
 		setNexusRepository("releases");

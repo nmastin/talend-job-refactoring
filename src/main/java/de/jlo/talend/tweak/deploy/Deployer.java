@@ -13,7 +13,7 @@ public abstract class Deployer {
 	protected String nexusUser = "admin";
 	protected String nexusPasswd = "Talend123";
 	protected String nexusRepository = null;
-	private File jobFile = null;
+	protected File jobFile = null;
 
 	public void setJobFile(String jobJarFilePath) {
 		this.jobFile = new File(jobJarFilePath);
