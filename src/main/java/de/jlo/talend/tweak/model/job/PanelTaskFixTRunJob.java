@@ -1,4 +1,4 @@
-package de.jlo.talend.tweak;
+package de.jlo.talend.tweak.model.job;
 
 import java.awt.Cursor;
 import java.awt.GridBagConstraints;

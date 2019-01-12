@@ -20,13 +20,12 @@ public abstract class Deployer {
 		String fileName = jobFile.getName();
 		int posDot = fileName.lastIndexOf(".");
 		String extension = fileName.substring(posDot, fileName.length());
-		int pos1 = -1;
 		if (extension == null || extension.trim().isEmpty()) {
 			throw new IllegalArgumentException("job file name has not extension. file path: " + jobJarFilePath);
 		} else if (extension.toLowerCase().endsWith("jar")) {
-			pos1 = fileName.lastIndexOf("-");
+			// ignore
 		} else if (extension.toLowerCase().endsWith("zip")) {
-			pos1 = fileName.lastIndexOf("_");
+			// ignore
 		} else {
 			throw new IllegalArgumentException("job file name has invalid extension: " + extension + ". file path: " + jobJarFilePath);
 		}

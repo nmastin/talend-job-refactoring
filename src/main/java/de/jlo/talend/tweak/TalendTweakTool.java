@@ -30,10 +30,13 @@ import javax.swing.SwingUtilities;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
+import de.jlo.talend.tweak.context.passwd.PanelEncryptPassword;
 import de.jlo.talend.tweak.deploy.PanelDeployDIJob;
 import de.jlo.talend.tweak.deploy.PanelDeployServiceJob;
 import de.jlo.talend.tweak.log.LogPanel;
 import de.jlo.talend.tweak.model.TalendModel;
+import de.jlo.talend.tweak.model.job.PanelTaskFixTRunJob;
+import de.jlo.talend.tweak.model.job.PanelTaskSearchByComponentAttributes;
 
 public class TalendTweakTool extends JFrame {
 
@@ -84,6 +87,7 @@ public class TalendTweakTool extends JFrame {
 		tabbedPane.add("Model setup", getConfigPane());
 		tabbedPane.add("Fix tRunJob", getPanelTaskFixTRunJob());
 		tabbedPane.add("Search Component Attributes", getPanelTaskSearchByComponentAttributes());
+		tabbedPane.add("Encrypt Password in context properties", new PanelEncryptPassword());
 		JSplitPane splitpane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, tabbedPane, LogPanel.getInstance());
 		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add(splitpane);

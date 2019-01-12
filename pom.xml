@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.jlo.talend.model</groupId>
 	<artifactId>jlo-talend-job-refactoring</artifactId>
-	<version>4.4</version>
+	<version>5.0</version>
 	<repositories>
 		<repository>
 			<id>jsqlparser-snapshots</id>
