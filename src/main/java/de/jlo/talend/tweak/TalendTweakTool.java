@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FilenameFilter;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.Properties;
@@ -57,7 +58,8 @@ public class TalendTweakTool extends JFrame {
 	public static final String PARAM_NEXUS_URL = "nexus_url";
 	public static final String PARAM_NEXUS_USER = "nexus_user";
 	public static final String PARAM_NEXUS_PW = "nexus_password";
-	public static final String PARAM_NEXUS_REPO = "nexus_repo";
+	public static final String PARAM_NEXUS_REPO_BATCH = "nexus_repo_jobs";
+	public static final String PARAM_NEXUS_REPO_SERVICE = "nexus_repo_servives";
 	public static final String PARAM_GROUP_ID = "group_id";
 	public static final String PARAM_LAST_DIR = "last_job_dir";
 
@@ -80,7 +82,7 @@ public class TalendTweakTool extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		Logger rootLogger = Logger.getRootLogger();
 		rootLogger.setLevel(Level.INFO);
-		setTitle("Talend Tweak Tool");
+		setTitle("Talend Tweak Tool - v" + readVersionNumber());
 		tabbedPane = new JTabbedPane();
 		tabbedPane.add("Deploy DI Job to Nexus", getPanelDeployDIJob());
 		tabbedPane.add("Deploy OSGi bundle to Nexus", getPanelDeployServiceJob());
@@ -321,6 +323,26 @@ public class TalendTweakTool extends JFrame {
 				userProperties.remove(key);
 			}
 		}
+	}
+	
+	public static String readVersionNumber() {
+		String groupId = "de.jlo.talend.tweak";
+		String artifactId = "jlo-talend-job-refactoring";
+		String pomPropertyResource = "/META-INF/maven/" + groupId + "/" + artifactId + "/pom.properties";
+		try {
+			InputStream in = TalendTweakTool.class.getResourceAsStream(pomPropertyResource);
+			if (in == null) {
+				LOG.warn("Resource: " + pomPropertyResource + " not found!");
+			} else {
+				Properties mavenProps = new Properties();
+				mavenProps.load(in);
+				in.close();
+				return mavenProps.getProperty("version");
+			}
+		} catch (Exception e) {
+			LOG.warn("Load maven properties failed: " + e.getMessage(), e);
+		}
+		return null;
 	}
 	
 }

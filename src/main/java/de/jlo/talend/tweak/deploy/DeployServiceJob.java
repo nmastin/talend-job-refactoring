@@ -13,11 +13,12 @@ import org.apache.log4j.Logger;
 public class DeployServiceJob extends Deployer {
 	
 	private static final Logger LOG = Logger.getLogger(DeployServiceJob.class);
-	
-	public DeployServiceJob() {
-		setNexusRepository("releases");
+	protected String nexusRepository = "releases";
+
+	public String getNexusRepository() {
+		return nexusRepository;
 	}
-	
+
 	private String buildBundlePom() {
 		StringBuilder pom = new StringBuilder();
 		pom.append("<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\n");

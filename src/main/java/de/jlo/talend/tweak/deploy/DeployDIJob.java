@@ -10,11 +10,13 @@ import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 
 public class DeployDIJob extends Deployer {
-		
-	public DeployDIJob() {
-		setNexusRepository("job-releases");
+
+	protected String nexusRepository = "job-releases";
+
+	public String getNexusRepository() {
+		return nexusRepository;
 	}
-	
+
 	private String buildDIJobPom() {
 		StringBuilder pom = new StringBuilder();
 		pom.append("<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\n");

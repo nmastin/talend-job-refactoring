@@ -4,15 +4,15 @@ import java.io.File;
 
 public abstract class Deployer {
 
+	
 	protected String artifactId = null;
 	protected String groupId = "de.gvl";
 	protected String version = null;
 	protected String nexusUrl = "http://talendmdmtest01.gvl.local:8081/nexus";
 	protected String restPath = "/service/local/artifact/maven/content";
 	protected HttpClient httpClient = null;
-	protected String nexusUser = "admin";
-	protected String nexusPasswd = "Talend123";
-	protected String nexusRepository = null;
+	protected String nexusUser = "gvl_developer";
+	protected String nexusPasswd = "gvl_developer";
 	protected File jobFile = null;
 
 	public void setJobFile(String jobJarFilePath) {
@@ -60,14 +60,6 @@ public abstract class Deployer {
 		httpClient.setMaxRetriesInCaseOfErrors(0);
 	}
 	
-	public String getNexusRepository() {
-		return nexusRepository;
-	}
-
-	public void setNexusRepository(String nexusRepository) {
-		this.nexusRepository = nexusRepository;
-	}
-
 	public String getNexusUrl() {
 		return nexusUrl;
 	}

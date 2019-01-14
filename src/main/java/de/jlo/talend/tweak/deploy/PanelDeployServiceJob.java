@@ -81,7 +81,7 @@ public class PanelDeployServiceJob extends JPanel {
 		{
 			tfNexusRepo = new JTextField();
 			tfNexusRepo.setToolTipText("Nexus repository");
-			tfNexusRepo.setText(TalendTweakTool.getProperty(TalendTweakTool.PARAM_NEXUS_REPO, deployer.getNexusRepository()));
+			tfNexusRepo.setText(TalendTweakTool.getProperty(TalendTweakTool.PARAM_NEXUS_REPO_SERVICE, deployer.getNexusRepository()));
 			GridBagConstraints gbc = new GridBagConstraints();
 			gbc.gridy = 1;
 			gbc.gridx = 1;
@@ -243,8 +243,7 @@ public class PanelDeployServiceJob extends JPanel {
 		deployer = new DeployServiceJob();
 		deployer.setNexusUrl(tfNexusURL.getText());
 		TalendTweakTool.setProperty(TalendTweakTool.PARAM_NEXUS_URL, deployer.getNexusUrl());
-		deployer.setNexusRepository(tfNexusRepo.getText());
-		TalendTweakTool.setProperty(TalendTweakTool.PARAM_NEXUS_REPO, deployer.getNexusRepository());
+		TalendTweakTool.setProperty(TalendTweakTool.PARAM_NEXUS_REPO_SERVICE, deployer.getNexusRepository());
 		deployer.setGroupId(tfNexusGroupId.getText());
 		TalendTweakTool.setProperty(TalendTweakTool.PARAM_GROUP_ID, deployer.getGroupId());
 		deployer.setNexusUser(tfNexusUser.getText());
