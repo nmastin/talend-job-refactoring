@@ -57,7 +57,7 @@ public abstract class Deployer {
 	
 	public void connect() throws Exception {
 		httpClient = new HttpClient(nexusUrl, nexusUser, nexusPasswd, 10000);
-		httpClient.setMaxRetriesInCaseOfErrors(0);
+		httpClient.setMaxRetriesInCaseOfErrors(5);
 	}
 	
 	public String getNexusUrl() {
