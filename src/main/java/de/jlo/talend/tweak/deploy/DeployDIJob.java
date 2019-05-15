@@ -52,6 +52,9 @@ public class DeployDIJob extends Deployer {
 		post.setEntity(entity);
 		String response = httpClient.execute(post, false);
 		System.out.println(response);
+		if (deleteLocalArtifactFile && httpClient.getStatusCode() == 200) {
+			deleteLocalFile();
+		}
 	}
 
 }

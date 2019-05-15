@@ -8,9 +8,11 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -96,14 +98,28 @@ public class TalendModel {
     }
     
     public List<Talendjob> getJobs(String jobNamePattern) {
+    	return getJobs(jobNamePattern, false);
+    }
+
+    	
+    public List<Talendjob> getJobs(String jobNamePattern, boolean onlyLatestVersion) {
     	if (jobNamePattern == null || jobNamePattern.trim().isEmpty()) {
     		return getAllJobs();
     	} else {
         	List<Talendjob> list = new ArrayList<Talendjob>();
+        	Set<String> uniqueJobNames = new HashSet<>();
         	Pattern pattern = Pattern.compile(jobNamePattern, Pattern.CASE_INSENSITIVE);
         	for (Talendjob job : listAllJobs) {
         		Matcher m = pattern.matcher(job.getJobName());
         		if (m.find()) {
+            		if (onlyLatestVersion) {
+            			if (uniqueJobNames.contains(job.getJobName())) {
+            				continue;
+            			} else {
+            				uniqueJobNames.add(job.getJobName());
+            				job = getLatestJob(job.getJobName());
+            			}
+            		}
         			list.add(job);
         		}
         	}

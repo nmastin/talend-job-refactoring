@@ -18,6 +18,7 @@ public class TaskSearchJobByComponentAttribute {
 	private TalendModel model = null;
 	private List<SearchResult> currentSearchResult = null;
 	private boolean replaceAttributeValue = false;
+	private boolean onlyInLatestVersion = false;
 	
 	public TaskSearchJobByComponentAttribute(TalendModel model) {
 		this.model = model;
@@ -29,12 +30,21 @@ public class TaskSearchJobByComponentAttribute {
 		private String componentId;
 		private String attribute;
 		private String attributeValue;
+		private String replacedAttributeValue;
 		
 		public SearchResult(Talendjob job, String componentId, String attribute, String attributeValue) {
 			this.job = job;
 			this.componentId = componentId;
 			this.attribute = attribute;
 			this.attributeValue = attributeValue;
+		}
+
+		public SearchResult(Talendjob job, String componentId, String attribute, String attributeValue, String replacedAttributeValue) {
+			this.job = job;
+			this.componentId = componentId;
+			this.attribute = attribute;
+			this.attributeValue = attributeValue;
+			this.replacedAttributeValue = replacedAttributeValue;
 		}
 
 		public Talendjob getJob() {
@@ -53,10 +63,18 @@ public class TaskSearchJobByComponentAttribute {
 			return attributeValue;
 		}
 
+		public String getReplacedAttributeValue() {
+			return replacedAttributeValue;
+		}
+
+		public void setReplacedAttributeValue(String replacedAttributeValue) {
+			this.replacedAttributeValue = replacedAttributeValue;
+		}
+
 	}
 
 	public List<SearchResult> search(String jobNamePattern, String componentName, String attribute, String valuePatternStr, String valueReplacement) throws Exception {
-		List<Talendjob> jobs = model.getJobs(jobNamePattern);
+		List<Talendjob> jobs = model.getJobs(jobNamePattern, onlyInLatestVersion);
 		Pattern valuePattern = null;
 		if (valuePatternStr != null && valuePatternStr.trim().isEmpty() == false) {
 			valuePattern = Pattern.compile(valuePatternStr, Pattern.CASE_INSENSITIVE);	
@@ -117,14 +135,23 @@ public class TaskSearchJobByComponentAttribute {
 				if (valuePattern != null) {
 					Matcher m = valuePattern.matcher(value);
 					if (m.find()) {
-						result = new SearchResult(job, componentId, attribute, value);
 						if (replaceAttributeValue) {
 							param.addAttribute("value", valueReplacement);
+							result = new SearchResult(job, componentId, attribute, value, valueReplacement);
+						} else {
+							result = new SearchResult(job, componentId, attribute, value);
 						}
 						break;
 					}
 				} else {
-					result = new SearchResult(job, componentId, name, value);
+					if (replaceAttributeValue) {
+						param.addAttribute("value", valueReplacement);
+						result = new SearchResult(job, componentId, name, value, valueReplacement);
+						break;
+					} else {
+						result = new SearchResult(job, componentId, name, value);
+						
+					}
 				}
 			}
 		}
@@ -138,7 +165,9 @@ public class TaskSearchJobByComponentAttribute {
 	public String getSummary() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Found " + currentSearchResult.size() + " components:\n");
-		sb.append("Replaced all found values with the new value=" + replaceAttributeValue + "\n");
+		if (replaceAttributeValue) {
+			sb.append("Replaced all found values with the new value\n");
+		}
 		for (SearchResult r : currentSearchResult) {
 			sb.append(r.getJob().getJobName());
 			sb.append("->");
@@ -146,7 +175,10 @@ public class TaskSearchJobByComponentAttribute {
 			sb.append(": ");
 			sb.append(r.getAttribute());
 			sb.append("=");
-			sb.append(r.getAttributeValue());
+			sb.append(r.getAttributeValue() != null ? "\"" + r.getAttributeValue() + "\"" : "null");
+			if (replaceAttributeValue && r.getReplacedAttributeValue() != null) {
+				sb.append(" replaced by value=\"" + r.getReplacedAttributeValue() + "\"");
+			}
 			sb.append("\n");
 		}
 		return sb.toString();
@@ -158,6 +190,14 @@ public class TaskSearchJobByComponentAttribute {
 
 	public void setReplaceAttributeValue(boolean replaceAttributeValue) {
 		this.replaceAttributeValue = replaceAttributeValue;
+	}
+
+	public boolean isOnlyInLatestVersion() {
+		return onlyInLatestVersion;
+	}
+
+	public void setOnlyInLatestVersion(boolean onlyInLatestVersion) {
+		this.onlyInLatestVersion = onlyInLatestVersion;
 	}
 
 }

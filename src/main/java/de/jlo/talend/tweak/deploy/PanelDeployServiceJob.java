@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -35,6 +36,7 @@ public class PanelDeployServiceJob extends JPanel {
 	private JPasswordField tfNexusPassword = null;
 	private JButton btnFileChooser = null;
 	private JButton btnDeploy = null;
+	private JCheckBox checkboxDeleteLocal = null;
 
 	public PanelDeployServiceJob(TalendTweakTool mainFrame) throws Exception {
 		this.mainFrame = mainFrame;
@@ -216,6 +218,16 @@ public class PanelDeployServiceJob extends JPanel {
 			gbc.insets = new Insets(5, 5, 5, 5);
 			this.add(btnDeploy, gbc);
 		}
+		{
+			checkboxDeleteLocal = new JCheckBox("Delete local jar file when successufully deployed");
+			checkboxDeleteLocal.setSelected("true".equals(TalendTweakTool.getProperty(TalendTweakTool.PARAM_DELETE_LOCAL, "true")));
+			checkboxDeleteLocal.setEnabled(false);
+			GridBagConstraints gbc = new GridBagConstraints();
+			gbc.gridy = 4;
+			gbc.gridx = 2;
+			gbc.insets = new Insets(5, 5, 5, 5);
+			this.add(checkboxDeleteLocal, gbc);
+		}
 	}
 
 	private void selectFile() {
@@ -252,6 +264,8 @@ public class PanelDeployServiceJob extends JPanel {
 		TalendTweakTool.setProperty(TalendTweakTool.PARAM_NEXUS_PW, deployer.getNexusPasswd());
 		deployer.setJobFile(tfFile.getText());
 		TalendTweakTool.setProperty(TalendTweakTool.PARAM_LAST_DIR, deployer.getJobFile().getParentFile().getAbsolutePath());
+		deployer.setDeleteLocalArtifactFile(checkboxDeleteLocal.isSelected());
+		TalendTweakTool.setProperty(TalendTweakTool.PARAM_DELETE_LOCAL, String.valueOf(checkboxDeleteLocal.isSelected()));
 		try {
 			LOG.info("Connecting...");
 			deployer.connect();

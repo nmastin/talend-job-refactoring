@@ -3,7 +3,6 @@ package de.jlo.talend.tweak.deploy;
 import java.io.File;
 
 public abstract class Deployer {
-
 	
 	protected String artifactId = null;
 	protected String groupId = "de.gvl";
@@ -14,6 +13,7 @@ public abstract class Deployer {
 	protected String nexusUser = "gvl_developer";
 	protected String nexusPasswd = "gvl_developer";
 	protected File jobFile = null;
+	protected boolean deleteLocalArtifactFile = true;
 
 	public void setJobFile(String jobJarFilePath) {
 		this.jobFile = new File(jobJarFilePath);
@@ -33,6 +33,16 @@ public abstract class Deployer {
 		int pos = fileName.indexOf(version);
 		artifactId = fileName.substring(0, pos - 1);
 		version = version + ".0";
+	}
+	
+	public void checkIfArtifactAlreadyExists() {
+		
+	}
+	
+	public void deleteLocalFile() {
+		if (this.jobFile != null && this.jobFile.exists()) {
+			this.jobFile.delete();
+		}
 	}
 
 	public String getGroupId() {
@@ -92,6 +102,14 @@ public abstract class Deployer {
 
 	public File getJobFile() {
 		return jobFile;
+	}
+
+	public boolean isDeleteLocalArtifactFile() {
+		return deleteLocalArtifactFile;
+	}
+
+	public void setDeleteLocalArtifactFile(boolean deleteLocalArtifactFile) {
+		this.deleteLocalArtifactFile = deleteLocalArtifactFile;
 	}
 
 }

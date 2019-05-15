@@ -62,6 +62,7 @@ public class TalendTweakTool extends JFrame {
 	public static final String PARAM_NEXUS_REPO_SERVICE = "nexus_repo_servives";
 	public static final String PARAM_GROUP_ID = "group_id";
 	public static final String PARAM_LAST_DIR = "last_job_dir";
+	public static final String PARAM_DELETE_LOCAL = "delete_local_file";
 
 	public static void main(String[] args) throws Exception {
 		TalendTweakTool tool = new TalendTweakTool();

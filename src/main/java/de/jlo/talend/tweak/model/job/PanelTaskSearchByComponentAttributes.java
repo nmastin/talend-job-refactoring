@@ -29,6 +29,7 @@ public class PanelTaskSearchByComponentAttributes extends JPanel {
 	private JTextField tfAttributeName = null;
 	private JTextField tfAttributeValuePattern = null;
 	private JCheckBox cbReplaceValue = null;
+	private JCheckBox cbOnlyInLatestVersion = null;
 	private JTextField tfAttributeValueReplacement = null;
 	private TalendModel model = null;
 	private JLabel lbModel = null;
@@ -84,6 +85,16 @@ public class PanelTaskSearchByComponentAttributes extends JPanel {
 			gbc.weightx = 1;
 			gbc.anchor = GridBagConstraints.WEST;
 			this.add(tfJobPattern, gbc);
+		}
+		{
+			cbOnlyInLatestVersion = new JCheckBox("Only latest job version");
+			GridBagConstraints gbc = new GridBagConstraints();
+			gbc.gridx = 2;
+			gbc.gridy = 2;
+			gbc.insets = new Insets(5, 5, 5, 5);
+			gbc.fill = GridBagConstraints.HORIZONTAL;
+			gbc.anchor = GridBagConstraints.WEST;
+			this.add(cbOnlyInLatestVersion, gbc);
 		}
 		{
 			JLabel label = new JLabel("Component Type Name");
@@ -245,6 +256,7 @@ public class PanelTaskSearchByComponentAttributes extends JPanel {
 		TaskSearchJobByComponentAttribute task = new TaskSearchJobByComponentAttribute(model);
 		try {
 			task.setReplaceAttributeValue(cbReplaceValue.isSelected());
+			task.setOnlyInLatestVersion(cbOnlyInLatestVersion.isSelected());
 			task.search(tfJobPattern.getText(), tfComponentName.getText(), tfAttributeName.getText(), tfAttributeValuePattern.getText(), tfAttributeValueReplacement.getText());
 			LOG.info(task.getSummary());
 		} catch (Exception e) {
