@@ -21,19 +21,19 @@ public class DatabaseConnection {
 	
 	public DatabaseConnection(Document doc) {
 		this.itemDoc = doc;
-    	Element root = itemDoc.getRootElement();
+    	Element databaseConnectionNode = (Element) itemDoc.selectSingleNode("/xmi:XMI/TalendMetadata:DatabaseConnection");
     	QName nameId = new QName("id", null);
-		id = root.attributeValue(nameId);
-		name = root.attributeValue("name");
-		contextMode = "true".equals(root.attributeValue("ContextMode"));
-		contextId = root.attributeValue("ContextId");
-		url = root.attributeValue("URL");
-		port = root.attributeValue("Port");
-		userName = root.attributeValue("Username");
-		password = root.attributeValue("Password");
-		serverName = root.attributeValue("ServerName");
-		database = root.attributeValue("SID");
-		schema = root.attributeValue("UiSchema");
+		id = databaseConnectionNode.attributeValue(nameId);
+		name = databaseConnectionNode.attributeValue("name");
+		contextMode = "true".equals(databaseConnectionNode.attributeValue("ContextMode"));
+		contextId = databaseConnectionNode.attributeValue("ContextId");
+		url = databaseConnectionNode.attributeValue("URL");
+		port = databaseConnectionNode.attributeValue("Port");
+		userName = databaseConnectionNode.attributeValue("Username");
+		password = databaseConnectionNode.attributeValue("Password");
+		serverName = databaseConnectionNode.attributeValue("ServerName");
+		database = databaseConnectionNode.attributeValue("SID");
+		schema = databaseConnectionNode.attributeValue("UiSchema");
 	}
 
 	public String getId() {

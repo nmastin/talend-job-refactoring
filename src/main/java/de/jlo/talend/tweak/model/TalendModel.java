@@ -48,7 +48,7 @@ public class TalendModel {
 		readJobPropertiesFiles(processFolder);
     	LOG.info("Finished read " + listAllJobs.size() + " jobs from project root: " + rootDir);
     	LOG.info("Read database connections...");
-    	File metadataConnectionFolder = new File(rootDir, "metadata/connection"); 
+    	File metadataConnectionFolder = new File(rootDir, "metadata/connections"); 
     	readDatabaseItemFiles(metadataConnectionFolder);
     	LOG.info("Finished read " + mapIdConnections.size() + " connections from project root: " + rootDir);
 		return listAllJobs.size();
@@ -186,6 +186,7 @@ public class TalendModel {
     }
     
     private void readDatabaseItemFiles(File metadataConnectionFolder) throws Exception {
+    	LOG.debug("Read database connection item files from folder: " + metadataConnectionFolder.getAbsolutePath());
         File[] list = metadataConnectionFolder.listFiles();
         if (list == null) {
         	return;
